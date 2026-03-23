@@ -1,0 +1,8 @@
+:root {
+  --accent-color: #ff0070;
+  --headline-color: #db00ff;
+  --quote-color: #000028;
+  --text-color: #F1B2CE;
+  --bg-color: #000028;
+  --sub-accent-color: var(--accent-color);
+}
