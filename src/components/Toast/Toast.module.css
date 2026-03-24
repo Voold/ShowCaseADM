@@ -8,15 +8,22 @@
   border-radius: var(--toast-border-radius) 0 0 var(--toast-border-radius);
   max-width: clamp(360px, 100%, 400px);
   min-width: 240px;
+  min-height: 80px;
   width: fit-content;
 }
 
 .green {
-  background-color: var(--toast-background-green-color);
+  background: linear-gradient(
+      color-mix(in srgb, var(--toast-green-color) 5%, transparent),
+      color-mix(in srgb, var(--toast-green-color) 5%, transparent)
+  ), var(--sec-color);
 }
 
 .red {
-  background-color: var(--toast-background-red-color);
+  background: linear-gradient(
+      color-mix(in srgb, var(--toast-red-color) 5%, transparent),
+      color-mix(in srgb, var(--toast-red-color) 5%, transparent)
+  ), var(--sec-color);
 }
 
 .toast::after {
