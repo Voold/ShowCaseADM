@@ -1,3 +1,9 @@
+:root{
+  --toast-border-radius: 3px;
+  --toast-green-color: var(--light-green-color);
+  --toast-red-color: var(--light-red-color);
+}
+
 .toast {
   position: relative;
   display: flex;

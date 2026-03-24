@@ -14,8 +14,6 @@
   --H6: 16px;
   --p : 16px;
 
-  --toast-border-radius: 3px;
-
-  --toast-green-color: #75FF9E;
-  --toast-red-color: #FF4B4B;
+  --light-green-color: #75FF9E;
+  --light-red-color: #FF4B4B;
 }
