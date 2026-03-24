@@ -1,0 +1,62 @@
+.toast {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  margin: 12px;
+  border-radius: var(--toast-border-radius) 0 0 var(--toast-border-radius);
+  max-width: clamp(360px, 100%, 400px);
+  min-width: 240px;
+  width: fit-content;
+}
+
+.green {
+  background-color: var(--toast-background-green-color);
+}
+
+.red {
+  background-color: var(--toast-background-red-color);
+}
+
+.toast::after {
+  content: "";
+  position: absolute;
+  border-radius: var(--toast-border-radius) 0 0 var(--toast-border-radius);
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+}
+
+.green::after {
+  background-color: var(--toast-green-color);
+}
+
+.red::after {
+  background-color: var(--toast-red-color);
+}
+
+h5 {
+  font-size: var(--H5);
+  color: var(--text-color);
+}
+
+p {
+  font-size: var(--p);
+  color: var(--text-color);
+}
+
+a {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: var(--p);
+}
+
+.green a {
+  color: var(--toast-green-color);
+}
+
+.red a {
+  color: var(--toast-red-color);
+}

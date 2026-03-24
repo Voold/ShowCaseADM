@@ -12,6 +12,8 @@ h5,
 h6,
 p {
   margin: 0;
+  padding: 0;
+  font-family: Inter, serif;
 }
 
 ul {
@@ -28,7 +30,7 @@ picture {
 button,
 a {
   color: currentColor;
-  font-family: inherit;
+  font-family: Inter, serif;
   font-size: inherit;
   line-height: inherit;
 }
