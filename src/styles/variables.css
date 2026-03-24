@@ -1,19 +1,8 @@
 :root {
-  --bg-color: rgb(26, 26, 26);
-  --text-color: rgb(241, 245, 249);
-  --primary-color: rgb(40, 190, 70);
-  --sec-color: rgb(36, 36, 36);
-  --outline-color: rgb(48, 48, 48);
-
-  /* Для уведомлений */
-  --H1: 36px;
-  --H2: 30px;
-  --H3: 26px;
-  --H4: 24px;
-  --H5: 20px;
-  --H6: 16px;
-  --p : 16px;
-
-  --light-green-color: #75FF9E;
-  --light-red-color: #FF4B4B;
+  --accent-color: #ff0070;
+  --headline-color: #db00ff;
+  --quote-color: #000028;
+  --text-color: #F1B2CE;
+  --bg-color: #000028;
+  --sub-accent-color: var(--accent-color);
 }
