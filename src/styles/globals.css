@@ -7,35 +7,12 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  font-family: Inter, serif;
 }
 
 body, h1, h2, h3, h4, h5, h6, p {
   margin: 0;
   padding: 0;
-}
-
-h1 {
-  font-size: 36px;
-}
-
-h2 {
-  font-size: 30px;
-}
-
-h3 {
-  font-size: 26px;
-}
-
-h4 {
-  font-size: 24px;
-}
-
-h5 {
-  font-size: 20px;
-}
-
-h6 {
-  font-size: 16px;
 }
 
 ul {
@@ -52,7 +29,6 @@ picture {
 button,
 a {
   color: currentColor;
-  font-family: inherit;
   font-size: inherit;
   line-height: inherit;
 }
