@@ -1,0 +1,25 @@
+.container {
+	display: flex;
+	gap: 10.5px;
+	justify-content: start;
+	align-items: center;
+}
+
+.logo {
+	aspect-ratio: 1;
+	height: 47px;
+}
+
+.title {
+	font-size: var(--H2);
+	color: var(--text-color);
+	font-weight: 900;
+	letter-spacing: 15%;
+}
+
+.subtitle {
+	color: color-mix(in srgb, var(--text-color) 30%, transparent);
+	font-weight: 700;
+	letter-spacing: 2%;
+	text-transform: uppercase;
+}

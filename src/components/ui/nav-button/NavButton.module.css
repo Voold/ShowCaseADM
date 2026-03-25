@@ -1,0 +1,34 @@
+.button {
+	position: relative;
+
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	gap: 20px;
+	padding: 3px 6px;
+
+	font-size: var(--H4);
+	font-weight: 500;
+}
+
+.button.active, .button:hover {
+	color: var(--primary-color);
+	background-color: color-mix(in srgb, var(--light-green-color) 10%, transparent);
+}
+
+.button.active::before, .button:hover::before {
+	content: "";
+	
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	width: 2px;
+	height: 100%;
+	background-color: var(--light-green-color);
+}
+
+.icon {
+	aspect-ratio: 1;
+	height: 44px;
+}

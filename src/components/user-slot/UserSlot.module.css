@@ -1,0 +1,26 @@
+.container {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.avatar {
+	aspect-ratio: 1;
+	height: 50px;
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.description {
+	flex-grow: 1;
+	user-select: none;
+}
+
+.name {
+	font-size: var(--H5);
+	font-weight: 900;
+}
+
+.role {
+	font-weight: 700;
+	color: color-mix(in srgb, var(--text-color) 30%, transparent);
+}
