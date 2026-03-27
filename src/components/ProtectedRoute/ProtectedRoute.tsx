@@ -6,12 +6,12 @@ import NavPanel from "@/components/nav-panel/NavPanel.tsx";
 const ProtectedRoute = () => {
   const status = useAuthStore((state) => state.status);
 
-  if (status !== 'authenticated' && status !== 'loading') {
-    return <Navigate to="/login"/>;
-  }
-
   if (status === 'loading') {
     return <div>Загрузка...</div>;
+  }
+  
+  if (status !== 'authenticated') {
+    return <Navigate to="/login"/>;
   }
 
   return (
