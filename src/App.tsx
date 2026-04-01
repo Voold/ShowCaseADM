@@ -1,10 +1,10 @@
+import {RouterProvider} from "react-router-dom";
+import {router} from "@/utils/router.tsx";
 
 function App() {
-
-
   return (
     <>
-      SHOWCASE ADM
+      <RouterProvider router={router}/>
     </>
   )
 }

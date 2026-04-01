@@ -15,6 +15,13 @@ body, h1, h2, h3, h4, h5, h6, p {
   padding: 0;
 }
 
+h1 { font-size: var(--H1)}
+h2 { font-size: var(--H2)}
+h3 { font-size: var(--H3)}
+h4 { font-size: var(--H4)}
+h5 { font-size: var(--H5)}
+h6 { font-size: var(--H6)}
+
 ul {
   margin: 0;
   padding: 0;
