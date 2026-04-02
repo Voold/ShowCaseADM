@@ -1,0 +1,7 @@
+html.theme-dark {
+  --bg-color: rgb(26, 26, 26);
+  --text-color: rgb(241, 245, 249);
+  --primary-color: rgb(40, 190, 70);
+  --sec-color: rgb(36, 36, 36);
+  --outline-color: rgb(48, 48, 48);
+}
