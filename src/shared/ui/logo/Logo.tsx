@@ -1,5 +1,5 @@
 import styles from './Logo.module.css'
-import LogoIcon from '../assets/tpu.svg?react'
+import LogoIcon from './assets/tpu.svg?react'
 
 export function Logo() {
   return (

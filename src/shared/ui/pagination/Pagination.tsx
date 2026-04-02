@@ -1,4 +1,4 @@
-import ChevronIcon from '@/assets/chevron-left.svg?react'
+import { ChevronLeftIcon } from '../../assets'
 import { useState } from 'react'
 import { getPaginationRange, type PaginationRange } from './getPaginationRange'
 import styles from './Pagination.module.css'
@@ -22,7 +22,7 @@ export function Pagination({ totalPages = 1, currentPage = 1, onPageSelect = () 
 
   return (
     <nav className={styles.pagination}>
-      <ChevronIcon
+      <ChevronLeftIcon
         className={`${styles.chevron} ${styles.left} ${activePage === 1 && styles.disabled}`}
         onClick={() => activePage !== 1 && setActivePage(p => p - 1)}
       />
@@ -43,7 +43,7 @@ export function Pagination({ totalPages = 1, currentPage = 1, onPageSelect = () 
           )
         )}
       </ul>
-      <ChevronIcon
+      <ChevronLeftIcon
         className={`${styles.chevron} ${activePage === totalPages && styles.disabled}`}
         onClick={() => activePage !== totalPages && setActivePage(p => p + 1)}
       />
