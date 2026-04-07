@@ -1,8 +1,8 @@
 import { useQuery, type UseQueryResult } from '@tanstack/react-query'
+import type { User } from '../model/types'
 import type { AxiosError } from 'axios'
-import type { User } from '../../model/types'
-import { userRequests } from '../../api/requests'
-import { queryKeys } from '../../api/queryKeys'
+import { queryKeys } from './queryKeys'
+import { userRequests } from './requests'
 
 export const useMe = (enabled = true): UseQueryResult<User, AxiosError> => {
   return useQuery({

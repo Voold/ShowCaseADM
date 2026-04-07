@@ -1,14 +1,14 @@
 import { useMutation, useQueryClient, type UseMutationResult } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'
 import { userKeys } from '@/entities/user'
-import { userRequests } from '@/entities/user'
+import { login, logout } from '@/entities/user'
 import type { AuthResponse, OAuthExchangeParams } from '@/entities/user'
 import { pkceService } from '../lib/pkce'
 
 export const useLogin = (): UseMutationResult<AuthResponse, AxiosError, OAuthExchangeParams> => {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: userRequests.login,
+    mutationFn: login,
     onSuccess: data => {
       queryClient.setQueryData(userKeys.me(), data.user)
       pkceService.clear()
@@ -19,7 +19,7 @@ export const useLogin = (): UseMutationResult<AuthResponse, AxiosError, OAuthExc
 export const useLogout = (): UseMutationResult<void, AxiosError, void> => {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: userRequests.logout,
+    mutationFn: logout,
     onSuccess: () => {
       queryClient.clear()
     }
