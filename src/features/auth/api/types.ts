@@ -1,4 +1,4 @@
-import type { User } from "../model/types";
+import type { User } from "@/entities/user/model/types";
 
 export interface OAuthExchangeParams {
   code: string;
