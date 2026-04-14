@@ -1,0 +1,79 @@
+:root {
+  --toast-border-radius: 3px;
+  --toast-green-color: var(--light-green-color);
+  --toast-red-color: var(--light-red-color);
+}
+
+.toast {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  margin: 12px;
+  border-radius: var(--toast-border-radius) 0 0 var(--toast-border-radius);
+  max-width: clamp(360px, 100%, 400px);
+  min-width: 240px;
+  min-height: 80px;
+  width: fit-content;
+}
+
+.green {
+  background:
+    linear-gradient(
+      color-mix(in srgb, var(--toast-green-color) 5%, transparent),
+      color-mix(in srgb, var(--toast-green-color) 5%, transparent)
+    ),
+    var(--sec-color);
+}
+
+.red {
+  background:
+    linear-gradient(
+      color-mix(in srgb, var(--toast-red-color) 5%, transparent),
+      color-mix(in srgb, var(--toast-red-color) 5%, transparent)
+    ),
+    var(--sec-color);
+}
+
+.toast::after {
+  content: '';
+  position: absolute;
+  border-radius: var(--toast-border-radius) 0 0 var(--toast-border-radius);
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+}
+
+.green::after {
+  background-color: var(--toast-green-color);
+}
+
+.red::after {
+  background-color: var(--toast-red-color);
+}
+
+h5 {
+  font-size: var(--H5);
+  color: var(--text-color);
+}
+
+p {
+  font-size: var(--p);
+  color: var(--text-color);
+}
+
+a {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: var(--p);
+}
+
+.green a {
+  color: var(--toast-green-color);
+}
+
+.red a {
+  color: var(--toast-red-color);
+}
