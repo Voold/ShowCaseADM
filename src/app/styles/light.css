@@ -1,4 +1,4 @@
-html.theme-light {
+:root.theme-light {
   --bg-color: rgb(246, 245, 248);
   --text-color: rgb(15, 23, 42);
   --primary-color: rgb(40, 190, 70);

@@ -1,4 +1,4 @@
-html.theme-dark {
+:root.theme-dark {
   --bg-color: rgb(26, 26, 26);
   --text-color: rgb(241, 245, 249);
   --primary-color: rgb(40, 190, 70);
