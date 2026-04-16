@@ -1,10 +1,9 @@
-import { useAuthStore } from "@/entities/user";
 import { useNavigate } from "react-router-dom";
 import styles from './LoginPage.module.css';
-import { ROUTES } from "@/shared/config";
+import { useAuthStore } from "@/entities/user";
+import { ROUTES } from "@/shared";
 
 export const LoginPage = () => {
-
   const navigate = useNavigate();
   const { setStatus } = useAuthStore();
 

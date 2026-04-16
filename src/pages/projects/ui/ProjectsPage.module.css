@@ -1,0 +1,10 @@
+.projectsPage{
+  display: flex;
+}
+
+.projectsContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	flex-grow: 1;
+}
