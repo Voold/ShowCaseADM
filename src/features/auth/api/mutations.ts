@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient, type UseMutationResult } from '@tanstack/react-query'
 import type { AxiosError } from 'axios'
+import { pkceService } from '../lib/pkce'
 import { userKeys } from '@/entities/user'
 import { login, logout } from '@/entities/user'
 import type { AuthResponse, OAuthExchangeParams } from '@/entities/user'
-import { pkceService } from '../lib/pkce'
 
 export const useLogin = (): UseMutationResult<AuthResponse, AxiosError, OAuthExchangeParams> => {
   const queryClient = useQueryClient()
