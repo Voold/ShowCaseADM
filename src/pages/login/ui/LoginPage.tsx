@@ -9,7 +9,7 @@ export const LoginPage = () => {
 
   const handleLogin = () => {
     setStatus('authenticated')
-    navigate(ROUTES.ADMIN);
+    navigate(ROUTES.MAIN);
   }
 
   return(
