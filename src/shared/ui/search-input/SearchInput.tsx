@@ -5,9 +5,10 @@ import type {ChangeEvent} from "react";
 interface SearchInputProps {
   value: string,
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
+  placeholder: string
 }
 
-export const SearchInput = ({value, onChange}: SearchInputProps) => {
+export const SearchInput = ({value, onChange, placeholder}: SearchInputProps) => {
   return(
       <div className={styles.container}>
         <div className={styles.search}>
@@ -17,7 +18,7 @@ export const SearchInput = ({value, onChange}: SearchInputProps) => {
               type='text'
               value={value}
               onChange={onChange}
-              placeholder={'Найти пользователя'}
+              placeholder={placeholder}
           />
         </div>
       </div>

@@ -1,10 +1,22 @@
 import styles from './UserSlot.module.css'
 import UserAvatar from '../../assets/user-avatar.svg?react'
-import type {UserSlotProps} from "../../model/types.ts";
 import OpenIcon from "./assets/up.svg?react"
-import {forwardRef} from "react";
+import type { ComponentPropsWithRef } from "react";
 
-export const UserSlot = forwardRef<HTMLDivElement, UserSlotProps>(
+export interface UserSlotProps extends ComponentPropsWithRef<'div'> {
+  id: string,
+  fullName: string,
+  avatar?: string,
+  email?: string,
+  userRole?: UserRoleTypes
+}
+
+export type UserRoleTypes = {
+  title: string,
+  isActive: boolean
+}
+
+export const UserSlot = (
         ({
           id,
           fullName,
@@ -13,8 +25,9 @@ export const UserSlot = forwardRef<HTMLDivElement, UserSlotProps>(
           userRole,
           className = '',
           children,
-          ...props
-        }, ref) => {
+          ref,
+           ...props
+        } : UserSlotProps, ) => {
   return (
     <div className={`${styles.container} ${className}`} {...props} ref={ref}>
       <div className={styles.avatarContainer}>
@@ -42,5 +55,3 @@ export const UserSlot = forwardRef<HTMLDivElement, UserSlotProps>(
     </div>
   );
 });
-
-UserSlot.displayName = 'UserSlot';

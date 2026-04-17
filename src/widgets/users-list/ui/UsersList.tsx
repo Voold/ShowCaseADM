@@ -72,6 +72,7 @@ const UsersList = () => {
                 setSearchQuery(e.target.value)
                 setCurrentPage(1)
             }}
+            placeholder={"Найти пользователя"}
         />
         <div className={styles.userList} ref={listContainerRef}>
           {paginatedUsers.map(user => (
