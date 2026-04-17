@@ -1,5 +1,5 @@
-import { useAuthStore } from '@/entities/user'
 import { Navigate, Outlet } from 'react-router-dom'
+import { useAuthStore } from '@/entities/user'
 import { ROUTES } from '@/shared/config'
 import { assertNever } from '@/shared/lib'
 

@@ -2,6 +2,13 @@
 	display: flex;
 	gap: 10px;
 	align-items: center;
+	justify-content: space-between;
+}
+
+.avatarContainer {
+	display: flex;
+	gap: 8px;
+	align-items: center;
 }
 
 .avatar {
@@ -11,16 +18,50 @@
 }
 
 .description {
-	flex-grow: 1;
 	user-select: none;
 }
 
 .name {
-	font-size: var(--H5);
+	font-size: var(--h5);
 	font-weight: 900;
 }
 
-.role {
+.id {
 	font-weight: 700;
 	color: color-mix(in srgb, var(--text-color) 30%, transparent);
+}
+
+.email {
+	font-style: italic;
+	cursor: pointer;
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	color: var(--blue-grey-color);
+}
+
+.openIcon {
+	width: 12px;
+	height: 12px;
+}
+
+.role {
+	display: flex;
+	width: 180px;
+	height: 32px;
+	margin-right: 8px;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--border-radius);
+}
+
+.active {
+	background-image: linear-gradient(
+		color-mix(in srgb, var(--primary-color) 20%, transparent),
+		color-mix(in srgb, var(--primary-color) 20%, transparent)
+	);
+}
+
+.inactive {
+	color: var(--blue-grey-color);
 }

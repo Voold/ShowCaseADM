@@ -1,5 +1,5 @@
-import { queryClient } from '@/shared/api'
 import { QueryClientProvider } from '@tanstack/react-query'
+import { queryClient } from '@/shared/api'
 
 interface AppProviderProps {
   children?: React.ReactNode
