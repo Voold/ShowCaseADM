@@ -1,4 +1,5 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom'
+import { createBrowserRouter } from 'react-router-dom'
+import { MainLayout } from '../layouts/main/MainLayout'
 import { LoginPage } from '@/pages/login'
 import { NotFoundPage } from '@/pages/not-found'
 import { MainPage } from '@/pages/main/'
@@ -11,17 +12,21 @@ import { ProtectedRoute } from '@/features/protected-route'
 import { ROUTES } from '@/shared'
 
 export const router = createBrowserRouter([
-  { path: '/', element: <Navigate to={ROUTES.ADMIN} replace /> },
   { path: ROUTES.LOGIN, element: <LoginPage /> },
   {
     element: <ProtectedRoute />,
     children: [
-      { path: ROUTES.ADMIN, element: <MainPage /> },
-      { path: ROUTES.PROJECTS, element: <ProjectsPage /> },
-      { path: ROUTES.USERS, element: <UsersPage /> },
-      { path: ROUTES.ROLES, element: <RolesPage /> },
-      { path: ROUTES.REPORTS, element: <ReportsPage /> },
-      { path: ROUTES.SETTINGS, element: <SettingsPage /> }
+      {
+        element: <MainLayout />,
+        children: [
+          { index: true, element: <MainPage /> },
+          { path: ROUTES.PROJECTS, element: <ProjectsPage /> },
+          { path: ROUTES.USERS, element: <UsersPage /> },
+          { path: ROUTES.ROLES, element: <RolesPage /> },
+          { path: ROUTES.REPORTS, element: <ReportsPage /> },
+          { path: ROUTES.SETTINGS, element: <SettingsPage /> }
+        ]
+      }
     ]
   },
   { path: '*', element: <NotFoundPage /> }

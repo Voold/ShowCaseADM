@@ -12,7 +12,7 @@ import { UserSlot } from '@/entities/user'
 import { Logo, ROUTES } from '@/shared'
 
 const buttons = [
-  { name: 'Главная', icon: LayoutIcon, to: ROUTES.ADMIN },
+  { name: 'Главная', icon: LayoutIcon, to: '/' },
   { name: 'Проекты', icon: FolderIcon, to: ROUTES.PROJECTS },
   { name: 'Пользователи', icon: UsersIcon, to: ROUTES.USERS },
   { name: 'Роли', icon: HammerIcon, to: ROUTES.ROLES },

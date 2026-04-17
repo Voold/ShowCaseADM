@@ -1,8 +1,8 @@
-.reportsPage{
+.page {
   display: flex;
 }
 
-.reportsContainer{
+.container{
   display: flex;
   justify-content: center;
   align-items: center;
