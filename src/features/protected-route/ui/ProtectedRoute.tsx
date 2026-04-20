@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom'
 import { useAuthStore } from '@/entities/user'
-import { ROUTES } from '@/shared/config'
-import { assertNever } from '@/shared/lib'
+import { ROUTES } from '@/shared'
+import { assertNever } from '@/shared'
 
 export const ProtectedRoute = () => {
   const status = useAuthStore(state => state.status)

@@ -1,6 +1,6 @@
-import { ENDPOINTS } from '@/shared/config'
 import type { InternalAxiosRequestConfig } from 'axios'
 import axios, { AxiosError } from 'axios'
+import { ENDPOINTS } from '..'
 
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || '/api',

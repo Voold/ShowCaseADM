@@ -1,7 +1,6 @@
-import { api } from '@/shared/api'
-import { ENDPOINTS } from '@/shared/config'
 import type { AuthResponse, OAuthExchangeParams } from './types'
 import type { User } from '../model/types'
+import { api, ENDPOINTS } from '@/shared'
 
 export async function login(params: OAuthExchangeParams): Promise<AuthResponse> {
   const { data } = await api.post<AuthResponse>(ENDPOINTS.LOGIN, params)
