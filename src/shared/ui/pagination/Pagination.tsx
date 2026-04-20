@@ -1,5 +1,4 @@
 import { ChevronLeftIcon } from '../../assets'
-import { useState } from 'react'
 import { getPaginationRange, type PaginationRange } from './getPaginationRange'
 import styles from './Pagination.module.css'
 
@@ -10,21 +9,31 @@ interface PaginationProps {
 }
 
 export function Pagination({ totalPages = 1, currentPage = 1, onPageSelect = () => {} }: PaginationProps) {
-  const [activePage, setActivePage] = useState(currentPage)
-  const pages: PaginationRange = getPaginationRange(activePage, totalPages)
+  const pages: PaginationRange = getPaginationRange(currentPage, totalPages)
 
-  const selectPage = (page: number) => {
-    if (activePage !== page) {
+  const handleSelectPage = (page: number) => {
+    if (page !== currentPage) {
       onPageSelect(page)
-      setActivePage(page)
+    }
+  }
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      onPageSelect(currentPage - 1)
+    }
+  }
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      onPageSelect(currentPage + 1)
     }
   }
 
   return (
     <nav className={styles.pagination}>
       <ChevronLeftIcon
-        className={`${styles.chevron} ${styles.left} ${activePage === 1 && styles.disabled}`}
-        onClick={() => activePage !== 1 && setActivePage(p => p - 1)}
+        className={`${styles.chevron} ${styles.left} ${currentPage === 1 && styles.disabled}`}
+        onClick={handlePrevPage}
       />
       <ul className={styles.pagesList}>
         {pages.map((page, i) =>
@@ -35,8 +44,8 @@ export function Pagination({ totalPages = 1, currentPage = 1, onPageSelect = () 
           ) : (
             <li
               key={i}
-              className={`${styles.page} ${activePage == page && styles.active}`}
-              onClick={() => selectPage(page)}
+              className={`${styles.page} ${currentPage == page && styles.active}`}
+              onClick={() => handleSelectPage(page as number)}
             >
               {page}
             </li>
@@ -44,8 +53,8 @@ export function Pagination({ totalPages = 1, currentPage = 1, onPageSelect = () 
         )}
       </ul>
       <ChevronLeftIcon
-        className={`${styles.chevron} ${activePage === totalPages && styles.disabled}`}
-        onClick={() => activePage !== totalPages && setActivePage(p => p + 1)}
+        className={`${styles.chevron} ${currentPage === totalPages && styles.disabled}`}
+        onClick={handleNextPage}
       />
     </nav>
   )
