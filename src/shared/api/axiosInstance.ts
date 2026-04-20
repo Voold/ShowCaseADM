@@ -3,7 +3,8 @@ import axios, { AxiosError } from 'axios'
 import { ENDPOINTS } from '..'
 
 export const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
+  // TODO - вынести в .env и добавить
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'https://backendMock/api',
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json'
