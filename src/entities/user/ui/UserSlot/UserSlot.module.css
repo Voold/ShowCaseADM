@@ -13,7 +13,7 @@
 
 .avatar {
 	aspect-ratio: 1;
-	height: 50px;
+	height: 36px;
 	color: rgba(0, 0, 0, 0.5);
 }
 
@@ -22,12 +22,12 @@
 }
 
 .name {
-	font-size: var(--h5);
-	font-weight: 900;
+	font-size: var(--h6);
+	font-weight: 700;
 }
 
 .id {
-	font-weight: 700;
+	font-weight: 400;
 	color: color-mix(in srgb, var(--text-color) 30%, transparent);
 }
 
@@ -49,7 +49,7 @@
 	display: flex;
 	width: 180px;
 	height: 32px;
-	margin-right: 8px;
+	margin-right: 4px;
 	align-items: center;
 	justify-content: center;
 	border-radius: var(--border-radius);

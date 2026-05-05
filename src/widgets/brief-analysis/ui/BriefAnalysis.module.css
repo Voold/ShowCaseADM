@@ -1,0 +1,9 @@
+.mainContainer {
+  display: flex;
+  min-width: 300px;
+  min-height: 200px;
+  flex-grow: 1;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: var(--sec-color);
+}
