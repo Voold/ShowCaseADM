@@ -2,6 +2,7 @@ import js from '@eslint/js'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 import pluginReact from 'eslint-plugin-react'
+import fsdPlugin from 'eslint-plugin-fsd-lint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
@@ -25,5 +26,6 @@ export default defineConfig([
     }
   },
   pluginReact.configs.flat.recommended,
-  pluginReact.configs.flat['jsx-runtime']
+  pluginReact.configs.flat['jsx-runtime'],
+  fsdPlugin.configs.strict
 ])
