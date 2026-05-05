@@ -4,4 +4,5 @@ export const ENDPOINTS = {
   REFRESH: import.meta.env.VITE_REF_POST_RELOGIN,
   LOGOUT: import.meta.env.VITE_REF_POST_LOGOUT,
   USER_BY_ID: import.meta.env.VITE_REF_GET_CURRENT_USER,
+  USERS_BY_NAME: import.meta.env.VITE_REF_GET_USERS_BY_NAME
 };

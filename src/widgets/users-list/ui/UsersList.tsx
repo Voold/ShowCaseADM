@@ -1,7 +1,7 @@
 import {useEffect, useRef, useState} from "react";
 import styles from './UsersList.module.css'
 import {UserSlot} from "@/entities/user";
-import {Pagination, SearchInput} from "@/shared/ui";
+import {Pagination, SearchInput} from "@/shared";
 
 const mockUsers = Array.from({ length: 24 }, (_, i) => ({
   id: i.toString(),
