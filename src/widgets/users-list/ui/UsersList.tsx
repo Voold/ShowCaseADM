@@ -16,7 +16,7 @@ const mockUsers = Array.from({length: 24}, (_, i) => ({
 const UsersList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 9;
+  const itemsPerPage = 8;
 
   const filteredUsers = mockUsers.filter((user) => {
     const lowerQuery = searchQuery.toLowerCase();
