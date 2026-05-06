@@ -8,9 +8,10 @@
 
 .userList {
   display: flex;
-  flex: 1;
   flex-direction: column;
   gap: 8px;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .userSlot {
