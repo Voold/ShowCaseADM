@@ -1,6 +1,6 @@
+import styles from "./UsersPage.module.css"
 import {QuickActions} from "@/widgets/quick-actions";
 import {BriefAnalysis} from "@/widgets/brief-analysis";
-import styles from "./UsersPage.module.css"
 import {UsersList} from "@/widgets/users-list";
 
 export const UsersPage = () => {
