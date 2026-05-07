@@ -1,10 +1,14 @@
 .page {
   display: flex;
+  height: 100vh;
 }
 
 .container{
+  background-color: var(--bg-color);
   display: flex;
   justify-content: center;
   align-items: center;
-	flex-grow: 1;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
 }
