@@ -4,12 +4,16 @@ export type User = {
   name: string
   role: string
   email: string
+  avatarUrl: string
 }
 
 export type UserDto = {
   id: number
-  firstName: string
-  lastName: string
-  role: string
+  profilePicture?: string
+  meta: {
+    firstName: string
+    lastName: string
+  }
   email: string
+  role: string
 }

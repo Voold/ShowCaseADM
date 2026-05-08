@@ -1,10 +1,12 @@
 import type { User, UserDto } from '../model/types'
+import defaultAvatar from '../assets/user-avatar.svg'
 
 export const mapUserDto = (dto: UserDto): User => {
   return {
     id: String(dto.id),
-    name: `${dto.lastName} ${dto.firstName}`,
+    name: `${dto.meta.lastName} ${dto.meta.firstName}`,
     role: dto.role,
-    email: dto.email
+    email: dto.email,
+    avatarUrl: dto.profilePicture || defaultAvatar
   }
 }
