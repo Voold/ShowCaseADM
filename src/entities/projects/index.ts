@@ -1,2 +1,2 @@
-export { ProjectSlot } from "./ui/project-slot";
-export type { Project, ProjectStatus } from "./model/types";
+export { ProjectSlot } from "./ui/project-slot/ProjectSlot.tsx";
+export type { Project } from "./model/types";

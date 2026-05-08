@@ -6,7 +6,7 @@
   height: 100%;
 }
 
-.userList {
+.projectsList {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -14,7 +14,7 @@
   min-height: 0;
 }
 
-.userSlot {
+.projectSlot {
   background-color: var(--sec-color);
   padding: 8px;
   border-radius: 8px;

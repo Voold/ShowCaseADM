@@ -29,7 +29,7 @@ export const UserSlot = (
            ...props
         } : UserSlotProps ) => {
   return (
-    <div className={`${styles.container} ${styles[className]}`} {...props} ref={ref}>
+    <div className={`${styles.container} ${className}`} {...props} ref={ref}>
       <div className={styles.avatarContainer}>
         {avatar ?
             (<img className={styles.avatar} src={avatar} alt='Аватарка'/>) :

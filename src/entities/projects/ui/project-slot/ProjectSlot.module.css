@@ -62,32 +62,25 @@
   align-items: center;
   justify-content: center;
   border-radius: var(--border-radius);
+
+  background-image: linear-gradient(
+      color-mix(in srgb, var(--status-bg-color) 20%, transparent),
+      color-mix(in srgb, var(--status-bg-color) 20%, transparent)
+  );
 }
 
 .active {
-  background-image: linear-gradient(
-      color-mix(in srgb, var(--primary-color) 20%, transparent),
-      color-mix(in srgb, var(--primary-color) 20%, transparent)
-  );
+  --status-bg-color: var(--primary-color);
 }
 
 .pending {
-  background-image: linear-gradient(
-      color-mix(in srgb, var(--quiet-grey-color) 20%, transparent),
-      color-mix(in srgb, var(--quiet-grey-color) 20%, transparent)
-  );
+  --status-bg-color: var(--quiet-grey-color);
 }
 
 .archive {
-  background-image: linear-gradient(
-      color-mix(in srgb, var(--black-color) 20%, transparent),
-      color-mix(in srgb, var(--black-color) 20%, transparent)
-  );
+  --status-bg-color: var(--black-color);
 }
 
 .closed {
-  background-image: linear-gradient(
-      color-mix(in srgb, var(--red-color) 20%, transparent),
-      color-mix(in srgb, var(--red-color) 20%, transparent)
-  );
+  --status-bg-color: var(--red-color);
 }

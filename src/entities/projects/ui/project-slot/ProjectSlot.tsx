@@ -1,12 +1,6 @@
 import styles from './ProjectSlot.module.css'
 import ProjectIcon from '../../assets/project.svg?react'
-
-interface ProjectSlotProps {
-  id: string,
-  name: string,
-  school: string,
-  status: "active" | "pending" | "closed" | "archive"
-}
+import type { Project } from '../../model/types.ts'
 
 const getStatusName = (status: string) => {
   switch (status) {
@@ -24,7 +18,7 @@ const getStatusName = (status: string) => {
 }
 
 export const ProjectSlot = (
-    { id, name, school, status} : ProjectSlotProps
+    { id, name, school, status} : Project
 ) => {
   return (
       <div className={`${styles.container}`}>
@@ -47,7 +41,6 @@ export const ProjectSlot = (
         `}>
               {getStatusName(status)}
         </p>
-
       </div>
   );
 }
