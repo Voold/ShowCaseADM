@@ -9,10 +9,10 @@ export const UsersPage = () => {
         <h2 className={styles.usersTitle}>Пользователи</h2>
         <div className={styles.content}>
           <UsersList />
-          <div className={styles.quickSide}>
+          <aside className={styles.quickSide}>
             <QuickActions />
             <BriefAnalysis />
-          </div>
+          </aside>
         </div>
       </main>
   )

@@ -8,9 +8,9 @@ export const ProjectsPage = () => {
         <h2 className={styles.projectTitle}>Проекты</h2>
         <div className={styles.content}>
           <ProjectsList />
-          <div className={styles.quickSide}>
+          <aside className={styles.quickSide}>
             <QuickActions />
-          </div>
+          </aside>
         </div>
       </main>
   )

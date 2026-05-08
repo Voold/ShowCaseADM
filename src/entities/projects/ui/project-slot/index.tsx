@@ -43,10 +43,7 @@ export const ProjectSlot = (
         }
         <p className={`
           ${styles.status}
-          ${status == 'active' ? styles.active : ''}
-          ${status == 'pending' ? styles.pending : ''}
-          ${status == 'archive' ? styles.archive : ''}
-          ${status == 'closed' ? styles.closed : ''}
+          ${styles[status]}
         `}>
               {getStatusName(status)}
         </p>
