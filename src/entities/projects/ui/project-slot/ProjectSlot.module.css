@@ -1,0 +1,93 @@
+.container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: var(--sec-color);
+  cursor: pointer;
+
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--outline-color);
+  }
+}
+
+.iconContainer {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.projectIcon {
+  aspect-ratio: 1;
+  height: 36px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.description {
+  user-select: none;
+}
+
+.name {
+  font-size: var(--h6);
+  font-weight: 700;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.id {
+  font-weight: 400;
+  color: color-mix(in srgb, var(--text-color) 30%, transparent);
+}
+
+.school {
+  font-style: italic;
+  cursor: pointer;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  color: var(--blue-grey-color);
+}
+
+.status {
+  display: flex;
+  width: 120px;
+  height: 32px;
+  margin-right: 4px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+}
+
+.active {
+  background-image: linear-gradient(
+      color-mix(in srgb, var(--primary-color) 20%, transparent),
+      color-mix(in srgb, var(--primary-color) 20%, transparent)
+  );
+}
+
+.pending {
+  background-image: linear-gradient(
+      color-mix(in srgb, var(--quiet-grey-color) 20%, transparent),
+      color-mix(in srgb, var(--quiet-grey-color) 20%, transparent)
+  );
+}
+
+.archive {
+  background-image: linear-gradient(
+      color-mix(in srgb, var(--black-color) 20%, transparent),
+      color-mix(in srgb, var(--black-color) 20%, transparent)
+  );
+}
+
+.closed {
+  background-image: linear-gradient(
+      color-mix(in srgb, var(--red-color) 20%, transparent),
+      color-mix(in srgb, var(--red-color) 20%, transparent)
+  );
+}
