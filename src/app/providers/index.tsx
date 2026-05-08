@@ -13,7 +13,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     <QueryClientProvider client={queryClient}>
       <AuthBootstrapper />
       {children}
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 };
