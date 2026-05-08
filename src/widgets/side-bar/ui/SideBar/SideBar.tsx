@@ -8,7 +8,7 @@ import LayoutIcon from '../../assets/layout.svg?react'
 import UsersIcon from '../../assets/users.svg?react'
 import styles from './SideBar.module.css'
 import { NavButton } from '../NavButton/NavButton'
-import { UserSlot } from '@/entities/user'
+import { mockedUsers, UserSlot } from '@/entities/user'
 import { Logo, ROUTES } from '@/shared'
 
 const buttons = [
@@ -42,7 +42,7 @@ export function SideBar() {
         ))}
       </nav>
       <span className={styles.divider} />
-      <UserSlot id={'993-993'} fullName={'Номинал Н. Н.'}/>
+      <UserSlot user={mockedUsers[0]}/>
     </div>
   )
 }

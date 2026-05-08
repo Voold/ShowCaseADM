@@ -29,10 +29,7 @@ export function DynamicList({
       <div className={styles.container}>
         <SearchInput
             value={searchQuery}
-            onChange={(e) => {
-              setSearchQuery(e.target.value);
-              setCurrentPage(1);
-            }}
+            onChange={(e) => setSearchQuery(e.target.value)}
             placeholder={placeholder}
         />
         <div className={styles.listWrapper}>
