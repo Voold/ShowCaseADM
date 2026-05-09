@@ -1,5 +1,5 @@
 import styles from './UserSlot.module.css'
-import UserAvatar from '../../assets/user-avatar.svg?react'
+import UserAvatar from '../../assets/user.svg?react'
 import OpenIcon from "./assets/up.svg?react"
 import type { ComponentPropsWithRef } from "react";
 
@@ -27,7 +27,7 @@ export const UserSlot = (
           children,
           ref,
            ...props
-        } : UserSlotProps, ) => {
+        } : UserSlotProps ) => {
   return (
     <div className={`${styles.container} ${className}`} {...props} ref={ref}>
       <div className={styles.avatarContainer}>

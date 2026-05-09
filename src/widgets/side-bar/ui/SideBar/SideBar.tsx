@@ -42,7 +42,7 @@ export function SideBar() {
         ))}
       </nav>
       <span className={styles.divider} />
-      <UserSlot id={'993-993'} fullName={'Номинал Н. Н.'}/>
+      <UserSlot id={'993-993'} fullName={'Номинал Н. Н.'} className={styles.noHover}/>
     </div>
   )
 }
