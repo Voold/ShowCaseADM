@@ -1,5 +1,5 @@
 import {useState} from "react";
-import { ProjectSlot } from "@/entities/projects";
+import { ProjectSlot } from "@/entities/project";
 import {DynamicList} from "@/shared";
 
 const mockProjects = Array.from({length: 24}, (_, i) => ({
