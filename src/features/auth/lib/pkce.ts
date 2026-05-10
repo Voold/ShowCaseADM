@@ -1,9 +1,11 @@
 import type { OAuthExchangeParams } from "@/entities/user";
 
 const STORAGE_KEYS = {
-  CODE_VERIFIER: 'code_verifier',
-  STATE: 'oauth_state',
+  CODE_VERIFIER: "code_verifier",
+  STATE: "oauth_state",
 } as const;
+
+const OAUTH_AUTHORIZE_URL = import.meta.env.VITE_OAUTH_AUTHORIZE_URL as string;
 
 class PkceService {
   prepareAuth = async () => {
@@ -17,10 +19,31 @@ class PkceService {
     return { challenge, state };
   };
 
+  async startAuth() {
+    const clientId = import.meta.env.VITE_TPU_OAUTH_CLIENT_ID as string;
+
+    if (!clientId) {
+      throw new Error("Не задан VITE_TPU_OAUTH_CLIENT_ID");
+    }
+
+    const { challenge, state } = await this.prepareAuth();
+    const redirectUri = window.location.origin; 
+    const params = new URLSearchParams({
+      client_id: clientId,
+      redirect_uri: redirectUri,
+      response_type: "code",
+      state,
+      code_challenge: challenge,
+      code_challenge_method: "S256",
+    });
+
+    window.location.assign(`${OAUTH_AUTHORIZE_URL}?${params.toString()}`);
+  }
+
   parseCallback(query: string): OAuthExchangeParams | null {
     const params = new URLSearchParams(query);
-    const code = params.get('code');
-    const state = params.get('state');
+    const code = params.get("code");
+    const state = params.get("state");
     const savedState = sessionStorage.getItem(STORAGE_KEYS.STATE);
     const codeVerifier = sessionStorage.getItem(STORAGE_KEYS.CODE_VERIFIER);
 
@@ -37,20 +60,23 @@ class PkceService {
   }
 
   private generateRandomString(len: number): string {
-    const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
+    const charset =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~";
     const values = new Uint8Array(len);
     crypto.getRandomValues(values);
-    return Array.from(values).map((x) => charset[x % charset.length]).join('');
+    return Array.from(values)
+      .map((x) => charset[x % charset.length])
+      .join("");
   }
 
   private async generateChallenge(verifier: string): Promise<string> {
     const encoder = new TextEncoder();
     const data = encoder.encode(verifier);
-    const digest = await crypto.subtle.digest('SHA-256', data);
+    const digest = await crypto.subtle.digest("SHA-256", data);
     return btoa(String.fromCharCode(...new Uint8Array(digest)))
-      .replace(/\+/g, '-')
-      .replace(/\//g, '_')
-      .replace(/=/g, '');
+      .replace(/\+/g, "-")
+      .replace(/\//g, "_")
+      .replace(/=/g, "");
   }
 }
 
