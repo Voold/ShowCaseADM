@@ -1,8 +1,25 @@
 .container {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+	justify-content: space-between;
+	cursor: pointer;
+
+	transition: background-color 0.2s ease-in-out;
+
+	background-color: var(--sec-color);
+	border-radius: 5px;
+	padding: 8px;
+
+	&:hover {
+		background-color: var(--outline-color);
+	}
+}
+
+.noHover {
+	&:hover {
+		background-color: transparent;
+	}
 }
 
 .avatarContainer {
@@ -22,8 +39,12 @@
 }
 
 .name {
-  font-size: var(--h6);
-  font-weight: 700;
+	font-size: var(--h6);
+	font-weight: 700;
+	max-width: 150px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .id {

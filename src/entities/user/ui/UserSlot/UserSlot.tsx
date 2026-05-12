@@ -1,5 +1,6 @@
-import styles from "./UserSlot.module.css";
-import UserAvatar from "../../assets/user-avatar.svg?react";
+import styles from './UserSlot.module.css'
+import UserAvatar from '../../assets/user.svg?react'
+import OpenIcon from "./assets/up.svg?react"
 import type { ComponentPropsWithRef } from "react";
 
 export interface UserSlotProps extends ComponentPropsWithRef<"div"> {
@@ -14,16 +15,18 @@ export type UserRoleTypes = {
   isActive: boolean;
 };
 
-export const UserSlot = ({
-  id,
-  fullName,
-  avatar,
-  userRole,
-  className = "",
-  children,
-  ref,
-  ...props
-}: UserSlotProps) => {
+export const UserSlot = (
+        ({
+          id,
+          fullName,
+          avatar,
+          email,
+          userRole,
+          className = '',
+          children,
+          ref,
+           ...props
+        } : UserSlotProps ) => {
   return (
     <div className={`${styles.container} ${className}`} {...props} ref={ref}>
       <div className={styles.avatarContainer}>
