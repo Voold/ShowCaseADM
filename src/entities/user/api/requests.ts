@@ -1,10 +1,14 @@
-import type { AuthResponse, OAuthExchangeParams } from './types'
+import type { AuthStatusResponse, OAuthExchangeParams } from './types'
 import type { User, UserDto } from '../model/types'
 import { mapUserDto } from '../lib/mappers'
 import { api, ENDPOINTS } from '@/shared'
 
-export async function login(params: OAuthExchangeParams): Promise<AuthResponse> {
-  const { data } = await api.post<AuthResponse>(ENDPOINTS.LOGIN, params)
+export async function login(params: OAuthExchangeParams): Promise<void> {
+  await api.post(ENDPOINTS.LOGIN, params)
+}
+
+export async function getAuthStatus(): Promise<AuthStatusResponse> {
+  const { data } = await api.get<AuthStatusResponse>(ENDPOINTS.STATUS as string)
   return data
 }
 

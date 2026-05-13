@@ -1,24 +1,44 @@
-import react from '@vitejs/plugin-react'
-import path from 'path'
-import { defineConfig } from 'vite'
-import svgr from 'vite-plugin-svgr'
+import react from "@vitejs/plugin-react";
+import fs from "fs";
+import path from "path";
+import { defineConfig } from "vite";
+import svgr from "vite-plugin-svgr";
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
     svgr({
       svgrOptions: {
-        dimensions: false, // отключает добавление width и height
+        dimensions: false,
         icon: true,
-        ref: true
+        ref: true,
       },
-      include: '**/*.svg?react'
-    })
+      include: "**/*.svg?react",
+    }),
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+  server: (() => {
+    const certDir = path.resolve(__dirname, "certs");
+    const keyPath = path.join(certDir, "dev.key");
+    const certPath = path.join(certDir, "dev.crt");
+
+    try {
+      if (fs.existsSync(keyPath) && fs.existsSync(certPath)) {
+        return {
+          https: {
+            key: fs.readFileSync(keyPath),
+            cert: fs.readFileSync(certPath),
+          },
+        };
+      }
+    } catch (e) {
+      console.warn("Ошибка при загрузке сертификатов HTTPS:", e);
     }
-  }
-})
+
+    return { https: {} };
+  })(),
+});

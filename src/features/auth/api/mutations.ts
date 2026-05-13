@@ -8,25 +8,21 @@ import { pkceService } from "../lib/pkce";
 import {
   login,
   logout,
-  userKeys,
   useAuthStore,
-  type AuthResponse,
   type OAuthExchangeParams,
 } from "@/entities/user";
 
 export const useLogin = (): UseMutationResult<
-  AuthResponse,
+  void,
   AxiosError,
   OAuthExchangeParams
 > => {
-  const queryClient = useQueryClient();
   const setStatus = useAuthStore((state) => state.setStatus);
   const setLoggedOut = useAuthStore((state) => state.setLoggedOut);
 
   return useMutation({
     mutationFn: login,
-    onSuccess: (data) => {
-      queryClient.setQueryData(userKeys.me(), data.user);
+    onSuccess: () => {
       setLoggedOut(false);
       setStatus("authenticated");
       pkceService.clear();
