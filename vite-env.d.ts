@@ -7,9 +7,10 @@ interface ImportMetaEnv {
   readonly VITE_REF_POST_LOGOUT: string
   readonly VITE_REF_GET_CURRENT_USER: string
   readonly VITE_REF_GET_USERS_BY_NAME: string
+  readonly VITE_REF_GET_PROJECTS_BY_NAME: string
   readonly VITE_API_BASE_URL: string
 }
 
 interface ImportMeta {
-	readonly env: ImportMetaEnv
+  readonly env: ImportMetaEnv
 }
