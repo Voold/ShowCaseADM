@@ -23,6 +23,11 @@ export default defineConfig([
     rules: {
       '@typescript-eslint/no-floating-promises': 'off',
       '@typescript-eslint/prefer-promise-reject-errors': 'off'
+    },
+    settings: {
+      react: {
+        version: 'detect'
+      }
     }
   },
   pluginReact.configs.flat.recommended,

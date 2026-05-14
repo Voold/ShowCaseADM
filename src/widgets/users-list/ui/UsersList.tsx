@@ -1,61 +1,47 @@
-import {useState} from "react";
+import { useEffect, useState } from 'react'
 import styles from './UsersList.module.css'
-import {UserSlot} from "@/entities/user";
-import {DynamicList} from "@/shared";
-
-const mockUsers = Array.from({length: 24}, (_, i) => ({
-  id: i.toString(),
-  fullName: `Ярон ${i + 1}. Н.`,
-  email: `user${i + 1}@example.com`,
-  userRole: {
-    title: i % 3 === 0 ? 'Админ' : 'Пользователь',
-    isActive: i % 2 === 0,
-  },
-}));
+import { useUserFilters } from '../model/useUserFilters'
+import OpenIcon from '../assets/up.svg?react'
+import { mockedUsers, UserSlot } from '@/entities/user'
+import { DynamicList, useDebounce } from '@/shared'
 
 const UsersList = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const {page, setPage, limit, offset, query, setQuery} = useUserFilters()
 
-  const filteredUsers = mockUsers.filter((user) => {
-    const lowerQuery = searchQuery.toLowerCase();
-    return (
-        user.fullName.toLowerCase().includes(lowerQuery) ||
-        user.email.toLowerCase().includes(lowerQuery)
-    );
-  });
+  const [localQuery, setLocalQuery] = useState(query)
+  const debouncedQuery = useDebounce(localQuery, 500)
 
-  const paginatedUsers = filteredUsers.slice(
-      (currentPage - 1) * itemsPerPage,
-      currentPage * itemsPerPage
-  );
+  useEffect(() => setQuery(debouncedQuery), [debouncedQuery])
+  useEffect(() => setLocalQuery(query), [query])
 
-  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage) || 1;
+  const filteredUsers = mockedUsers.filter(user => {
+    const lowerQuery = query.toLowerCase()
+    return user.name.toLowerCase().includes(lowerQuery) || user.email.toLowerCase().includes(lowerQuery)
+  })
+
+  const paginatedUsers = filteredUsers.slice(offset, offset + limit)
+  const totalPages = Math.ceil(filteredUsers.length / limit) || 1
 
   return (
-      <DynamicList
-          currentPage={currentPage}
-          totalPages={totalPages}
-          setCurrentPage={setCurrentPage}
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          placeholder={"Найти пользователя..."}
-      >
-        {
-          paginatedUsers.map(user => (
-              <UserSlot
-                  className={styles.userSlot}
-                  key={user.id}
-                  id={user.id}
-                  fullName={user.fullName}
-                  email={user.email}
-                  userRole={user.userRole}
-              />
-          ))
-        }
-      </DynamicList>
-  );
+    <DynamicList
+      currentPage={page}
+      totalPages={totalPages}
+      setCurrentPage={setPage}
+      searchQuery={localQuery}
+      setSearchQuery={setLocalQuery}
+      placeholder={'Найти пользователя...'}
+    >
+      {paginatedUsers.map(user => (
+        <UserSlot className={styles.userSlot} key={user.id} user={user}>
+          <a href={`mailto:${user.email}`} className={styles.email}>
+            {user.email}
+            <OpenIcon className={styles.openIcon} />
+          </a>
+          <p className={`${styles.role} ${user.role === 'Админ' ? styles.active : styles.inactive}`}>{user.role}</p>
+        </UserSlot>
+      ))}
+    </DynamicList>
+  )
 }
 
-export default UsersList;
+export default UsersList

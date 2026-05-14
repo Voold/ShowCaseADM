@@ -81,3 +81,8 @@ button {
   border: none;
   outline: none;
 }
+
+input {
+  font-family: inherit;
+  font-size: inherit;
+}

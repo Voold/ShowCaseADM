@@ -19,3 +19,39 @@
   padding: 8px;
   border-radius: 8px;
 }
+
+.email {
+	font-style: italic;
+	cursor: pointer;
+	display: flex;
+	gap: 4px;
+	align-items: center;
+	color: var(--blue-grey-color);
+  text-decoration: none;
+}
+
+.openIcon {
+	width: 12px;
+	height: 12px;
+}
+
+.role {
+	display: flex;
+	width: 180px;
+	height: 32px;
+	margin-right: 4px;
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--border-radius);
+}
+
+.active {
+	background-image: linear-gradient(
+		color-mix(in srgb, var(--primary-color) 20%, transparent),
+		color-mix(in srgb, var(--primary-color) 20%, transparent)
+	);
+}
+
+.inactive {
+	color: var(--blue-grey-color);
+}

@@ -45,7 +45,7 @@ export function Pagination({ totalPages = 1, currentPage = 1, onPageSelect = () 
             <li
               key={i}
               className={`${styles.page} ${currentPage == page && styles.active}`}
-              onClick={() => handleSelectPage(page as number)}
+              onClick={() => handleSelectPage(page)}
             >
               {page}
             </li>
