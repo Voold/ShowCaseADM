@@ -8,7 +8,7 @@ import LayoutIcon from '../../assets/layout.svg?react'
 import UsersIcon from '../../assets/users.svg?react'
 import styles from './SideBar.module.css'
 import { NavButton } from '../NavButton/NavButton'
-import { UserSlot, useMe, useAuthStore } from '@/entities/user'
+import { UserSlot, useMe, useAuthStore, placeholderUser } from '@/entities/user'
 import { Logo, ROUTES } from '@/shared'
 
 const buttons = [
@@ -24,8 +24,7 @@ export function SideBar() {
   const location = useLocation()
   const [activeButton, setActiveButton] = useState(location.pathname)
   const status = useAuthStore((s) => s.status)
-  const meQuery = useMe(status === 'authenticated')
-  const user = meQuery.data
+  const {data: user = placeholderUser} = useMe(status === 'authenticated')
 
   return (
     <div className={styles.sideBar}>
@@ -45,11 +44,7 @@ export function SideBar() {
         ))}
       </nav>
       <span className={styles.divider} />
-      <UserSlot
-        id={user?.userId ?? ''}
-        fullName={ user?.meta.firstName ? user?.meta.firstName + ' ' + user?.meta.lastName : (meQuery.isLoading ? 'Загрузка...' : '')}
-        avatar={user?.profilePicture}
-      />
+      <UserSlot user={user}/>
     </div>
   )
 }

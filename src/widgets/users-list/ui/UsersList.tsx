@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react'
 import styles from './UsersList.module.css'
 import { useUserFilters } from '../model/useUserFilters'
 import OpenIcon from '../assets/up.svg?react'
-import { mockedUsers, UserSlot } from '@/entities/user'
+import { getHighestRole, getRoleTranslation, mockedUsers, UserSlot } from '@/entities/user'
 import { DynamicList, useDebounce } from '@/shared'
 
 const UsersList = () => {
-  const {page, setPage, limit, offset, query, setQuery} = useUserFilters()
+  const { page, setPage, limit, offset, query, setQuery } = useUserFilters()
 
   const [localQuery, setLocalQuery] = useState(query)
   const debouncedQuery = useDebounce(localQuery, 500)
@@ -16,7 +16,7 @@ const UsersList = () => {
 
   const filteredUsers = mockedUsers.filter(user => {
     const lowerQuery = query.toLowerCase()
-    return user.name.toLowerCase().includes(lowerQuery) || user.email.toLowerCase().includes(lowerQuery)
+    return user.meta.name.toLowerCase().includes(lowerQuery) || user.email.toLowerCase().includes(lowerQuery)
   })
 
   const paginatedUsers = filteredUsers.slice(offset, offset + limit)
@@ -37,7 +37,9 @@ const UsersList = () => {
             {user.email}
             <OpenIcon className={styles.openIcon} />
           </a>
-          <p className={`${styles.role} ${user.role === 'Админ' ? styles.active : styles.inactive}`}>{user.role}</p>
+          <p className={`${styles.role} ${user.roles.some(role => role.type === 'Admin') ? styles.active : styles.inactive}`}>
+            {getRoleTranslation(getHighestRole(user.roles))}
+          </p>
         </UserSlot>
       ))}
     </DynamicList>

@@ -8,13 +8,13 @@ export async function login(params: OAuthExchangeParams): Promise<void> {
 }
 
 export async function getAuthStatus(): Promise<AuthStatusResponse> {
-  const { data } = await api.get<AuthStatusResponse>(ENDPOINTS.STATUS as string)
+  const { data } = await api.get<AuthStatusResponse>(ENDPOINTS.STATUS)
   return data
 }
 
 export async function getMe(): Promise<User> {
-  const { data } = await api.get<User>(ENDPOINTS.ME)
-  return data
+  const { data } = await api.get<UserDto>(ENDPOINTS.ME)
+  return mapUserDto(data)
 }
 
 export async function logout(): Promise<void> {
@@ -23,8 +23,8 @@ export async function logout(): Promise<void> {
 
 //ANCHOR - other feature
 export async function getUserById(uid: string): Promise<User> {
-  const { data } = await api.get<User>(`${ENDPOINTS.USER_BY_ID}${uid}`)
-  return data
+  const { data } = await api.get<UserDto>(`${ENDPOINTS.USER_BY_ID}${uid}`)
+  return mapUserDto(data)
 }
 
 export async function getUsersByName(query: string, offset: number, limit: number): Promise<User[]> {
