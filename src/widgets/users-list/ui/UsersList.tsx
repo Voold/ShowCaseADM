@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import styles from './UsersList.module.css'
-import { useUserFilters } from '../model/useUserFilters'
 import OpenIcon from '../assets/up.svg?react'
 import { getHighestRole, getRoleTranslation, mockedUsers, UserSlot } from '@/entities/user'
-import { DynamicList, useDebounce } from '@/shared'
+import { DynamicList, useDebounce, useQueryFilters } from '@/shared'
 
 const UsersList = () => {
-  const { page, setPage, limit, offset, query, setQuery } = useUserFilters()
+  const { page, setPage, limit, offset, query, setQuery } = useQueryFilters()
 
   const [localQuery, setLocalQuery] = useState(query)
   const debouncedQuery = useDebounce(localQuery, 500)
