@@ -1,45 +1,25 @@
-import styles from "./UserSlot.module.css";
-import UserAvatar from "../../assets/user.svg?react";
-import type { ComponentPropsWithRef } from "react";
+import styles from './UserSlot.module.css'
+import type { ComponentPropsWithRef } from 'react'
+import defaultProfilePicture from '../../assets/user-avatar.svg'
+import type { UserBase } from '../../model/types'
 
-export interface UserSlotProps extends ComponentPropsWithRef<"div"> {
-  id: string;
-  fullName: string;
-  avatar?: null | string;
-  email?: string;
-  userRole?: UserRoleTypes; // Все тоже не очень очевидно из структуры юзера...
+export interface UserSlotProps extends ComponentPropsWithRef<'div'> {
+  user: UserBase
 }
 
-export type UserRoleTypes = {
-  title: string;
-  isActive: boolean;
-};
-
-export const UserSlot = ({
-  id,
-  fullName,
-  avatar,
-  email,
-  userRole,
-  className = "",
-  children,
-  ref,
-  ...props
-}: UserSlotProps) => {
+export const UserSlot = ({ user, className, children, ...props }: UserSlotProps) => {
   return (
-    <div className={`${styles.container} ${className}`} {...props} ref={ref}>
+    <div className={`${styles.container} ${className}`} {...props}>
       <div className={styles.avatarContainer}>
-        {avatar ? (
-          <img className={styles.avatar} src={avatar} alt="Аватарка" />
-        ) : (
-          <UserAvatar className={styles.avatar} />
-        )}
+        {/* <img className={styles.avatar} src={user.profilePicture} alt="Фото профиля" /> */}
+        <img className={styles.avatar} src={defaultProfilePicture} alt='Фото профиля' /> {/* TODO убрать когда дадут аватарку на Base */}
+
         <div className={styles.description}>
-          <p className={styles.name}>{fullName}</p>
-          <p className={styles.id}>{id}</p>
+          <p className={styles.name}>{user.meta.name}</p>
+          <p className={styles.id}>{user.id}</p>
         </div>
       </div>
       {children}
     </div>
-  );
-};
+  )
+}

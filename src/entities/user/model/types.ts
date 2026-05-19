@@ -1,33 +1,68 @@
 // TODO - Обновить тип юзера
-export type User = {
-  userId: string;
+export type User = UserBase & {
+  profilePicture: string
   meta: {
-    firstName: string;
-    lastName: string;
-    bio: string;
-    skills: string;
-    expirience: string;
-  };
-  profilePicture: null | string;
-  roles: {
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    Default?: {};
-    Student?: {
-      course: string;
-      school: string;
-      meta: {
-        group: string;
-      };
-    };
-  };
-  email: string;
-  capabilites: string[];
-};
+    bio: string
+    skills: string
+    experience: string
+  }
+  capabilities: string[] // по хорошему заменить на юнион
+}
+
+export type UserBase = {
+  id: string
+  email: string
+  roles: UserRole[]
+  meta: {
+    name: string
+  }
+} // TODO добавить фото профиля 
+
+export type UserBaseDto = {
+  userId: number
+  email: string
+  roles: string[]
+  meta: {
+    firstName: string
+    lastName: string
+  }
+}
 
 export type UserDto = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  role: string;
-  email: string;
-};
+  userId: number
+  email: string
+  profilePicture: string | null
+  meta: {
+    firstName: string
+    lastName: string
+    bio: string
+    skills: string
+    experience: string
+  }
+  roles: {
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+    Default?: {}
+    Student?: {
+      course: string
+      school: string
+      meta: {
+        group: string
+      }
+    },
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+    Admin?: {}
+  }
+  capabilities: string[] | null
+}
+
+type Role<T> = {
+  [K in keyof Required<T>]: { type: K, weight: number } & T[K]
+}[keyof Required<T>] // Объединяет результат в юнион вида {type: *роль*, ...}
+
+export type UserRole = Role<UserDto['roles']>
+
+export const ROLE_WEIGHTS: Record<keyof UserDto['roles'], number> = {
+  Default: 1,
+  Student: 2,
+  Admin: 3
+}

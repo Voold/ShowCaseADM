@@ -19,3 +19,8 @@
   padding: 8px;
   border-radius: 8px;
 }
+
+.placeholder {
+  margin: auto;
+  opacity: 0.3;
+}

@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
 import styles from './UsersList.module.css'
-import { useUserFilters } from '../model/useUserFilters'
 import OpenIcon from '../assets/up.svg?react'
-import { mockedUsers, UserSlot } from '@/entities/user'
-import { DynamicList, useDebounce } from '@/shared'
+import { getHighestRole, getRoleTranslation, UserSlot, useUsersByName } from '@/entities/user'
+import { DynamicList, useDebounce, useQueryFilters } from '@/shared'
 
 const UsersList = () => {
-  const {page, setPage, limit, offset, query, setQuery} = useUserFilters()
+  const { page, setPage, limit, offset, query, setQuery } = useQueryFilters()
 
   const [localQuery, setLocalQuery] = useState(query)
   const debouncedQuery = useDebounce(localQuery, 500)
@@ -14,13 +13,10 @@ const UsersList = () => {
   useEffect(() => setQuery(debouncedQuery), [debouncedQuery])
   useEffect(() => setLocalQuery(query), [query])
 
-  const filteredUsers = mockedUsers.filter(user => {
-    const lowerQuery = query.toLowerCase()
-    return user.name.toLowerCase().includes(lowerQuery) || user.email.toLowerCase().includes(lowerQuery)
-  })
+  const { data: users = [], isSuccess, isLoading, isError } = useUsersByName(query.toLowerCase(), offset, limit)
 
-  const paginatedUsers = filteredUsers.slice(offset, offset + limit)
-  const totalPages = Math.ceil(filteredUsers.length / limit) || 1
+  const paginatedUsers = users.slice(offset, offset + limit)
+  const totalPages = Math.ceil(users.length / limit) || 1
 
   return (
     <DynamicList
@@ -31,15 +27,25 @@ const UsersList = () => {
       setSearchQuery={setLocalQuery}
       placeholder={'Найти пользователя...'}
     >
-      {paginatedUsers.map(user => (
-        <UserSlot className={styles.userSlot} key={user.id} user={user}>
-          <a href={`mailto:${user.email}`} className={styles.email}>
-            {user.email}
-            <OpenIcon className={styles.openIcon} />
-          </a>
-          <p className={`${styles.role} ${user.role === 'Админ' ? styles.active : styles.inactive}`}>{user.role}</p>
-        </UserSlot>
-      ))}
+      {isLoading && <h3 className={styles.placeholder}>Загрузка...</h3>}
+      {isError && <h3 className={styles.placeholder}>Произошла ошибка :P</h3>}
+      {isSuccess && users.length === 0 ? (
+        <h3 className={styles.placeholder}>Ничего не нашлось!</h3>
+      ) : (
+        paginatedUsers.map(user => (
+          <UserSlot className={styles.userSlot} key={user.id} user={user}>
+            <a href={`mailto:${user.email}`} className={styles.email}>
+              {user.email}
+              <OpenIcon className={styles.openIcon} />
+            </a>
+            <p
+              className={`${styles.role} ${user.roles.some(role => role.type === 'Admin') ? styles.active : styles.inactive}`}
+            >
+              {getRoleTranslation(getHighestRole(user.roles))}
+            </p>
+          </UserSlot>
+        ))
+      )}
     </DynamicList>
   )
 }

@@ -7,7 +7,7 @@ interface Filters {
   limit?: number
 }
 
-export const useUserFilters = () => {
+export const useQueryFilters = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const query = searchParams.get('query') || ''

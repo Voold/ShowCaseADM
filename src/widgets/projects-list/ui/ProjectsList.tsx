@@ -1,55 +1,40 @@
-import {useState} from "react";
-import { ProjectSlot } from "@/entities/project";
-import {DynamicList} from "@/shared";
-
-const mockProjects = Array.from({length: 24}, (_, i) => ({
-  id: i.toString(),
-  name: `Проект ${i + 1}. Н. Проект ${i + 1}. Н. Проект ${i + 1}. Н. Проект ${i + 1}. Н.`,
-  school: `ИШИТР`,
-  status: 'pending'
-}));
+import { useEffect, useState } from 'react'
+import styles from './ProjectsList.module.css'
+import { ProjectSlot, useProjectsByName } from '@/entities/project'
+import { DynamicList, useDebounce, useQueryFilters } from '@/shared'
 
 const ProjectsList = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const { page, setPage, limit, offset, query, setQuery } = useQueryFilters()
 
-  const filteredProjects = mockProjects.filter((project) => {
-    const lowerQuery = searchQuery.toLowerCase();
-    return (
-        project.name.toLowerCase().includes(lowerQuery)
-    );
-  });
+  const [localQuery, setLocalQuery] = useState(query)
+  const debouncedQuery = useDebounce(localQuery, 500)
 
-  const paginatedProjects = filteredProjects.slice(
-      (currentPage - 1) * itemsPerPage,
-      currentPage * itemsPerPage
-  );
+  useEffect(() => setQuery(debouncedQuery), [debouncedQuery])
+  useEffect(() => setLocalQuery(query), [query])
 
-  const totalPages = Math.ceil(filteredProjects.length / itemsPerPage) || 1;
+  const { data: projects = [], isSuccess, isLoading, isError } = useProjectsByName(query.toLowerCase(), offset, limit)
+
+  const paginatedProjects = projects.slice(offset, offset + limit)
+  const totalPages = Math.ceil(projects.length / limit) || 1
 
   return (
-      <DynamicList
-          currentPage={currentPage}
-          totalPages={totalPages}
-          setCurrentPage={setCurrentPage}
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          placeholder={"Найти проект..."}
-      >
-        {
-          paginatedProjects.map((project) => (
-              <ProjectSlot
-                  key={project.id}
-                  id={project.id}
-                  name={project.name}
-                  school={project.school}
-                  status={'pending'}
-              />
-          ))
-        }
-      </DynamicList>
-  );
+    <DynamicList
+      currentPage={page}
+      totalPages={totalPages}
+      setCurrentPage={setPage}
+      searchQuery={localQuery}
+      setSearchQuery={setLocalQuery}
+      placeholder={'Найти проект...'}
+    >
+      {isLoading && <h3 className={styles.placeholder}>Загрузка...</h3>}
+      {isError && <h3 className={styles.placeholder}>Произошла ошибка :P</h3>}
+      {isSuccess && projects.length === 0 ? (
+        <h3 className={styles.placeholder}>Ничего не нашлось!</h3>
+      ) : (
+        paginatedProjects.map(project => <ProjectSlot key={project.id} project={project} />)
+      )}
+    </DynamicList>
+  )
 }
 
-export default ProjectsList;
+export default ProjectsList

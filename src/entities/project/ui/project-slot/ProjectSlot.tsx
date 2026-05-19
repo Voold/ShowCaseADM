@@ -1,46 +1,28 @@
 import styles from './ProjectSlot.module.css'
 import ProjectIcon from '../../assets/project.svg?react'
 import type { Project } from '../../model/types.ts'
+import { getStatusTranslation } from '../../lib/getStatusTranslation.ts'
+import type { ComponentPropsWithoutRef } from 'react'
 
-const getStatusName = (status: string) => {
-  switch (status) {
-    case 'active':
-      return "Активен"
-    case 'pending':
-      return "В ожидании"
-    case 'closed':
-      return "Закрыт"
-    case 'archive':
-      return "Архив"
-    default:
-      return "Неизвестно"
-  }
+interface ProjectSlotProps extends ComponentPropsWithoutRef<'div'> {
+  project: Project
 }
 
-export const ProjectSlot = (
-    { id, name, school, status} : Project
-) => {
+export const ProjectSlot = ({project, ...props}: ProjectSlotProps) => {
   return (
-      <div className={`${styles.container}`}>
-        <div className={styles.iconContainer}>
-          <ProjectIcon className={styles.projectIcon}/>
-          <div className={styles.description}>
-            <p className={styles.name}>{name}</p>
-            <p className={styles.id}>{id}</p>
-          </div>
+    <div className={`${styles.container}`} {...props}>
+      <div className={styles.iconContainer}>
+        <ProjectIcon className={styles.projectIcon} />
+        <div className={styles.description}>
+          <p className={styles.name}>{project.name}</p>
+          <p className={styles.id}>{project.id}</p>
         </div>
-
-        {school &&
-            (<p className={styles.school}>
-              {school}
-            </p>)
-        }
-        <p className={`
-          ${styles.status}
-          ${styles[status]}
-        `}>
-              {getStatusName(status)}
-        </p>
       </div>
-  );
+
+      <p className={styles.school}>{project.school}</p>
+      <p className={`${styles.status} ${styles[project.status]}`}>
+        {getStatusTranslation(project.status)}
+      </p>
+    </div>
+  )
 }

@@ -55,3 +55,8 @@
 .inactive {
 	color: var(--blue-grey-color);
 }
+
+.placeholder {
+	margin: auto;
+	opacity: 0.3;
+}
