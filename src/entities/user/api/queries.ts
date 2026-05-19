@@ -32,7 +32,6 @@ export const useUsersByName = (query: string, offset: number, limit: number) => 
   return useQuery({
     queryKey: queryKeys.search(trimmedQuery, offset, limit),
     queryFn: () => getUsersByName(trimmedQuery, offset, limit),
-    enabled: !!trimmedQuery,
     staleTime: 60 * 1000 // 1 min, может вынести в queryClient?
   })
 }
