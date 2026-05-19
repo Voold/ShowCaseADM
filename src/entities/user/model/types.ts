@@ -1,28 +1,31 @@
 // TODO - Обновить тип юзера
-export type User = {
-  id: string
-  email: string
+export type User = UserBase & {
   profilePicture: string
   meta: {
-    name: string
     bio: string
     skills: string
     experience: string
   }
-  roles: UserRole[]
   capabilities: string[] // по хорошему заменить на юнион
 }
 
-type Role<T> = {
-  [K in keyof Required<T>]: { type: K, weight: number } & T[K]
-}[keyof Required<T>] // Объединяет результат в юнион вида {type: *роль*, ...}
+export type UserBase = {
+  id: string
+  email: string
+  roles: UserRole[]
+  meta: {
+    name: string
+  }
+} // TODO добавить фото профиля 
 
-export type UserRole = Role<UserDto['roles']>
-
-export const ROLE_WEIGHTS: Record<keyof UserDto['roles'], number> = {
-  Default: 1,
-  Student: 2,
-  Admin: 3
+export type UserBaseDto = {
+  userId: number
+  email: string
+  roles: string[]
+  meta: {
+    firstName: string
+    lastName: string
+  }
 }
 
 export type UserDto = {
@@ -50,4 +53,16 @@ export type UserDto = {
     Admin?: {}
   }
   capabilities: string[] | null
+}
+
+type Role<T> = {
+  [K in keyof Required<T>]: { type: K, weight: number } & T[K]
+}[keyof Required<T>] // Объединяет результат в юнион вида {type: *роль*, ...}
+
+export type UserRole = Role<UserDto['roles']>
+
+export const ROLE_WEIGHTS: Record<keyof UserDto['roles'], number> = {
+  Default: 1,
+  Student: 2,
+  Admin: 3
 }

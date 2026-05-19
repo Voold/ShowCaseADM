@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { mockedProjects, ProjectSlot } from '@/entities/project'
+import styles from './ProjectsList.module.css'
+import { ProjectSlot, useProjectsByName } from '@/entities/project'
 import { DynamicList, useDebounce, useQueryFilters } from '@/shared'
 
 const ProjectsList = () => {
@@ -11,13 +12,10 @@ const ProjectsList = () => {
   useEffect(() => setQuery(debouncedQuery), [debouncedQuery])
   useEffect(() => setLocalQuery(query), [query])
 
-  const filteredProjects = mockedProjects.filter(project => {
-    const lowerQuery = query.toLowerCase()
-    return project.name.toLowerCase().includes(lowerQuery)
-  })
+  const { data: projects = [], isSuccess, isLoading, isError } = useProjectsByName(query.toLowerCase(), offset, limit)
 
-  const paginatedProjects = filteredProjects.slice(offset, offset + limit)
-  const totalPages = Math.ceil(filteredProjects.length / limit) || 1
+  const paginatedProjects = projects.slice(offset, offset + limit)
+  const totalPages = Math.ceil(projects.length / limit) || 1
 
   return (
     <DynamicList
@@ -28,9 +26,13 @@ const ProjectsList = () => {
       setSearchQuery={setLocalQuery}
       placeholder={'Найти проект...'}
     >
-      {paginatedProjects.map(project => (
-        <ProjectSlot key={project.id} project={project} />
-      ))}
+      {isLoading && <h3 className={styles.placeholder}>Загрузка...</h3>}
+      {isError && <h3 className={styles.placeholder}>Произошла ошибка :P</h3>}
+      {isSuccess && projects.length === 0 ? (
+        <h3 className={styles.placeholder}>Ничего не нашлось!</h3>
+      ) : (
+        paginatedProjects.map(project => <ProjectSlot key={project.id} project={project} />)
+      )}
     </DynamicList>
   )
 }
