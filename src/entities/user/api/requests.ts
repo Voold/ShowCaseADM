@@ -1,6 +1,6 @@
 import type { AuthStatusResponse, OAuthExchangeParams } from './types'
-import type { User, UserDto } from '../model/types'
-import { mapUserDto } from '../lib/mappers'
+import type { User, UserBase, UserBaseDto, UserDto } from '../model/types'
+import { mapUserBaseDto, mapUserDto } from '../lib/mappers'
 import { api, ENDPOINTS } from '@/shared'
 
 export async function login(params: OAuthExchangeParams): Promise<void> {
@@ -23,12 +23,12 @@ export async function logout(): Promise<void> {
 
 //ANCHOR - other feature
 export async function getUserById(uid: string): Promise<User> {
-  const { data } = await api.get<UserDto>(`${ENDPOINTS.USER_BY_ID}${uid}`)
+  const { data } = await api.get<UserDto>(`${ENDPOINTS.USER_BY_ID}/${uid}`)
   return mapUserDto(data)
 }
 
-export async function getUsersByName(query: string, offset: number, limit: number): Promise<User[]> {
+export async function getUsersByName(query: string, offset: number, limit: number): Promise<UserBase[]> {
   const params = { offset, limit, query }
-  const { data } = await api.get<UserDto[]>(String(ENDPOINTS.USERS_BY_NAME), { params })
-  return data.map(mapUserDto)
+  const { data } = await api.get<UserBaseDto[]>(ENDPOINTS.USERS_BY_NAME, { params })
+  return data.map(mapUserBaseDto)
 }
