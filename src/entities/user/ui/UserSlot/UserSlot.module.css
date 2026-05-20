@@ -3,23 +3,18 @@
 	gap: 10px;
 	align-items: center;
 	justify-content: space-between;
-	cursor: pointer;
 
 	transition: background-color 0.2s ease-in-out;
 
 	background-color: var(--sec-color);
-	border-radius: 5px;
-	padding: 8px;
-
-	&:hover {
-		background-color: var(--outline-color);
-	}
 }
 
-.noHover {
-	&:hover {
-		background-color: transparent;
-	}
+.clickable:hover {
+  cursor: pointer;
+  background-color: var(--outline-color);
+  
+  border-radius: 5px;
+	padding: 8px;
 }
 
 .avatarContainer {
