@@ -7,15 +7,14 @@ export interface UserSlotProps extends ComponentPropsWithRef<'div'> {
   user: UserBase
 }
 
-export const UserSlot = ({ user, className, children, ...props }: UserSlotProps) => {
+export const UserSlot = ({ user, className, children, onClick, ...props }: UserSlotProps) => {
   return (
-    <div className={`${styles.container} ${className}`} {...props}>
-      <div className={styles.avatarContainer}>
+    <div className={`${styles.container} ${onClick && styles.clickable} ${className}`} onClick={onClick} {...props}>
+      <div className={styles.mainInfo}>
         {/* <img className={styles.avatar} src={user.profilePicture} alt="Фото профиля" /> */}
-        <img className={styles.avatar} src={defaultProfilePicture} alt='Фото профиля' /> {/* TODO убрать когда дадут аватарку на Base */}
-
+        <img className={styles.avatar} src={defaultProfilePicture} alt='Фото профиля' />{' '} {/* TODO убрать когда дадут аватарку на Base */}
         <div className={styles.description}>
-          <p className={styles.name}>{user.meta.name}</p>
+          <p title={user.meta.name} className={styles.name}>{user.meta.name}</p>
           <p className={styles.id}>{user.id}</p>
         </div>
       </div>

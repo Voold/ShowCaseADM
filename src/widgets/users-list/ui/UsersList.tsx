@@ -33,16 +33,18 @@ const UsersList = () => {
         <h3 className={styles.placeholder}>Ничего не нашлось!</h3>
       ) : (
         paginatedUsers.map(user => (
-          <UserSlot className={styles.userSlot} key={user.id} user={user}>
+          <UserSlot className={styles.userSlot} key={user.id} user={user} onClick={() => {}}>
             <a href={`mailto:${user.email}`} className={styles.email}>
               {user.email}
               <OpenIcon className={styles.openIcon} />
             </a>
-            <p
-              className={`${styles.role} ${user.roles.some(role => role.type === 'Admin') ? styles.active : styles.inactive}`}
-            >
-              {getRoleTranslation(getHighestRole(user.roles))}
-            </p>
+            <div className={styles.roleWrapper}>
+              <p
+                className={`${styles.role} ${user.roles.some(role => role.type === 'Student') ? styles.active : styles.inactive}`}
+              >
+                {getRoleTranslation(getHighestRole(user.roles))}
+              </p>
+            </div>
           </UserSlot>
         ))
       )}
