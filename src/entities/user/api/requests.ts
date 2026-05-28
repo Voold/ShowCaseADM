@@ -1,5 +1,6 @@
 import type { AuthStatusResponse, OAuthExchangeParams } from './types'
-import type { User, UserBase, UserBaseDto, UserDto } from '../model/types'
+import type { GetUsersResponse } from './types'
+import type { User, UserBase, UserDto } from '../model/types'
 import { mapUserBaseDto, mapUserDto } from '../lib/mappers'
 import { api, ENDPOINTS } from '@/shared'
 
@@ -29,6 +30,6 @@ export async function getUserById(uid: string): Promise<User> {
 
 export async function getUsersByName(query: string, offset: number, limit: number): Promise<UserBase[]> {
   const params = { offset, limit, query }
-  const { data } = await api.get<UserBaseDto[]>(ENDPOINTS.USERS_BY_NAME, { params })
-  return data.map(mapUserBaseDto)
+  const { data } = await api.get<GetUsersResponse>(ENDPOINTS.USERS_BY_NAME, { params })
+  return data.users.map(mapUserBaseDto)
 }
