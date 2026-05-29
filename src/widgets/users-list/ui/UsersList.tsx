@@ -14,10 +14,11 @@ const UsersList = () => {
   useEffect(() => setQuery(debouncedQuery), [debouncedQuery])
   useEffect(() => setLocalQuery(query), [query])
 
-  const { data: users = [], isSuccess, isLoading, isError } = useUsersByName(query.toLowerCase(), offset, limit)
+  const { data, isSuccess, isLoading, isError } = useUsersByName(query.toLowerCase(), offset, limit)
+  const { users, total } = data || { users: [], total: 0 }
 
   const paginatedUsers = users.slice(offset, offset + limit)
-  const totalPages = Math.ceil(users.length / limit) || 1
+  const totalPages = Math.ceil(total / limit) || 1
 
   return (
     <DynamicList
