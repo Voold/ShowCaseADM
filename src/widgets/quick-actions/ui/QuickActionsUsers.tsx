@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { QuickActions } from './QuickActions'
 import styles from './QuickActions.module.css'
-import { AgreeButton } from '@/shared/ui/agree-button/AgreeButton'
+import { AgreeButton } from '@/shared'
 
 interface Users {
   name: string,
@@ -46,7 +46,7 @@ export const QuickActionsUsers = () => {
     <QuickActions title="Быстрые действия">
       <div className={styles.block}>
 
-        <p className={styles.snippet}>Выдать роль "Наставник"</p>
+        <p className={styles.snippet}>Выдать роль &quot;Наставник&quot;</p>
 
         <div className={styles.inputBlock}>
             <input
@@ -58,7 +58,7 @@ export const QuickActionsUsers = () => {
             />
             <button className={styles.addButton} onClick={() => handleAddUser(value)}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 12H12M12 12H18M12 12V18M12 12V6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6 12H12M12 12H18M12 12V18M12 12V6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </button>
         </div>
@@ -66,7 +66,7 @@ export const QuickActionsUsers = () => {
         <div className={styles.namesContainer}>
           {
             users.map((user) => (
-              <div className={styles.user}>
+              <div key={user.id} className={styles.user}>
                 {user.name} [{user.id}]
               </div>
             ))

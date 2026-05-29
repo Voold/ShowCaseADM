@@ -1,19 +1,18 @@
 import { useParams } from 'react-router-dom'
 import styles from './UserPage.module.css'
-import { useUserById } from '@/entities/user/api/queries'
-import { UserSlot } from '@/entities/user'
-import { IssuingARole } from '@/features/issuing-a-role/ui/IssuingARole'
 import { ProjectsList } from '@/widgets/projects-list'
+import { IssuingARole } from '@/features/issuing-a-role'
+import { useUserById, UserSlot } from '@/entities/user'
 
 export const UserPage = () => {
 
   const query = useParams()
   const uid = query.id || ''
 
-  const { data, isLoading, error } = useUserById(uid) 
+  const { data, isLoading, IsError } = useUserById(uid)
 
-  console.log('UserPage', { data, isLoading, error })
-
+  if (isLoading) return <h1>Загрузка</h1>
+  if (IsError) return <h1>Ошибка</h1>
 
   return (
     <main className={styles.mainContainer}>
@@ -23,7 +22,7 @@ export const UserPage = () => {
           <div className={styles.userSlot}>
             {data && <UserSlot user={data} />}
           </div>
-          <IssuingARole 
+          <IssuingARole
             userRoles={data?.roles}
           />
         </div>
@@ -36,7 +35,7 @@ export const UserPage = () => {
             <p className={styles.info}>Скины:</p>
             {data?.meta.skills ? data?.meta.skills : 'Нет'}
             <p className={styles.info}>Опыт:</p>
-            {data?.meta.experience ? data?.meta.experience :'Нет'}
+            {data?.meta.experience ? data?.meta.experience : 'Нет'}
           </div>
           <p className={styles.title}>Проекты пользователя</p>
           <ProjectsList />

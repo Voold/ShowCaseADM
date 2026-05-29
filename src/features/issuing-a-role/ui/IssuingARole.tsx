@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import styles from './IssuingARole.module.css'
-import type { UserRole } from '@/entities/user/model/types'
-import { getRoleTranslation } from '@/entities/user';
-import { AgreeButton } from '@/shared/ui/agree-button/AgreeButton';
+import { getRoleTranslation, type UserRole } from '@/entities/user';
+import { AgreeButton } from '@/shared';
 
 const ALL_ROLES = [
   {type: 'Default'},
@@ -31,7 +30,9 @@ interface IssuingARoleProps {
   // ]
 }
 
-export const IssuingARole = ({ userRoles = [], onChange, onSubmit } : IssuingARoleProps) => {
+const EMPTY_ROLES: UserRole[] = [];
+
+export const IssuingARole = ({ userRoles = EMPTY_ROLES, onChange, onSubmit } : IssuingARoleProps) => {
 
   const [initialRoles, setInitialRoles] = useState<Set<string>>(() =>
     new Set(userRoles.map((role) => String(role.type)))
@@ -41,11 +42,13 @@ export const IssuingARole = ({ userRoles = [], onChange, onSubmit } : IssuingARo
     new Set(userRoles.map((role) => String(role.type)))
   );
 
+  const serializedRoles = userRoles.map((role) => String(role.type)).join(',');
+
   useEffect(() => {
     const initialSet = new Set(userRoles.map((role) => String(role.type)));
     setInitialRoles(initialSet);
     setRoles(initialSet);
-  }, [userRoles]);
+  }, [serializedRoles]);
 
   const isRolesChanged = () => {
     if (roles.size !== initialRoles.size) {
@@ -79,6 +82,7 @@ export const IssuingARole = ({ userRoles = [], onChange, onSubmit } : IssuingARo
 
   const handleSubmitRoles = () => {
     console.log(roles)
+    onSubmit?.()
   }
 
   const isActive = isRolesChanged()

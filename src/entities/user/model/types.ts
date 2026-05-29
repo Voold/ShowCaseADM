@@ -51,10 +51,15 @@ export type UserDto = {
     },
     // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     Admin?: {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     Curator?: {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     Mentor?: {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     Moderator?: {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     ROOP?: {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     Teacher?: {},
   }
   capabilities: string[] | null

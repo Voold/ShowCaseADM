@@ -1,5 +1,5 @@
 import { useQuery, type UseQueryResult } from '@tanstack/react-query'
-import type { User, UserDto } from '../model/types'
+import type { User } from '../model/types'
 import type { AuthStatusResponse } from './types'
 import type { AxiosError } from 'axios'
 import { queryKeys } from './queryKeys'
