@@ -1,5 +1,5 @@
 export { queryKeys as userKeys } from './api/queryKeys'
-export { login, logout } from './api/requests'
+export { login, logout, getUserById } from './api/requests'
 export { useAuthStatus, useMe, useUsersByName } from './api/queries'
 export { type AuthStatusResponse, type OAuthExchangeParams } from './api/types'
 export { useAuthStore } from './model/store/useAuthStore'

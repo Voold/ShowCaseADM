@@ -18,6 +18,10 @@
 	height: 12px;
 }
 
+.link {
+	text-decoration: none;
+}
+
 .roleWrapper {
 	flex: 1;
 

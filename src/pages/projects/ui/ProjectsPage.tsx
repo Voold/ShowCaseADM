@@ -1,6 +1,6 @@
 import styles from "./ProjectPage.module.css";
 import {ProjectsList} from "@/widgets/projects-list";
-import {QuickActions} from "@/widgets/quick-actions";
+import {QuickActionsProjects} from "@/widgets/quick-actions";
 
 export const ProjectsPage = () => {
   return (
@@ -9,7 +9,7 @@ export const ProjectsPage = () => {
         <div className={styles.content}>
           <ProjectsList />
           <aside className={styles.quickSide}>
-            <QuickActions />
+            <QuickActionsProjects />
           </aside>
         </div>
       </main>

@@ -22,4 +22,7 @@
   --quiet-grey-color: #626262;
 
   --black-color: #000000;
+
+  --green-20pr: rgba(40, 190, 70, 0.2);
+  --grey-40pr: rgba(55, 55, 64, 0.4);
 }

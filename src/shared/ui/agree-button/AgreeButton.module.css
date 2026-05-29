@@ -1,0 +1,13 @@
+.submitButton {
+  background-color: var(--green-20pr);
+  border-radius: 5px;
+  padding: 5px 40px;
+  width: fit-content;
+  align-self: flex-end;
+}
+
+.disabled {
+  background-color: var(--grey-40pr);
+  pointer-events: none;
+  color: var(--blue-grey-color)
+}

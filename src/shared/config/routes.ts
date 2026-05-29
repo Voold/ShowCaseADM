@@ -6,4 +6,5 @@ export const ROUTES = {
   ROLES: '/roles',
   REPORTS: '/reports',
   SETTINGS: '/settings',
+  USER: 'user/:id'
 }

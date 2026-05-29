@@ -50,7 +50,12 @@ export type UserDto = {
       }
     },
     // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    Admin?: {}
+    Admin?: {},
+    Curator?: {},
+    Mentor?: {},
+    Moderator?: {},
+    ROOP?: {},
+    Teacher?: {},
   }
   capabilities: string[] | null
 }
@@ -64,5 +69,10 @@ export type UserRole = Role<UserDto['roles']>
 export const ROLE_WEIGHTS: Record<keyof UserDto['roles'], number> = {
   Default: 1,
   Student: 2,
-  Admin: 3
+  Admin: 3,
+  Curator: 1,
+  Mentor: 1,
+  Moderator: 1,
+  ROOP: 1,
+  Teacher: 1,
 }

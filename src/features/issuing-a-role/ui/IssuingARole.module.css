@@ -1,0 +1,64 @@
+.mainContainer {
+  display: flex;
+  min-width: 300px;
+  padding: 16px;
+  gap: 12px;
+  border-radius: 8px;
+  background-color: var(--sec-color);
+  flex-direction: column;
+}
+
+.snippet {
+  font-weight: 700;
+}
+
+.roleList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px
+}
+
+.roleItem {
+  position: relative;
+  padding: 12px;
+  border-radius: 5px;
+  background-color: var(--bg-color);
+
+  &::before {
+    content: '';
+    position: absolute;
+    background-color: var(--grey-40pr);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    background-color: var(--bg-color);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 13px;
+  }
+}
+
+
+
+.active {
+  background-color: var(--green-20pr);
+
+  &::before{
+    background-color: var(--green-20pr);
+  }
+
+  &::after{
+    background-color: var(--primary-color);
+  }
+}
