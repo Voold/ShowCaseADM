@@ -1,4 +1,4 @@
-import type { UserBaseDto } from '../model/types';
+import type { UserBaseDto } from "../model/types";
 
 export interface OAuthExchangeParams {
   code: string;
