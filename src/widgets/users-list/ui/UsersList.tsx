@@ -36,10 +36,17 @@ const UsersList = () => {
         paginatedUsers.map(user => (
           <Link key={user.id} to={`/user/${user.id}`} className={styles.link}>
             <UserSlot className={styles.userSlot} user={user} onClick={() => {}}>
-              <a href={`mailto:${user.email}`} className={styles.email}>
+              <span
+                onClick={(e) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  window.location.href = `mailto:${user.email}`
+                }}
+                className={styles.email}
+              >
                 {user.email}
                 <OpenIcon className={styles.openIcon} />
-              </a>
+              </span>
               <div className={styles.roleWrapper}>
                 <p
                   className={`${styles.role} ${user.roles.some(role => role.type === 'Student') ? styles.active : styles.inactive}`}

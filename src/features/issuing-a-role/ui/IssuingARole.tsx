@@ -1,33 +1,13 @@
 import { useEffect, useState } from 'react'
 import styles from './IssuingARole.module.css'
 import { getRoleTranslation, type UserRole } from '@/entities/user';
+import {ALL_ROLES} from "@/entities/user";
 import { AgreeButton } from '@/shared';
-
-const ALL_ROLES = [
-  {type: 'Default'},
-  {type: 'Student'},
-  {type: 'Admin'},
-  {type: 'Curator'},
-  {type: 'Mentor'},
-  {type: 'Moderator'},
-  {type: 'ROOP'},
-  {type: 'Teacher'},
-] as const
 
 interface IssuingARoleProps {
   userRoles?: UserRole[],
   onChange?: (newRoles: string[]) => void;
   onSubmit?: () => void;
-  // roles: [
-  //   Default?: {},
-  //   Student?: {},
-  //   Admin?: {},
-  //   Curator?: {},
-  //   Mentor?: {},
-  //   Moderator?: {},
-  //   ROOP?: {},
-  //   Teacher?: {},
-  // ]
 }
 
 const EMPTY_ROLES: UserRole[] = [];

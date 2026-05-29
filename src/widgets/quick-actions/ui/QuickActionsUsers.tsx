@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { QuickActions } from './QuickActions'
 import styles from './QuickActions.module.css'
+import PlusIcon from '../assets/plus.svg?react'
 import { AgreeButton } from '@/shared'
 
 interface Users {
@@ -57,9 +58,7 @@ export const QuickActionsUsers = () => {
                 onChange={(e) => setValue(e.target.value)}
             />
             <button className={styles.addButton} onClick={() => handleAddUser(value)}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 12H12M12 12H18M12 12V18M12 12V6" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              <PlusIcon/>
             </button>
         </div>
 
