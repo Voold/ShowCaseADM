@@ -1,4 +1,5 @@
-import { ROLE_WEIGHTS, type UserRole } from "../model/types";
+import { ROLE_WEIGHTS } from "../config/constants";
+import { type UserRole } from "../model/types";
 
 export const getHighestRole = (roles: UserRole[]): UserRole => {
 	if (!roles.length) return { type: "Default", weight: ROLE_WEIGHTS.Default }

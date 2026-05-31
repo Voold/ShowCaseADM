@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import OpenIcon from '../assets/up.svg?react'
 import styles from './UsersList.module.css'
-import { getHighestRole, getRoleTranslation, UserSlot, useUsersByName } from '@/entities/user'
+import { getHighestRole, ROLES_TRANSLATIONS, UserSlot, useUsersByName } from '@/entities/user'
 import { DynamicList, useDebounce, useQueryFilters } from '@/shared'
 
 const UsersList = () => {
@@ -52,7 +52,7 @@ const UsersList = () => {
                 <p
                   className={`${styles.role} ${user.roles.some(role => role.type === 'Student') ? styles.active : styles.inactive}`}
                 >
-                  {getRoleTranslation(getHighestRole(user.roles))}
+                  {ROLES_TRANSLATIONS[getHighestRole(user.roles).type]}
                 </p>
               </div>
             </UserSlot>

@@ -1,5 +1,6 @@
-import { ROLE_WEIGHTS, type User, type UserBase, type UserBaseDto, type UserDto, type UserRole } from '../model/types'
+import { type User, type UserBase, type UserBaseDto, type UserDto, type UserRole } from '../model/types'
 import defaultAvatar from '../assets/user-avatar.svg'
+import { ROLE_WEIGHTS } from '../config/constants'
 
 const mapRoles = (dto: UserDto['roles']): UserRole[] => {
   return Object.entries(dto).map(([key, value]) => {

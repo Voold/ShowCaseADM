@@ -70,14 +70,3 @@ type Role<T> = {
 }[keyof Required<T>] // Объединяет результат в юнион вида {type: *роль*, ...}
 
 export type UserRole = Role<UserDto['roles']>
-
-export const ROLE_WEIGHTS: Record<keyof UserDto['roles'], number> = {
-  Default: 1,
-  Student: 2,
-  Admin: 3,
-  Curator: 1,
-  Mentor: 1,
-  Moderator: 1,
-  ROOP: 1,
-  Teacher: 1,
-}

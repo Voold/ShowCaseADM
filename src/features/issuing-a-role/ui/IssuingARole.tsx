@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import styles from './IssuingARole.module.css'
-import { getRoleTranslation, type UserRole } from '@/entities/user';
-import {ALL_ROLES} from "@/entities/user";
+import { ROLES_TRANSLATIONS, type UserRole } from '@/entities/user';
 import { AgreeButton } from '@/shared';
 
 interface IssuingARoleProps {
@@ -14,18 +13,18 @@ const EMPTY_ROLES: UserRole[] = [];
 
 export const IssuingARole = ({ userRoles = EMPTY_ROLES, onChange, onSubmit } : IssuingARoleProps) => {
 
-  const [initialRoles, setInitialRoles] = useState<Set<string>>(() =>
-    new Set(userRoles.map((role) => String(role.type)))
+  const [initialRoles, setInitialRoles] = useState<Set<UserRole['type']>>(() =>
+    new Set(userRoles.map((role) => role.type))
   );
 
-  const [roles, setRoles] = useState<Set<string>>(() =>
-    new Set(userRoles.map((role) => String(role.type)))
+  const [roles, setRoles] = useState<Set<UserRole['type']>>(() =>
+    new Set(userRoles.map((role) => role.type))
   );
 
   const serializedRoles = userRoles.map((role) => String(role.type)).join(',');
 
   useEffect(() => {
-    const initialSet = new Set(userRoles.map((role) => String(role.type)));
+    const initialSet = new Set(userRoles.map((role) => role.type));
     setInitialRoles(initialSet);
     setRoles(initialSet);
   }, [serializedRoles]);
@@ -44,7 +43,7 @@ export const IssuingARole = ({ userRoles = EMPTY_ROLES, onChange, onSubmit } : I
     return false
   }
 
-  const handleToggleRole = (role: string) => {
+  const handleToggleRole = (role: UserRole['type']) => {
     setRoles((prev) => {
       const newRoles = new Set(prev)
 
@@ -72,17 +71,16 @@ export const IssuingARole = ({ userRoles = EMPTY_ROLES, onChange, onSubmit } : I
       <p className={styles.snippet}>Роли пользователя</p>
       <ul className={styles.roleList}>
         {
-          ALL_ROLES.map((role) => {
-
-            const isSelected = roles.has(role.type)
-
+          Object.keys(ROLES_TRANSLATIONS).map((role) => {
+            const roleType = role as UserRole['type']
+            const isSelected = roles.has(roleType)
             return (
               <li
-                key={role.type}
+                key={role}
                 className={`${styles.roleItem} ${isSelected ? styles.active : ''}`}
-                onClick={() => handleToggleRole(role.type)}
+                onClick={() => handleToggleRole(roleType)}
               >
-                {getRoleTranslation(role as UserRole)}
+                {ROLES_TRANSLATIONS[roleType]}
               </li>
             )
           })
