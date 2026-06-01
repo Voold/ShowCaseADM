@@ -6,10 +6,11 @@ const ProjectsList = () => {
   const { page, setPage, limit, offset, query, setQuery } = useQueryFilters()
   const [localQuery, setLocalQuery] = useQuerySync(query, setQuery)
 
-  const { data: projects = [], isSuccess, isLoading, isError } = useProjectsByName(query.toLowerCase(), offset, limit)
+  const { data, isSuccess, isLoading, isError } = useProjectsByName(query.toLowerCase(), offset, limit)
+  const { projects, total } = data || { projects: [], total: 0 }
 
   const paginatedProjects = projects.slice(offset, offset + limit)
-  const totalPages = Math.ceil(projects.length / limit) || 1
+  const totalPages = Math.ceil(total / limit) || 1
 
   return (
     <DynamicList

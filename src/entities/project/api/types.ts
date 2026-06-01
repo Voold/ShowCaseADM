@@ -6,3 +6,10 @@ export type GetUserProjectsResponse = {
   offset: number
   total: number
 }
+
+export type GetProjectsResponse = {
+  projects: ProjectDto[]
+  limit: number
+  offset: number
+  total: number
+}
