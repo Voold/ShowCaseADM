@@ -1,16 +1,10 @@
-import { useEffect, useState } from 'react'
 import styles from './ProjectsList.module.css'
 import { ProjectSlot, useProjectsByName } from '@/entities/project'
-import { DynamicList, useDebounce, useQueryFilters } from '@/shared'
+import { DynamicList, useQueryFilters, useQuerySync } from '@/shared'
 
 const ProjectsList = () => {
   const { page, setPage, limit, offset, query, setQuery } = useQueryFilters()
-
-  const [localQuery, setLocalQuery] = useState(query)
-  const debouncedQuery = useDebounce(localQuery, 500)
-
-  useEffect(() => setQuery(debouncedQuery), [debouncedQuery])
-  useEffect(() => setLocalQuery(query), [query])
+  const [localQuery, setLocalQuery] = useQuerySync(query, setQuery)
 
   const { data: projects = [], isSuccess, isLoading, isError } = useProjectsByName(query.toLowerCase(), offset, limit)
 

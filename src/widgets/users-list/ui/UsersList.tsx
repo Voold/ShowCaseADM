@@ -1,18 +1,12 @@
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import OpenIcon from '../assets/up.svg?react'
 import styles from './UsersList.module.css'
 import { getHighestRole, ROLES_TRANSLATIONS, UserSlot, useUsersByName } from '@/entities/user'
-import { DynamicList, useDebounce, useQueryFilters } from '@/shared'
+import { DynamicList, useQueryFilters, useQuerySync } from '@/shared'
 
 const UsersList = () => {
   const { page, setPage, limit, offset, query, setQuery } = useQueryFilters()
-
-  const [localQuery, setLocalQuery] = useState(query)
-  const debouncedQuery = useDebounce(localQuery, 500)
-
-  useEffect(() => setQuery(debouncedQuery), [debouncedQuery])
-  useEffect(() => setLocalQuery(query), [query])
+  const [localQuery, setLocalQuery] = useQuerySync(query, setQuery)
 
   const { data, isSuccess, isLoading, isError } = useUsersByName(query.toLowerCase(), offset, limit)
   const { users, total } = data || { users: [], total: 0 }
