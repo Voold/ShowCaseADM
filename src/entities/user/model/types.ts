@@ -50,7 +50,17 @@ export type UserDto = {
       }
     },
     // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    Admin?: {}
+    Admin?: {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+    Curator?: {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+    Mentor?: {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+    Moderator?: {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+    ROOP?: {},
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+    Teacher?: {},
   }
   capabilities: string[] | null
 }
@@ -60,9 +70,3 @@ type Role<T> = {
 }[keyof Required<T>] // Объединяет результат в юнион вида {type: *роль*, ...}
 
 export type UserRole = Role<UserDto['roles']>
-
-export const ROLE_WEIGHTS: Record<keyof UserDto['roles'], number> = {
-  Default: 1,
-  Student: 2,
-  Admin: 3
-}

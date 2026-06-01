@@ -5,6 +5,7 @@ import type { AxiosError } from 'axios'
 import { queryKeys } from './queryKeys'
 import { getAuthStatus, getMe, getUsersByName } from './requests'
 import { placeholderUser } from '../config/constants'
+import { getUserById } from './requests'
 
 export const useAuthStatus = (enabled = true): UseQueryResult<AuthStatusResponse, AxiosError> => {
   return useQuery({
@@ -24,6 +25,16 @@ export const useMe = (enabled = true): UseQueryResult<User, AxiosError> => {
     enabled,
     staleTime: Infinity,
     placeholderData: placeholderUser
+  })
+}
+
+export const useUserById = (uid: string) => {
+  return useQuery({
+    queryKey: queryKeys.user(uid),
+    queryFn: () => getUserById(uid),
+    retry: false,
+    enabled: !!uid,
+    staleTime: Infinity
   })
 }
 

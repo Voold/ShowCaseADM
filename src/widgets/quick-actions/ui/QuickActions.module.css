@@ -2,7 +2,74 @@
   display: flex;
   min-width: 300px;
   min-height: 200px;
-  padding: 12px;
+  padding: 16px;
+  gap: 8px;
   border-radius: 8px;
   background-color: var(--sec-color);
+  flex-direction: column;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.content {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.snippet {
+  color: var(--blue-grey-color);
+}
+
+.input {
+  flex-grow: 1;
+}
+
+.inputBlock {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 8px
+}
+
+.namesContainer {
+  width: 100%;
+  background-color: var(--bg-color);
+  height: 80px;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
+  gap: 4px;
+  padding: 8px;
+}
+
+.addButton {
+  width: 24px;
+  height: 24px;
+  padding: 3px;
+  background-color: var(--green-20pr);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1/1;
+}
+
+.user {
+  background-color: var(--green-20pr);
+  border-radius: 5px;
+  padding: 5px 10px;
+  align-content: center;
+  font-size: 11px;
+  height: fit-content;
 }

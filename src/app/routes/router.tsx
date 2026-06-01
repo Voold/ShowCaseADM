@@ -8,6 +8,7 @@ import { UsersPage } from "@/pages/users";
 import { RolesPage } from "@/pages/roles";
 import { ReportsPage } from "@/pages/reports";
 import { SettingsPage } from "@/pages/settings/ui/SettingsPage";
+import { UserPage } from '@/pages/user'
 import { AuthBootstrapper } from "@/features/auth";
 import { ProtectedRoute } from "@/features/protected-route";
 import { ROUTES } from "@/shared";
@@ -35,6 +36,9 @@ export const router = createBrowserRouter([
               { index: true, element: <MainPage /> },
               { path: ROUTES.PROJECTS, element: <ProjectsPage /> },
               { path: ROUTES.USERS, element: <UsersPage /> },
+
+              { path: ROUTES.USER, element: <UserPage /> },
+
               { path: ROUTES.ROLES, element: <RolesPage /> },
               { path: ROUTES.REPORTS, element: <ReportsPage /> },
               { path: ROUTES.SETTINGS, element: <SettingsPage /> },

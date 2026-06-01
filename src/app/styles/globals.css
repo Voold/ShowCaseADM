@@ -85,4 +85,12 @@ button {
 input {
   font-family: inherit;
   font-size: inherit;
+
+  background-color: var(--bg-color);
+  border-radius: 5px;
+  padding: 12px;
+  font-size: 14px;
+  border: none;
+
+  outline: none;
 }

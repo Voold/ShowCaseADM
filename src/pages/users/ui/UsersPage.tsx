@@ -1,5 +1,5 @@
 import styles from "./UsersPage.module.css"
-import {QuickActions} from "@/widgets/quick-actions";
+import {QuickActionsUsers} from "@/widgets/quick-actions";
 import {BriefAnalysis} from "@/widgets/brief-analysis";
 import {UsersList} from "@/widgets/users-list";
 
@@ -10,7 +10,7 @@ export const UsersPage = () => {
         <div className={styles.content}>
           <UsersList />
           <aside className={styles.quickSide}>
-            <QuickActions />
+            <QuickActionsUsers />
             <BriefAnalysis />
           </aside>
         </div>
