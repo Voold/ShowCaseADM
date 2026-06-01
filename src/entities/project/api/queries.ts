@@ -11,9 +11,9 @@ export const useProjectsByName = (query: string, offset: number, limit: number) 
   })
 }
 
-export const useUserProjects = (userId: string, params: {query: string, offset: number, limit: number}) => {
+export const useUserProjects = (userId: string, params: { query: string; offset: number; limit: number }) => {
   return useQuery({
-    queryKey: queryKeys.user(userId),
+    queryKey: queryKeys.userSearch(userId, params.query, params.limit, params.offset),
     queryFn: () => getUserProjects(userId, params),
     staleTime: 60 * 1000 // 1 min
   })
