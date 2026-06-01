@@ -28,7 +28,7 @@ export async function getUserById(uid: string): Promise<User> {
   return mapUserDto(data)
 }
 
-export async function getUsersByName(query: string, offset: number, limit: number): Promise<{users: UserBase[], total: number}> {
+export async function getUsersByName(query: string, offset: number, limit: number): Promise<{ users: UserBase[]; total: number }> {
   const params = { offset, limit, query }
   const { data } = await api.get<GetUsersResponse>(ENDPOINTS.USERS_BY_NAME, { params })
   return { users: data.users.map(mapUserBaseDto), total: data.total }
