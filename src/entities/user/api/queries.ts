@@ -28,12 +28,12 @@ export const useMe = (enabled = true): UseQueryResult<User, AxiosError> => {
   })
 }
 
-export const useUserById = (uid: string) => {
+export const useUserById = (userId: string | undefined) => {
   return useQuery({
-    queryKey: queryKeys.user(uid),
-    queryFn: () => getUserById(uid),
+    queryKey: queryKeys.user(userId ?? ""),
+    queryFn: () => getUserById(userId!),
     retry: false,
-    enabled: !!uid,
+    enabled: !!userId,
     staleTime: Infinity
   })
 }
