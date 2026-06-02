@@ -1,9 +1,9 @@
-import { type ReactNode } from 'react'
+import { type ComponentPropsWithoutRef, type ReactNode } from 'react'
 import { Pagination } from '../pagination/Pagination.tsx'
 import { SearchInput } from '../search-input/SearchInput.tsx'
 import styles from './DynamicList.module.css'
 
-interface DynamicListProps {
+interface DynamicListProps extends ComponentPropsWithoutRef<'div'> {
   // Нужный список
   children?: ReactNode
   // Для пагинации
