@@ -8,6 +8,7 @@ interface ImportMetaEnv {
   readonly VITE_REF_GET_AUTH_STATUS: string
   readonly VITE_REF_GET_USERS: string
   readonly VITE_REF_GET_PROJECTS: string
+  readonly VITE_REF_ROLES: string
   readonly VITE_API_BASE_URL: string
 }
 
