@@ -1,17 +1,27 @@
 .container {
   display: flex;
-  gap: 10px;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
+
+  background-color: var(--sec-color);
+}
+
+.clickable {
+  user-select: none;
+  cursor: pointer;
+
   padding: 8px;
   border-radius: 5px;
-  background-color: var(--sec-color);
-  cursor: pointer;
 
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
     background-color: var(--outline-color);
+  }
+
+  &:active {
+    background-color: color-mix(in srgb, var(--outline-color) 80%, transparent);
   }
 }
 

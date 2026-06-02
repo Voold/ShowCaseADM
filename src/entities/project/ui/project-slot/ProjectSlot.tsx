@@ -8,9 +8,9 @@ interface ProjectSlotProps extends ComponentPropsWithoutRef<'div'> {
   project: Project
 }
 
-export const ProjectSlot = ({project, ...props}: ProjectSlotProps) => {
+export const ProjectSlot = ({ project, className, onClick, ...props }: ProjectSlotProps) => {
   return (
-    <div className={`${styles.container}`} {...props}>
+    <div className={`${styles.container} ${onClick && styles.clickable} ${className}`} onClick={onClick} {...props}>
       <div className={styles.iconContainer}>
         <ProjectIcon className={styles.projectIcon} />
         <div className={styles.description}>
@@ -20,9 +20,7 @@ export const ProjectSlot = ({project, ...props}: ProjectSlotProps) => {
       </div>
 
       <p className={styles.school}>{project.school}</p>
-      <p className={`${styles.status} ${styles[project.status]}`}>
-        {getStatusTranslation(project.status)}
-      </p>
+      <p className={`${styles.status} ${styles[project.status]}`}>{getStatusTranslation(project.status)}</p>
     </div>
   )
 }
