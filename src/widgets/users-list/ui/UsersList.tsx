@@ -44,7 +44,7 @@ const UsersList = () => {
               </span>
               <div className={styles.roleWrapper}>
                 <p
-                  className={`${styles.role} ${user.roles.some(role => role.type === 'Student') ? styles.active : styles.inactive}`}
+                  className={`${styles.role} ${user.roles.some(role => role.type === 'Admin') ? styles.active : styles.inactive}`}
                 >
                   {ROLES_TRANSLATIONS[getHighestRole(user.roles).type]}
                 </p>

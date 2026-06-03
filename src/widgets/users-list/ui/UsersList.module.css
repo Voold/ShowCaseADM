@@ -8,9 +8,12 @@
 
 	font-style: italic;
 	color: var(--blue-grey-color);
-  text-decoration: none;
 	
 	cursor: pointer;
+
+	&:hover {
+		text-decoration: underline;
+	}
 }
 
 .openIcon {
