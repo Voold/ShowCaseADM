@@ -1,0 +1,12 @@
+.container {
+	width: 500px;
+
+	display: flex; 
+	flex-direction: column;
+	gap: 24px;
+}
+
+.slot {
+	border-radius: 5px;
+  padding: 16px;
+}

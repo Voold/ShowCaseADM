@@ -1,3 +1,4 @@
 export { assertNever } from './assertNever'
 export { useDebounce } from './hooks/useDebounce'
 export { useQueryFilters } from './hooks/useQueryFilters'
+export { useQuerySync } from './hooks/useQuerySync'

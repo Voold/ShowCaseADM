@@ -1,21 +1,16 @@
-import { useEffect, useState } from 'react'
 import styles from './ProjectsList.module.css'
 import { ProjectSlot, useProjectsByName } from '@/entities/project'
-import { DynamicList, useDebounce, useQueryFilters } from '@/shared'
+import { DynamicList, useQueryFilters, useQuerySync } from '@/shared'
 
 const ProjectsList = () => {
   const { page, setPage, limit, offset, query, setQuery } = useQueryFilters()
+  const [localQuery, setLocalQuery] = useQuerySync(query, setQuery)
 
-  const [localQuery, setLocalQuery] = useState(query)
-  const debouncedQuery = useDebounce(localQuery, 500)
-
-  useEffect(() => setQuery(debouncedQuery), [debouncedQuery])
-  useEffect(() => setLocalQuery(query), [query])
-
-  const { data: projects = [], isSuccess, isLoading, isError } = useProjectsByName(query.toLowerCase(), offset, limit)
+  const { data, isSuccess, isLoading, isError } = useProjectsByName(query.toLowerCase(), offset, limit)
+  const { projects, total } = data || { projects: [], total: 0 }
 
   const paginatedProjects = projects.slice(offset, offset + limit)
-  const totalPages = Math.ceil(projects.length / limit) || 1
+  const totalPages = Math.ceil(total / limit) || 1
 
   return (
     <DynamicList

@@ -4,7 +4,10 @@ export const ENDPOINTS = {
   ME: import.meta.env.VITE_REF_GET_ME_DATA,
   REFRESH: import.meta.env.VITE_REF_POST_RELOGIN,
   LOGOUT: import.meta.env.VITE_REF_POST_LOGOUT,
-  USER_BY_ID: import.meta.env.VITE_REF_GET_CURRENT_USER,
-  USERS_BY_NAME: import.meta.env.VITE_REF_GET_USERS_BY_NAME,
-  PROJECTS_BY_NAME: import.meta.env.VITE_REF_GET_PROJECTS_BY_NAME
+  USER_BY_ID: (userId: string) => `${import.meta.env.VITE_REF_GET_USERS}/${userId}`,
+  USERS_BY_NAME: import.meta.env.VITE_REF_GET_USERS,
+  PROJECTS_BY_NAME: import.meta.env.VITE_REF_GET_PROJECTS,
+  USER_PROJECTS: (userId: string) =>
+    `${import.meta.env.VITE_REF_GET_USERS}/${userId}/${import.meta.env.VITE_REF_GET_PROJECTS}`,
+  USER_ROLES: (userId: string, roleName: string) => `${import.meta.env.VITE_REF_GET_USERS}/${userId}/${import.meta.env.VITE_REF_ROLES}/${roleName}`
 }
