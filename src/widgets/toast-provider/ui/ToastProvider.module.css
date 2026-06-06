@@ -1,0 +1,12 @@
+.list {
+	position: fixed;
+	right: 12px;
+	bottom: 12px;
+	
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+	gap: 16px;
+
+	z-index: var(--z-index-toast);
+}
