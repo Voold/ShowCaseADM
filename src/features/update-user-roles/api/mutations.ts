@@ -10,10 +10,12 @@ import {
   type User,
   type UserRole
 } from '@/entities/user'
+import { useToastsStore } from '@/entities/toast'
 import { type BackendError } from '@/shared'
 
 export const useSetUserRole = () => {
   const queryClient = useQueryClient()
+  const { show } = useToastsStore()
 
   return useMutation({
     mutationFn: ({ userId, type, payload }: SetUserRoleVariables) => putUserRole(userId, type, payload),
@@ -29,16 +31,23 @@ export const useSetUserRole = () => {
         })
       }
     },
+    onSettled: (_, __, vars) =>
+      show({ status: 'success', title: 'Успех', description: `Роль ${ROLES_TRANSLATIONS[vars.type]} добавлена` }),
     onError: (error, vars) => {
       const isBackendError = axios.isAxiosError<BackendError>(error) && error.response
       const message = isBackendError ? error.response?.data.msg : error.message
-      alert(`При добавлении роли ${ROLES_TRANSLATIONS[vars.type]} произошла ошибка\n${message}`)
+      show({
+        status: 'error',
+        title: 'Ошибка',
+        description: `При добавлении роли ${ROLES_TRANSLATIONS[vars.type]} произошла ошибка\n${message}`
+      })
     }
   })
 }
 
 export const useRemoveUserRole = () => {
   const queryClient = useQueryClient()
+  const { show } = useToastsStore()
 
   return useMutation({
     mutationFn: ({ userId, type }: RemoveUserRoleVariables) => deleteUserRole(userId, type),
@@ -54,10 +63,16 @@ export const useRemoveUserRole = () => {
         })
       }
     },
+    onSettled: (_, __, vars) =>
+      show({ status: 'success', title: 'Успех', description: `Роль ${ROLES_TRANSLATIONS[vars.type]} добавлена` }),
     onError: (error, vars) => {
       const isBackendError = axios.isAxiosError<BackendError>(error) && error.response
       const message = isBackendError ? error.response?.data.msg : error.message
-      alert(`При удалении роли ${ROLES_TRANSLATIONS[vars.type]} произошла ошибка\n${message}`)
+      show({
+        status: 'error',
+        title: 'Ошибка',
+        description: `При удалении роли ${ROLES_TRANSLATIONS[vars.type]} произошла ошибка\n${message}`
+      })
     }
   })
 }
