@@ -1,33 +1,13 @@
-.mainContainer {
-  display: flex;
-  min-width: 300px;
-  min-height: 200px;
-  padding: 16px;
-  gap: 8px;
-  border-radius: 8px;
-  background-color: var(--sec-color);
-  flex-direction: column;
-}
-
-.title {
-  font-size: 1rem;
-  font-weight: 700;
+.snippet {
+  color: var(--blue-grey-color);
 }
 
 .content {
-  display: grid;
-  gap: 12px;
-  width: 100%;
-}
+  height: 100%;
 
-.block {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-}
-
-.snippet {
-  color: var(--blue-grey-color);
+  gap: 12px;
 }
 
 .input {
@@ -44,7 +24,7 @@
 .namesContainer {
   width: 100%;
   background-color: var(--bg-color);
-  height: 80px;
+  height: 100%;
   border-radius: 5px;
   display: flex;
   flex-wrap: wrap;

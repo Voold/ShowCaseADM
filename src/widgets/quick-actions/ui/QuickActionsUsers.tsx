@@ -44,10 +44,8 @@ export const QuickActionsUsers = () => {
 
 
   return (
-    <QuickActions title="Быстрые действия">
-      <div className={styles.block}>
-
-        <p className={styles.snippet}>Выдать роль &quot;Наставник&quot;</p>
+    <Card title='Быстрые действия'>
+      <p className={styles.snippet}>Выдать роль &quot;Наставник&quot;</p>
 
         <div className={styles.inputBlock}>
             <input
@@ -76,6 +74,8 @@ export const QuickActionsUsers = () => {
           active={users.length > 0 ? true : false}
         />
       </div>
-    </QuickActions>
+
+      <AgreeButton active={users.length > 0 ? true : false} />
+    </Card>
   )
 }
