@@ -30,16 +30,15 @@ export const useSetUserRole = () => {
           roles: [...previousUser.roles, { type, weight: ROLE_WEIGHTS[type], ...payload } as UserRole]
         })
       }
+      show({ status: 'success', title: 'Успех', description: `Роль ${ROLES_TRANSLATIONS[vars.type]} добавлена` })
     },
-    onSettled: (_, __, vars) =>
-      show({ status: 'success', title: 'Успех', description: `Роль ${ROLES_TRANSLATIONS[vars.type]} добавлена` }),
     onError: (error, vars) => {
       const isBackendError = axios.isAxiosError<BackendError>(error) && error.response
       const message = isBackendError ? error.response?.data.msg : error.message
       show({
         status: 'error',
         title: 'Ошибка',
-        description: `При добавлении роли ${ROLES_TRANSLATIONS[vars.type]} произошла ошибка\n${message}`
+        description: `При добавлении роли ${ROLES_TRANSLATIONS[vars.type]} произошла ошибка: ${message}`
       })
     }
   })
@@ -62,16 +61,15 @@ export const useRemoveUserRole = () => {
           roles: previousUser.roles.filter(role => role.type !== type)
         })
       }
+      show({ status: 'success', title: 'Успех', description: `Роль ${ROLES_TRANSLATIONS[vars.type]} добавлена` })
     },
-    onSettled: (_, __, vars) =>
-      show({ status: 'success', title: 'Успех', description: `Роль ${ROLES_TRANSLATIONS[vars.type]} добавлена` }),
     onError: (error, vars) => {
       const isBackendError = axios.isAxiosError<BackendError>(error) && error.response
       const message = isBackendError ? error.response?.data.msg : error.message
       show({
         status: 'error',
         title: 'Ошибка',
-        description: `При удалении роли ${ROLES_TRANSLATIONS[vars.type]} произошла ошибка\n${message}`
+        description: `При удалении роли ${ROLES_TRANSLATIONS[vars.type]} произошла ошибка: ${message}`
       })
     }
   })
