@@ -30,7 +30,7 @@ export const useSetUserRole = () => {
           roles: [...previousUser.roles, { type, weight: ROLE_WEIGHTS[type], ...payload } as UserRole]
         })
       }
-      show({ status: 'success', title: 'Успех', description: `Роль ${ROLES_TRANSLATIONS[vars.type]} добавлена` })
+      show({ status: 'success', title: 'Успех', description: `Роль ${ROLES_TRANSLATIONS[vars.type]} для пользователя с ID ${vars.userId} добавлена` })
     },
     onError: (error, vars) => {
       const isBackendError = axios.isAxiosError<BackendError>(error) && error.response
@@ -38,7 +38,7 @@ export const useSetUserRole = () => {
       show({
         status: 'error',
         title: 'Ошибка',
-        description: `При добавлении роли ${ROLES_TRANSLATIONS[vars.type]} произошла ошибка: ${message}`
+        description: `При добавлении роли ${ROLES_TRANSLATIONS[vars.type]} для пользователя с ID ${vars.userId} произошла ошибка: ${message}`
       })
     }
   })
@@ -61,7 +61,7 @@ export const useRemoveUserRole = () => {
           roles: previousUser.roles.filter(role => role.type !== type)
         })
       }
-      show({ status: 'success', title: 'Успех', description: `Роль ${ROLES_TRANSLATIONS[vars.type]} добавлена` })
+      show({ status: 'success', title: 'Успех', description: `Роль ${ROLES_TRANSLATIONS[vars.type]} пользователя с ID ${vars.userId} удалена` })
     },
     onError: (error, vars) => {
       const isBackendError = axios.isAxiosError<BackendError>(error) && error.response
@@ -69,7 +69,7 @@ export const useRemoveUserRole = () => {
       show({
         status: 'error',
         title: 'Ошибка',
-        description: `При удалении роли ${ROLES_TRANSLATIONS[vars.type]} произошла ошибка: ${message}`
+        description: `При удалении роли ${ROLES_TRANSLATIONS[vars.type]} пользователя с ID ${vars.userId} произошла ошибка: ${message}`
       })
     }
   })
