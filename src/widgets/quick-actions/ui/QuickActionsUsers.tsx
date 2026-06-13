@@ -29,6 +29,7 @@ export const QuickActionsUsers = () => {
 
   const handleSubmit = () => {
     chosenUsers.forEach(user => setRoleMutate({ userId: user.id, type: 'Curator', payload: {} }))
+    setChosenUsers([])
   }
 
   return (
