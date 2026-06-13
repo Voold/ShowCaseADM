@@ -10,46 +10,96 @@
   gap: 12px;
 }
 
-.input {
-  flex-grow: 1;
+.searchWrapper {
+  position: relative;
+
+  &:focus-within .userList {
+    visibility: visible;
+  }
 }
 
-.inputBlock {
-  display: flex;
+.userList {
+  position: absolute;
+  translate: 0 100%;
+  bottom: -5px;
+
   width: 100%;
-  align-items: center;
-  gap: 8px
+  visibility: hidden;
+  z-index: 2;
 }
 
-.namesContainer {
-  width: 100%;
-  background-color: var(--bg-color);
-  height: 100%;
-  border-radius: 5px;
-  display: flex;
-  flex-wrap: wrap;
-  overflow: auto;
-  gap: 4px;
-  padding: 8px;
-}
-
-.addButton {
-  width: 24px;
-  height: 24px;
-  padding: 3px;
-  background-color: var(--green-20pr);
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 1/1;
-}
 
 .user {
-  background-color: var(--green-20pr);
+  display: flex;
+  justify-content: start;
+
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  padding: 10px;
   border-radius: 5px;
-  padding: 5px 10px;
-  align-content: center;
-  font-size: 11px;
-  height: fit-content;
+
+  &:hover {
+    background-color: var(--outline-color);
+  }
+}
+
+.chosenUserList {
+  height: 100%;
+  align-content: start;
+  overflow-y: auto;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+
+  border-radius: 5px;
+  padding: 8px;
+
+  background-color: var(--bg-color);
+}
+
+.chosenUser {
+  height: max-content;
+  
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  
+  padding: 10px;
+  border-radius: 5px;
+  
+  background-color: var(--green-20pr);
+}
+
+.removeButton {
+  position: relative;
+  display: inline-block;
+
+  aspect-ratio: 1;
+  height: 15px;
+
+  &::after, &::before {
+    content: "";
+    
+    position: absolute;
+    top: 50%;
+    left: 0;
+
+    width: 100%;
+    height: 2px;
+
+    background-color: var(--text-color);
+    border-radius: 1px;
+  }
+
+  &::after {
+    transform: translateY(-50%) rotate(-45deg);
+  }
+
+  &::before {
+    transform: translateY(-50%) rotate(45deg);
+  }
 }
