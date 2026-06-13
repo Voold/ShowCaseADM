@@ -47,18 +47,14 @@ export const QuickActionsUsers = () => {
     <Card title='Быстрые действия'>
       <p className={styles.snippet}>Выдать роль &quot;Наставник&quot;</p>
 
-        <div className={styles.inputBlock}>
-            <input
-                className={styles.input}
-                type='text'
-                placeholder='12345'
-                value={value}
-                onChange={(e) => setValue(e.target.value)}
-            />
-            <button className={styles.addButton} onClick={() => handleAddUser(value)}>
-              <PlusIcon/>
-            </button>
-        </div>
+      <div className={styles.inputBlock}>
+        <SearchInput
+          className={styles.input}
+          placeholder='Имя или ID пользователя'
+          value={value}
+          onChange={e => setValue(e.target.value)}
+        />
+      </div>
 
         <div className={styles.namesContainer}>
           {

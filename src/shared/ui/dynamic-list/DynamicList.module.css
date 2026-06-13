@@ -7,6 +7,12 @@
   min-height: 0;
 }
 
+.searchInput {
+  padding: 8px;
+  background-color: var(--sec-color);
+  border-radius: 12px;
+}
+
 .list {
   position: relative;
   display: flex;

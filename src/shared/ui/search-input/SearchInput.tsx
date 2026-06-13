@@ -6,11 +6,12 @@ interface SearchInputProps {
   value: string,
   onChange: (e: ChangeEvent<HTMLInputElement>) => void
   placeholder: string
+  className?: string
 }
 
-export const SearchInput = ({value, onChange, placeholder}: SearchInputProps) => {
+export const SearchInput = ({value, onChange, placeholder, className}: SearchInputProps) => {
   return(
-      <div className={styles.container}>
+      <div className={className}>
         <div className={styles.search}>
           <SearchIcon className={styles.icon}/>
           <input
