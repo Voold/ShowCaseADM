@@ -10,10 +10,12 @@ import {
   type User,
   type UserRole
 } from '@/entities/user'
+import { useToastsStore } from '@/entities/toast'
 import { type BackendError } from '@/shared'
 
 export const useSetUserRole = () => {
   const queryClient = useQueryClient()
+  const { show } = useToastsStore()
 
   return useMutation({
     mutationFn: ({ userId, type, payload }: SetUserRoleVariables) => putUserRole(userId, type, payload),
@@ -28,17 +30,23 @@ export const useSetUserRole = () => {
           roles: [...previousUser.roles, { type, weight: ROLE_WEIGHTS[type], ...payload } as UserRole]
         })
       }
+      show({ status: 'success', title: 'Успех', description: `Роль ${ROLES_TRANSLATIONS[vars.type]} для пользователя с ID ${vars.userId} добавлена` })
     },
     onError: (error, vars) => {
       const isBackendError = axios.isAxiosError<BackendError>(error) && error.response
       const message = isBackendError ? error.response?.data.msg : error.message
-      alert(`При добавлении роли ${ROLES_TRANSLATIONS[vars.type]} произошла ошибка\n${message}`)
+      show({
+        status: 'error',
+        title: 'Ошибка',
+        description: `При добавлении роли ${ROLES_TRANSLATIONS[vars.type]} для пользователя с ID ${vars.userId} произошла ошибка: ${message}`
+      })
     }
   })
 }
 
 export const useRemoveUserRole = () => {
   const queryClient = useQueryClient()
+  const { show } = useToastsStore()
 
   return useMutation({
     mutationFn: ({ userId, type }: RemoveUserRoleVariables) => deleteUserRole(userId, type),
@@ -53,11 +61,16 @@ export const useRemoveUserRole = () => {
           roles: previousUser.roles.filter(role => role.type !== type)
         })
       }
+      show({ status: 'success', title: 'Успех', description: `Роль ${ROLES_TRANSLATIONS[vars.type]} пользователя с ID ${vars.userId} удалена` })
     },
     onError: (error, vars) => {
       const isBackendError = axios.isAxiosError<BackendError>(error) && error.response
       const message = isBackendError ? error.response?.data.msg : error.message
-      alert(`При удалении роли ${ROLES_TRANSLATIONS[vars.type]} произошла ошибка\n${message}`)
+      show({
+        status: 'error',
+        title: 'Ошибка',
+        description: `При удалении роли ${ROLES_TRANSLATIONS[vars.type]} пользователя с ID ${vars.userId} произошла ошибка: ${message}`
+      })
     }
   })
 }
