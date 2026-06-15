@@ -1,0 +1,11 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100dvh;
+  background-color: rgba(0, 0, 0, 0.6);
+	backdrop-filter: blur(2px);
+}
