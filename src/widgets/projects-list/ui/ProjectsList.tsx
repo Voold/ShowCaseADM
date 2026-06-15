@@ -9,7 +9,6 @@ const ProjectsList = () => {
   const { data, isSuccess, isLoading, isError } = useProjectsByName(query.toLowerCase(), offset, limit)
   const { projects, total } = data || { projects: [], total: 0 }
 
-  const paginatedProjects = projects.slice(offset, offset + limit)
   const totalPages = Math.ceil(total / limit) || 1
 
   return (
@@ -26,7 +25,7 @@ const ProjectsList = () => {
       {isSuccess && projects.length === 0 ? (
         <h3 className={styles.placeholder}>Ничего не нашлось!</h3>
       ) : (
-        paginatedProjects.map(project => <ProjectSlot key={project.id} project={project} />)
+        projects.map(project => <ProjectSlot key={project.id} project={project} />)
       )}
     </DynamicList>
   )

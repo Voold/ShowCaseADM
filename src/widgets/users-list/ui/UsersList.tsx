@@ -11,7 +11,6 @@ const UsersList = () => {
   const { data, isSuccess, isLoading, isError } = useUsersByName(query.toLowerCase(), offset, limit)
   const { users, total } = data || { users: [], total: 0 }
 
-  const paginatedUsers = users.slice(offset, offset + limit)
   const totalPages = Math.ceil(total / limit) || 1
 
   return (
@@ -28,7 +27,7 @@ const UsersList = () => {
       {isSuccess && users.length === 0 ? (
         <h3 className={styles.placeholder}>Ничего не нашлось!</h3>
       ) : (
-        paginatedUsers.map(user => (
+        users.map(user => (
           <Link key={user.id} to={`/user/${user.id}`} className={styles.link}>
             <UserSlot className={styles.userSlot} user={user} onClick={() => {}}>
               <span
