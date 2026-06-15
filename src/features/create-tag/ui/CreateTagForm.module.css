@@ -1,0 +1,13 @@
+.form {
+  display: flex;
+  gap: 10px;
+
+  & input {
+		border: none;
+		background-color: var(--bg-color);
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
