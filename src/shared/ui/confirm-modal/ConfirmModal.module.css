@@ -1,0 +1,30 @@
+.card {
+  min-width: 30vw;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+
+  & button {
+    border-radius: 5px;
+    padding: 10px 20px;
+    flex-grow: 1;
+  }
+}
+
+.confirm {
+  background-color: color-mix(in srgb, var(--primary-color) 60%, transparent);
+}
+
+.reject {
+	background-color: var(--red-color);
+}
