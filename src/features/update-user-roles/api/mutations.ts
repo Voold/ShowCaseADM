@@ -30,6 +30,8 @@ export const useSetUserRole = () => {
           roles: [...previousUser.roles, { type, weight: ROLE_WEIGHTS[type], ...payload } as UserRole]
         })
       }
+      queryClient.invalidateQueries({queryKey: [...userKeys.all, 'search']})
+
       show({ status: 'success', title: 'Успех', description: `Роль ${ROLES_TRANSLATIONS[vars.type]} для пользователя с ID ${vars.userId} добавлена` })
     },
     onError: (error, vars) => {
@@ -61,6 +63,8 @@ export const useRemoveUserRole = () => {
           roles: previousUser.roles.filter(role => role.type !== type)
         })
       }
+      queryClient.invalidateQueries({queryKey: [...userKeys.all, 'search']})
+      
       show({ status: 'success', title: 'Успех', description: `Роль ${ROLES_TRANSLATIONS[vars.type]} пользователя с ID ${vars.userId} удалена` })
     },
     onError: (error, vars) => {
