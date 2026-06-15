@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { queryKeys } from "./queryKeys"
 import { getTagsByName } from "./requests"
 
-export const useGetTagsByName = (query: string, offset: number, limit: number) => {
+export const useTagsByName = (query: string, offset: number, limit: number) => {
   const trimmedQuery = query.trim()
 	return useQuery({
 		queryKey: queryKeys.search(trimmedQuery, offset, limit),
