@@ -8,10 +8,11 @@ export function TagList() {
 	const { page, setPage, limit, offset, query, setQuery } = useQueryFilters()
   const [localQuery, setLocalQuery] = useQuerySync(query, setQuery)
 
-  const { data, isSuccess, isLoading, isError } = useTagsByName(query.toLowerCase(), offset, limit)
-  const { tags, total } = data || { tags: [], total: 0 }
+  const { data: tags = [], isSuccess, isLoading, isError } = useTagsByName(query.toLowerCase(), offset, limit)
+  // const { tags, total } = data || { tags: [], total: 0 }
 
-  const totalPages = Math.ceil(total / limit) || 1
+  // const totalPages = Math.ceil(total / limit) || 1
+  const totalPages = 1
 
   return (
     <DynamicList

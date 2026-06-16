@@ -3,10 +3,13 @@ import type { Tag } from '../model/types'
 import { mapTagDto } from '../lib/mappers'
 import { api, ENDPOINTS } from '@/shared'
 
-export const getTagsByName = async (query: string, offset: number, limit: number): Promise<{ tags: Tag[]; total: number }> => {
+// export const getTagsByName = async (query: string, offset: number, limit: number): Promise<GetTagsResponse> => {
+export const getTagsByName = async (query: string, offset: number, limit: number): Promise<Tag[]> => {
   const params = { offset, limit, query }
-  const { data } = await api.get<GetTagsResponse>(ENDPOINTS.TAGS, { params })
-  return { tags: data.tags.map(tag => mapTagDto(tag)), total: data.total }
+  const { data } = await api.get<TagDto[]>(ENDPOINTS.TAGS, { params })
+  return data.map(tag => mapTagDto(tag))
+  // const { data } = await api.get<GetTagsResponse>(ENDPOINTS.TAGS, { params })
+  // return { tags: data.tags.map(tag => mapTagDto(tag)), total: data.total }
 }
 
 export const createTag = async (payload: Omit<Tag, 'id'>): Promise<string> => {
