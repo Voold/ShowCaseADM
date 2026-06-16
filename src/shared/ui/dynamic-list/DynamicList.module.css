@@ -27,6 +27,7 @@
   flex-grow: 1;
   min-height: 0;
   gap: 8px;
+  will-change: transform;
 }
 
 .listWrapper::after {
