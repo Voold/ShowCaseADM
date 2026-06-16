@@ -1,3 +1,5 @@
+const SETTINGS_BASE = '/settings'
+
 export const ROUTES = {
   MAIN: '/',
   LOGIN: '/login',
@@ -5,6 +7,12 @@ export const ROUTES = {
   USERS: '/users',
   ROLES: '/roles',
   REPORTS: '/reports',
-  SETTINGS: '/settings',
+  SETTINGS: {
+    BASE: SETTINGS_BASE,
+    TAGS: `${SETTINGS_BASE}/tags`,
+    PROJECT_ROLES: `${SETTINGS_BASE}/project-roles`,
+    PARTNERS: `${SETTINGS_BASE}/partners`,
+    CHECKPOINTS: `${SETTINGS_BASE}/checkpoints`
+  },
   USER: 'user/:id'
-}
+} as const

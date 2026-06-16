@@ -15,7 +15,7 @@ const buttons = [
   { name: 'Пользователи', icon: UsersIcon, to: ROUTES.USERS },
   { name: 'Роли', icon: HammerIcon, to: ROUTES.ROLES },
   { name: 'Отчёты', icon: DiagramIcon, to: ROUTES.REPORTS },
-  { name: 'Настройки', icon: GearIcon, to: ROUTES.SETTINGS }
+  { name: 'Настройки', icon: GearIcon, to: ROUTES.SETTINGS.BASE }
 ]
 
 export function SideBar() {
