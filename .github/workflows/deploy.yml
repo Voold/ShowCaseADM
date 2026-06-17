@@ -2,7 +2,7 @@ name: CI/CD dev Pipeline
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "develop" ]
 
 jobs:
   build-and-push:
