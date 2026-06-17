@@ -14,12 +14,12 @@ export const getTagsByName = async (query: string, offset: number, limit: number
 
 export const createTag = async (payload: Omit<Tag, 'id'>): Promise<string> => {
   const dtoPayload: Omit<TagDto, 'tagId'> = { tagName: payload.name }
-  const { data: id } = await api.post<string>(ENDPOINTS.TAGS, dtoPayload)
+  const { data: id } = await api.post<string>(ENDPOINTS.TAGS, dtoPayload) // TODO check backend response types 
   return id
 }
 
-export const editTag = async (id: string, payload: Omit<Tag, 'id'>): Promise<void> => {
-  const dtoPayload: Omit<TagDto, 'tagId'> = { tagName: payload.name }
+export const editTag = async (id: string, payload: Tag): Promise<void> => {
+  const dtoPayload: TagDto = { tagId: payload.id, tagName: payload.name }
   await api.put(ENDPOINTS.TAG_BY_ID(id), dtoPayload)
 }
 
