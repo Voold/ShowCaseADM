@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { useLocation } from 'react-router-dom'
 import DiagramIcon from '../../assets/diagram.svg?react'
 import FolderIcon from '../../assets/folder.svg?react'
 import GearIcon from '../../assets/gear.svg?react'
@@ -17,14 +15,12 @@ const buttons = [
   { name: 'Пользователи', icon: UsersIcon, to: ROUTES.USERS },
   { name: 'Роли', icon: HammerIcon, to: ROUTES.ROLES },
   { name: 'Отчёты', icon: DiagramIcon, to: ROUTES.REPORTS },
-  { name: 'Настройки', icon: GearIcon, to: ROUTES.SETTINGS }
+  { name: 'Настройки', icon: GearIcon, to: ROUTES.SETTINGS.BASE }
 ]
 
 export function SideBar() {
-  const location = useLocation()
-  const [activeButton, setActiveButton] = useState(location.pathname)
-  const status = useAuthStore((s) => s.status)
-  const {data: user = placeholderUser} = useMe(status === 'authenticated')
+  const status = useAuthStore(s => s.status)
+  const { data: user = placeholderUser } = useMe(status === 'authenticated')
 
   return (
     <div className={styles.sideBar}>
@@ -32,19 +28,13 @@ export function SideBar() {
       <span className={styles.divider} />
       <nav className={styles.buttonList}>
         {buttons.map(button => (
-          <NavButton
-            to={button.to}
-            key={button.name}
-            Icon={button.icon}
-            isActive={activeButton === button.to}
-            onClick={() => setActiveButton(button.to)}
-          >
+          <NavButton to={button.to} key={button.name} Icon={button.icon}>
             {button.name}
           </NavButton>
         ))}
       </nav>
       <span className={styles.divider} />
-      <UserSlot user={user}/>
+      <UserSlot user={user} />
     </div>
   )
 }

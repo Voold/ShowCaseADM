@@ -9,6 +9,7 @@ interface ImportMetaEnv {
   readonly VITE_REF_GET_USERS: string
   readonly VITE_REF_GET_PROJECTS: string
   readonly VITE_REF_ROLES: string
+  readonly VITE_API_TAGS_URL: string
   readonly VITE_API_BASE_URL: string
 }
 

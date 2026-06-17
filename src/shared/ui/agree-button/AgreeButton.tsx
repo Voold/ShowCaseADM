@@ -1,19 +1,18 @@
+import type { ComponentPropsWithoutRef } from 'react'
 import styles from './AgreeButton.module.css'
 
-interface AgreeButtonProps {
-  active: boolean,
-  onSubmit?: () => void
+interface AgreeButtonProps extends ComponentPropsWithoutRef<'button'> {
+  isLoading?: boolean
 }
 
-export const AgreeButton = ( {active, onSubmit} : AgreeButtonProps) => {
+export const AgreeButton = ( {isLoading = false, disabled, className, children, ...props} : AgreeButtonProps) => {
   return(
     <button 
-      className={`${styles.submitButton} ${active ? '' : styles.disabled}`} 
+      className={`${styles.button} ${disabled ? styles.disabled : ""} ${className ?? ""}`} 
       type='submit'
-      disabled={!active}
-      onClick={active ? onSubmit : undefined}
+      {...props}
     >
-      Подтвердить
+      {isLoading ? "Загрузка..." : children}
     </button>
   )
 }

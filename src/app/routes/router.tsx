@@ -1,17 +1,17 @@
-import { createBrowserRouter, Outlet } from "react-router-dom";
-import { MainLayout } from "../layouts/main/MainLayout";
-import { LoginPage } from "@/pages/login";
-import { NotFoundPage } from "@/pages/not-found";
-import { MainPage } from "@/pages/main/";
-import { ProjectsPage } from "@/pages/projects";
-import { UsersPage } from "@/pages/users";
-import { RolesPage } from "@/pages/roles";
-import { ReportsPage } from "@/pages/reports";
-import { SettingsPage } from "@/pages/settings/ui/SettingsPage";
+import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom'
+import { MainLayout, SettingsLayout } from '../layouts'
+import { LoginPage } from '@/pages/login'
+import { NotFoundPage } from '@/pages/not-found'
+import { MainPage } from '@/pages/main/'
+import { ProjectsPage } from '@/pages/projects'
+import { UsersPage } from '@/pages/users'
+import { RolesPage } from '@/pages/roles'
+import { ReportsPage } from '@/pages/reports'
 import { UserPage } from '@/pages/user'
-import { AuthBootstrapper } from "@/features/auth";
-import { ProtectedRoute } from "@/features/protected-route";
-import { ROUTES } from "@/shared";
+import { TagsSettingsPage } from '@/pages/tags-settings'
+import { AuthBootstrapper } from '@/features/auth'
+import { ProtectedRoute } from '@/features/protected-route'
+import { ROUTES } from '@/shared'
 
 const RootRoute = () => {
   return (
@@ -19,8 +19,8 @@ const RootRoute = () => {
       <AuthBootstrapper />
       <Outlet />
     </>
-  );
-};
+  )
+}
 
 export const router = createBrowserRouter([
   {
@@ -41,12 +41,22 @@ export const router = createBrowserRouter([
 
               { path: ROUTES.ROLES, element: <RolesPage /> },
               { path: ROUTES.REPORTS, element: <ReportsPage /> },
-              { path: ROUTES.SETTINGS, element: <SettingsPage /> },
-            ],
-          },
-        ],
+              {
+                path: ROUTES.SETTINGS.BASE,
+                element: <SettingsLayout />,
+                children: [
+                  { index: true, element: <Navigate to={ROUTES.SETTINGS.TAGS} /> },
+                  { path: ROUTES.SETTINGS.TAGS, element: <TagsSettingsPage /> },
+                  // { path: ROUTES.SETTINGS.PROJECT_ROLES, element: <TagsSettingsPage /> },
+                  // { path: ROUTES.SETTINGS.PARTNERS, element: <TagsSettingsPage /> },
+                  // { path: ROUTES.SETTINGS.CHECKPOINTS, element: <TagsSettingsPage /> }
+                ]
+              }
+            ]
+          }
+        ]
       },
-      { path: "*", element: <NotFoundPage /> },
-    ],
-  },
-]);
+      { path: '*', element: <NotFoundPage /> }
+    ]
+  }
+])

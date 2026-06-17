@@ -1,0 +1,14 @@
+.container {
+	display: flex;
+	align-items: start;
+	gap: 20px;
+	flex-grow: 1;
+	
+	& > :first-child {
+		width: 100%;
+	}
+	
+	& > :last-child {
+		width: 100%;
+	}
+}

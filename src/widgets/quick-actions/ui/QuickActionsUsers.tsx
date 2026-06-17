@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import styles from './QuickActionsUsers.module.css'
 import { useSetUserRole } from '@/features/update-user-roles'
 import { useUsersByName, type UserBase } from '@/entities/user'
@@ -57,7 +58,7 @@ export const QuickActionsUsers = () => {
         ))}
       </div>
 
-      <AgreeButton active={chosenUsers.length > 0} onSubmit={handleSubmit} />
+      <AgreeButton disabled={users.length === 0} onClick={handleSubmit}>Подтвердить</AgreeButton>
     </Card>
   )
 }

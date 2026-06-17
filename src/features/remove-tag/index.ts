@@ -1,0 +1,1 @@
+export { RemoveTagButton } from './ui/RemoveTagButton'

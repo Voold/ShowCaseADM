@@ -23,17 +23,16 @@ export function DynamicList({
   setCurrentPage,
   searchQuery,
   setSearchQuery,
-  placeholder
+  placeholder,
+  className
 }: DynamicListProps) {
   return (
-    <div className={styles.container}>
-      <SearchInput className={styles.searchInput} value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder={placeholder} />
+    <div className={`${styles.container} ${className ?? ''}`}>
+      <SearchInput value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder={placeholder} />
       <div className={styles.listWrapper}>
         <div className={styles.list}>{children}</div>
       </div>
-      {totalPages !== 1 && (
-        <Pagination currentPage={currentPage} totalPages={totalPages} onPageSelect={setCurrentPage} />
-      )}
+      {totalPages !== 1 && <Pagination currentPage={currentPage} totalPages={totalPages} onPageSelect={setCurrentPage} />}
     </div>
   )
 }

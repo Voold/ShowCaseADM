@@ -12,6 +12,10 @@
   text-decoration: none;
 }
 
+.button.active {
+  pointer-events: none;
+}
+
 .button.active,
 .button:hover {
   color: var(--primary-color);
