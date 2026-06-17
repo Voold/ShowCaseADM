@@ -58,7 +58,7 @@ export const QuickActionsUsers = () => {
         ))}
       </div>
 
-      <AgreeButton disabled={users.length === 0}>Подтвердить</AgreeButton>
+      <AgreeButton disabled={users.length === 0} onClick={handleSubmit}>Подтвердить</AgreeButton>
     </Card>
   )
 }
