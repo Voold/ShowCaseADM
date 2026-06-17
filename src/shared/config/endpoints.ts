@@ -12,4 +12,6 @@ export const ENDPOINTS = {
   USER_ROLES: (userId: string, roleName: string) => `${import.meta.env.VITE_REF_GET_USERS}/${userId}/${import.meta.env.VITE_REF_ROLES}/${roleName}`,
   TAGS: import.meta.env.VITE_API_TAGS_URL,
   TAG_BY_ID: (tagId: string) => `${import.meta.env.VITE_API_TAGS_URL}/${tagId}`,
+  PROJECT_ROLES: import.meta.env.VITE_API_PROJECT_ROLES_URL,
+  PROJECT_ROLE_BY_ID: (roleId: string) => `${import.meta.env.VITE_API_PROJECT_ROLES_URL}/${roleId}`,
 }
