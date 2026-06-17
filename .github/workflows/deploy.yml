@@ -54,16 +54,3 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           source: "dist/*"
           target: "~/tempAdm"
-          debug: true
-
-      - name: Verify deployment
-        uses: appleboy/ssh-action@v0.1.7
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          script: |
-            echo "Проверка логов Nginx"
-            sudo tail -n 50 /var/log/nginx/error.log
-            echo "Проверка доступности приложения"
-            curl http://${{ secrets.HOST}}
