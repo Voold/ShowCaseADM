@@ -38,11 +38,12 @@ export const useUserById = (userId: string | undefined) => {
   })
 }
 
-export const useUsersByName = (query: string, offset: number, limit: number) => {
+export const useUsersByName = (query: string, offset: number, limit: number, enabled: boolean = true) => {
   const trimmedQuery = query.trim()
   return useQuery({
     queryKey: queryKeys.search(trimmedQuery, offset, limit),
     queryFn: () => getUsersByName(trimmedQuery, offset, limit),
+    enabled: enabled,
     staleTime: 60 * 1000 // 1 min, может вынести в queryClient?
   })
 }

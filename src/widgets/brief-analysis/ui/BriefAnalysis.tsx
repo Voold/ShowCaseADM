@@ -1,9 +1,5 @@
-import styles from './BriefAnalysis.module.css'
+import { Card } from '@/shared'
 
 export const BriefAnalysis = () => {
-  return(
-      <section className={styles.mainContainer}>
-        <h5 className={styles.title} >Краткая аналитика</h5>
-      </section>
-  )
+  return <Card title='Краткая аналитика' />
 }
