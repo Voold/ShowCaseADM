@@ -7,6 +7,11 @@
 	min-height: 0;
 }
 
+.input {
+  border: 6px solid var(--sec-color);
+  border-radius: 12px;
+}
+
 .listWrapper {
   position: relative;
   
