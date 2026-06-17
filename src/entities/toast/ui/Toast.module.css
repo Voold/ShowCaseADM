@@ -1,0 +1,53 @@
+.toast {
+  --toast-border-radius: 3px 0 0 3px;
+  position: relative;
+  overflow-wrap: break-word;
+
+  display: flex;
+  width: max-content;
+  flex-direction: column;
+  gap: 15px;
+
+  padding: 20px;
+  border-radius: var(--toast-border-radius);
+
+  max-width: 400px;
+  min-width: 240px;
+
+  background-color: color-mix(in srgb, var(--toast-accent-color) 5%, var(--bg-color));
+  opacity: 1;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 3px;
+    height: 100%;
+
+    border-radius: var(--toast-border-radius);
+    background-color: var(--toast-accent-color);
+  }
+}
+
+.link {
+  width: max-content;
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--toast-accent-color);
+}
+
+.success {
+  --toast-accent-color: var(--light-green-color);
+}
+
+.error {
+  --toast-accent-color: var(--light-red-color);
+}
+
+.fadeOut {
+  opacity: 0;
+  transition: opacity 5s ease-in;
+}
