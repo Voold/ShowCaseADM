@@ -27,7 +27,7 @@ export function DynamicList({
 }: DynamicListProps) {
   return (
     <div className={styles.container}>
-      <SearchInput value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder={placeholder} />
+      <SearchInput className={styles.searchInput} value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder={placeholder} />
       <div className={styles.listWrapper}>
         <div className={styles.list}>{children}</div>
       </div>
