@@ -2,65 +2,66 @@ name: CI/CD dev Pipeline
 
 on:
   push:
-    branches: [ "develop" ]
+    branches:
+      - develop
 
 jobs:
-  build-and-push:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          node-version: '22.17.1'
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
+      - name: Cache dependencies
+        uses: actions/cache@v3
         with:
-          context: .
-          push: true
-          tags: ghcr.io/voold/showcaseadm:latest
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build-and-push
+      - name: Install dependencies
+        run: |
+          npm install
+          # Проверяем установленные пакеты
+          npm list --depth=0
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Build project
+        env:
+          VITE_TPU_OAUTH_CLIENT_ID: ${{ secrets.VITE_TPU_OAUTH_CLIENT_ID }}
+        run: |
+          npm run build
+          # Проверяем результат сборки
+          ls dist
 
-      - name: Copy docker-compose via SCP
-        uses: appleboy/scp-action@v0.1.7
+      - name: Verify build output
+        run: |
+          test -d dist || (echo "Директория dist не создана" && exit 1)
+          test -f dist/index.html || (echo "Файл index.html отсутствует" && exit 1)
+
+      - name: Deploy to server
+        uses: appleboy/scp-action@v0.1.4
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
+          username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.PORT }}
-          source: "docker-compose.yml"
+          source: "dist/*"
           target: "~/tempAdm"
-        
-      - name: Deploy to Server via SSH
-        uses: appleboy/ssh-action@v1.0.3
+
+      - name: Verify deployment
+        uses: appleboy/ssh-action@v0.1.7
         with:
           host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
+          username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.PORT }}
           script: |
-            cd ~/tempAdm
-
-            echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-
-            docker compose pull
-
-            docker compose up -d --remove-orphans
-
-            docker image prune -f% 
+            echo "Проверка логов Nginx"
+            sudo tail -n 50 /var/log/nginx/error.log
+            echo "Проверка доступности приложения"
+            curl http://${{ secrets.HOST}}
