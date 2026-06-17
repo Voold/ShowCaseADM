@@ -2,13 +2,15 @@
 	display: flex;
 	align-items: start;
 	gap: 20px;
-	flex-grow: 1;
+
+	flex: 1;
+	min-height: 0;
 	
 	& > :first-child {
-		width: 100%;
+		flex: 1 1 0;
 	}
 	
 	& > :last-child {
-		width: 100%;
+		flex: 1 1 0;
 	}
 }
