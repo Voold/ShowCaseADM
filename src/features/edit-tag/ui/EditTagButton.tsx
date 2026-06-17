@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import styles from './EditTagButton.module.css'
-import EditIcon from '../assets/edit.svg?react'
 import { useEditTag } from '../api/mutations'
-import { AgreeButton, Card, Modal } from '@/shared'
+import { AgreeButton, Card, EditIcon, Modal } from '@/shared'
 
 interface EditTagButtonProps {
   tagId: string
