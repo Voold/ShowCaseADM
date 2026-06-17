@@ -1,4 +1,4 @@
-import { type GetTagsResponse, type TagDto } from './types'
+import { type TagDto } from './types'
 import type { Tag } from '../model/types'
 import { mapTagDto } from '../lib/mappers'
 import { api, ENDPOINTS } from '@/shared'
