@@ -13,7 +13,6 @@ import { PartnersSettingsPage } from '@/pages/parnters-settings'
 import { ProjectRolesSettingsPage } from '@/pages/project-roles-settings'
 import { AuthBootstrapper } from '@/features/auth'
 import { ProtectedRoute } from '@/features/protected-route'
-import { AuthBootstrapper } from '@/features/auth'
 import { ROUTES } from '@/shared'
 
 const RootRoute = () => {

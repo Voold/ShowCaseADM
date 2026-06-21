@@ -9,7 +9,7 @@ export const useAddPartner = () => {
   const { show } = useToastsStore()
 
   return useMutation({
-    mutationFn: (payload: Omit<Partner, "id" | "avatarUrl"> & Partial<Pick<Partner, "avatarUrl">>) => addPartner(payload),
+    mutationFn: (payload: Omit<Partner, "id">) => addPartner(payload),
     onSuccess: (partnerId, vars) => {
       queryClient.invalidateQueries({queryKey: [...queryKeys.all, 'search']})
       queryClient.invalidateQueries({queryKey: queryKeys.partner(partnerId)})

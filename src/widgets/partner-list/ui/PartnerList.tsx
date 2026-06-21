@@ -19,6 +19,7 @@ export function PartnerList() {
       searchQuery={localQuery}
       setSearchQuery={setLocalQuery}
       placeholder={'Найти партнёра...'}
+      className={styles.container}
     >
       {isLoading && <h3 className={styles.placeholder}>Загрузка...</h3>}
       {isError && <h3 className={styles.placeholder}>Произошла ошибка :P</h3>}

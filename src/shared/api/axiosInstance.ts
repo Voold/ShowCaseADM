@@ -40,9 +40,8 @@ axiosInstance.interceptors.response.use(
       _retry?: boolean;
     };
 
-    // TODO - обсудить с Егором 403 статус
     if (
-      (error.response?.status === 401 || error.response?.status === 403) &&
+      (error.response?.status === 401) &&
       !originalRequest._retry
     ) {
       if (isRefreshing) {
