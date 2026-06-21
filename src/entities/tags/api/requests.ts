@@ -14,8 +14,8 @@ export const getTagsByName = async (query: string, offset: number, limit: number
 
 export const createTag = async (payload: Omit<Tag, 'id'>): Promise<string> => {
   const dtoPayload: Omit<TagDto, 'tagId'> = { tagName: payload.name }
-  const { data: id } = await api.post<string>(ENDPOINTS.TAGS, dtoPayload)
-  return id
+  const { data } = await api.post<{tagId: string}>(ENDPOINTS.TAGS, dtoPayload)
+  return data.tagId
 }
 
 export const editTag = async (id: string, payload: Omit<Tag, 'id'>): Promise<void> => {
