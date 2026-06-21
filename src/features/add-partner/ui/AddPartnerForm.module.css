@@ -1,0 +1,50 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+
+  & input {
+    flex-grow: 1;
+		border: none;
+		background-color: var(--bg-color);
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  & p {
+    display: none;
+    color: var(--red-color);
+    font-size: 14px;
+  }
+}
+
+.error {
+  & input {
+    position: relative;
+    border: 1px solid var(--red-color);
+  }
+  
+  & p {
+    display: block;
+  }
+}
+
+.button {
+  height: 38px;
+  align-self: flex-end;
+}

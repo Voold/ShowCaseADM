@@ -14,4 +14,6 @@ export const ENDPOINTS = {
   TAG_BY_ID: (tagId: string) => `${import.meta.env.VITE_API_TAGS_URL}/${tagId}`,
   PROJECT_ROLES: import.meta.env.VITE_API_PROJECT_ROLES_URL,
   PROJECT_ROLE_BY_ID: (roleId: string) => `${import.meta.env.VITE_API_PROJECT_ROLES_URL}/${roleId}`,
+  PARTNERS: import.meta.env.VITE_API_PARTNERS_URL,
+  PARTNER_BY_ID: (partnerId: string) => `${import.meta.env.VITE_API_PARTNERS_URL}/${partnerId}`,
 }

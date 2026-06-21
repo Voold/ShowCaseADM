@@ -1,0 +1,19 @@
+.placeholder {
+  margin: auto;
+  opacity: 0.3;
+}
+
+.partner {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 10px;
+	padding: 10px;
+	background-color: var(--sec-color);
+	border-radius: 5px;
+}
+
+.partnerActions {
+	display: flex;
+	gap: 7px;
+}

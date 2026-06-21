@@ -1,6 +1,5 @@
 // TODO - Обновить тип юзера
 export type User = UserBase & {
-  profilePicture: string
   meta: {
     bio: string
     skills: string
@@ -13,6 +12,7 @@ export type UserBase = {
   id: string
   email: string
   roles: UserRole[]
+  profilePicture: string
   meta: {
     name: string
   }
@@ -21,17 +21,19 @@ export type UserBase = {
 export type UserBaseDto = {
   userId: number
   email: string
-  roles: string[]
   meta: {
     firstName: string
     lastName: string
   }
+  roles?: string[]
+  profilePicture?: string
 }
 
 export type UserDto = {
   userId: number
   email: string
-  profilePicture: string | null
+  profilePicture?: string
+  capabilities?: string[]
   meta: {
     firstName: string
     lastName: string
@@ -62,7 +64,6 @@ export type UserDto = {
     // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     Teacher?: {},
   }
-  capabilities: string[] | null
 }
 
 type Role<T> = {

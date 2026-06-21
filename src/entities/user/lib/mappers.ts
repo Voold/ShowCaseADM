@@ -23,7 +23,7 @@ export const mapUserDto = (dto: UserDto): User => {
       ...dto.meta
     },
     roles: mapRoles(dto.roles),
-    capabilities: dto.capabilities || [] // по хорошему заменить на юнион
+    capabilities: dto.capabilities || []
   }
 }
 
@@ -31,13 +31,14 @@ export const mapUserBaseDto = (dto: UserBaseDto): UserBase => {
   return {
     id: String(dto.userId),
     email: dto.email,
-    roles: dto.roles.map(roleName => {
+    profilePicture: dto.profilePicture || defaultAvatar,
+    roles: dto.roles?.map(roleName => {
       const type = roleName as keyof UserDto['roles']
       return {
         type: type,
         weight: ROLE_WEIGHTS[type]
       } as UserRole
-    }),
+    }) || [],
     meta: {
       name: `${dto.meta.lastName} ${dto.meta.firstName}`
     }
