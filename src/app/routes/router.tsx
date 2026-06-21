@@ -9,8 +9,9 @@ import { RolesPage } from '@/pages/roles'
 import { ReportsPage } from '@/pages/reports'
 import { UserPage } from '@/pages/user'
 import { TagsSettingsPage } from '@/pages/tags-settings'
-import { AuthBootstrapper } from '@/features/auth'
+import { ProjectRolesSettingsPage } from '@/pages/project-roles-settings'
 import { ProtectedRoute } from '@/features/protected-route'
+import { AuthBootstrapper } from '@/features/auth'
 import { ROUTES } from '@/shared'
 
 const RootRoute = () => {
@@ -47,7 +48,7 @@ export const router = createBrowserRouter([
                 children: [
                   { index: true, element: <Navigate to={ROUTES.SETTINGS.TAGS} /> },
                   { path: ROUTES.SETTINGS.TAGS, element: <TagsSettingsPage /> },
-                  // { path: ROUTES.SETTINGS.PROJECT_ROLES, element: <TagsSettingsPage /> },
+                  { path: ROUTES.SETTINGS.PROJECT_ROLES, element: <ProjectRolesSettingsPage /> },
                   // { path: ROUTES.SETTINGS.PARTNERS, element: <TagsSettingsPage /> },
                   // { path: ROUTES.SETTINGS.CHECKPOINTS, element: <TagsSettingsPage /> }
                 ]

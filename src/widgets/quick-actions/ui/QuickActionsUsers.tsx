@@ -39,7 +39,6 @@ export const QuickActionsUsers = () => {
 
       <div className={styles.searchWrapper}>
         <SearchInput
-          className={styles.input}
           placeholder='Имя или ID пользователя'
           value={localQuery}
           onChange={e => setLocalQuery(e.target.value)}

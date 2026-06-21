@@ -1,23 +1,23 @@
 import { useState } from 'react'
-import styles from './EditTagButton.module.css'
-import { useEditTag } from '../api/mutations'
+import styles from './EditProjectRoleButton.module.css'
+import { useEditProjectRole } from '../api/mutations'
 import { AgreeButton, Card, EditIcon, Modal } from '@/shared'
 
-interface EditTagButtonProps {
-  tagId: string
+interface EditProjectRoleButtonProps {
+  roleId: string
 }
 
-export function EditTagButton({ tagId }: EditTagButtonProps) {
+export function EditProjectRoleButton({ roleId }: EditProjectRoleButtonProps) {
   const [isModalOpen, setIsModalOpened] = useState(false)
   const [value, setValue] = useState('')
 
-  const { mutate: editTag } = useEditTag()
+  const { mutate: editProjectRole } = useEditProjectRole()
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
     e.preventDefault()
 		
 		setIsModalOpened(false)
-    editTag({ id: tagId, name: value })
+    editProjectRole({ id: roleId, name: value })
     setValue('')
   }
 
@@ -29,11 +29,10 @@ export function EditTagButton({ tagId }: EditTagButtonProps) {
           setIsModalOpened(true)
         }}
       />
-      {/* вот тут бы спиннер на загрузку поставить */}
       <Modal isOpened={isModalOpen} onClose={() => setIsModalOpened(false)}>
-        <Card title='Изменение тега'>
+        <Card title='Изменение роли'>
           <form className={styles.form} onSubmit={handleSubmit}>
-            <input placeholder='Имя тега' value={value} onChange={e => setValue(e.target.value)} />
+            <input placeholder='Имя роли' value={value} onChange={e => setValue(e.target.value)} />
             <AgreeButton disabled={!value.trim()}>Подтвердить</AgreeButton>
           </form>
         </Card>
@@ -41,3 +40,4 @@ export function EditTagButton({ tagId }: EditTagButtonProps) {
     </>
   )
 }
+
