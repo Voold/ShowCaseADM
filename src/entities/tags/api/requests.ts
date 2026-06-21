@@ -18,8 +18,8 @@ export const createTag = async (payload: Omit<Tag, 'id'>): Promise<string> => {
   return data.tagId
 }
 
-export const editTag = async (id: string, payload: Omit<Tag, 'id'>): Promise<void> => {
-  const dtoPayload: Omit<TagDto, 'tagId'> = { tagName: payload.name }
+export const editTag = async (id: string, payload: Tag): Promise<void> => {
+  const dtoPayload: TagDto = { tagId: payload.id, tagName: payload.name }
   await api.put(ENDPOINTS.TAG_BY_ID(id), dtoPayload)
 }
 

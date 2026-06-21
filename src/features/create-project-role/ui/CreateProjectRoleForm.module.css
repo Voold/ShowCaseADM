@@ -1,0 +1,15 @@
+.form {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+
+  & input {
+    flex-grow: 1;
+		border: none;
+		background-color: var(--bg-color);
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
