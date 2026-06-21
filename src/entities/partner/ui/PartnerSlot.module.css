@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  background-color: var(--sec-color);
+}
+
+.clickable {
+  user-select: none;
+  cursor: pointer;
+
+  border-radius: 5px;
+  padding: 8px;
+
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--outline-color);
+  }
+
+  &:active {
+    background-color: color-mix(in srgb, var(--outline-color) 80%, transparent);
+  }
+}
+
+.mainInfo {
+  flex: 1;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: inherit;
+}
+
+.avatar {
+  aspect-ratio: 1;
+  height: 50px; 
+  flex-shrink: 0;
+}
+
+.name {
+  font-size: var(--h6);
+  font-weight: 700;
+  
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
