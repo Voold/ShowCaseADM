@@ -5,9 +5,10 @@ import { AgreeButton, Card, EditIcon, Modal } from '@/shared'
 
 interface EditTagButtonProps {
   tagId: string
+  groupId: string
 }
 
-export function EditTagButton({ tagId }: EditTagButtonProps) {
+export function EditTagButton({ tagId, groupId }: EditTagButtonProps) {
   const [isModalOpen, setIsModalOpened] = useState(false)
   const [value, setValue] = useState('')
 
@@ -17,7 +18,7 @@ export function EditTagButton({ tagId }: EditTagButtonProps) {
     e.preventDefault()
 		
 		setIsModalOpened(false)
-    editTag({ id: tagId, name: value })
+    editTag({ id: tagId, name: value, groupId: groupId})
     setValue('')
   }
 

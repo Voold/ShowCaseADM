@@ -11,6 +11,6 @@ export function UserProfileInfo({ userId, ...props }: UserProfileInfoProps) {
   if (isLoading) return <h2>Загрузка</h2>
   if (isError || !user) return <h2>Ошибка</h2>
 
-  const { bio, skills, experience } = user.meta
-  return <UserInfo email={user.email} bio={bio} skills={skills} experience={experience} {...props} />
+  const { bio, competencies, experience } = user.meta
+  return <UserInfo email={user.email} bio={bio} competencies={competencies.map(c => c.name)} experience={experience} {...props} />
 }

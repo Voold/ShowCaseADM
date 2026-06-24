@@ -20,6 +20,14 @@ export const mapUserDto = (dto: UserDto): User => {
     profilePicture: dto.profilePicture || defaultAvatar,
     meta: {
       name: `${dto.meta.lastName} ${dto.meta.firstName}`,
+      competencies: dto.meta.skills?.map(c => ({
+        id: c.roleTypeId,
+        name: c.roleTypeName,
+        skills: c.skills?.map(s => ({
+          id: s.skillId,
+          name: s.skillName
+        })) || []
+      })) || [],
       ...dto.meta
     },
     roles: mapRoles(dto.roles),

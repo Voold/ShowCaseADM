@@ -41,7 +41,7 @@ export function AddPartnerForm() {
             <p>{error}</p>
           </div>
         </div>
-        <AgreeButton className={styles.button} disabled={!name.trim() && !error} isLoading={isPending}>
+        <AgreeButton className={styles.button} disabled={!name.trim() || !!error} isLoading={isPending}>
           Создать
         </AgreeButton>
       </form>

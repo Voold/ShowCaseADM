@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { createTag, queryKeys, type Tag } from '@/entities/tags'
+import { createTag, queryKeys, type Tag } from '@/entities/tag'
 import { useToastsStore } from '@/entities/toast'
 import type { BackendError } from '@/shared'
 
@@ -13,8 +13,8 @@ export const useCreateTag = () => {
     onSuccess: (tagId, vars) => {
       const queryKey = queryKeys.tag(tagId)
       queryClient.setQueryData<Tag>(queryKey, { id: tagId, ...vars })
-      queryClient.invalidateQueries({queryKey: [...queryKeys.all, 'search']})
-      
+      queryClient.invalidateQueries({ queryKey: [...queryKeys.all, 'search'] })
+
       show({ status: 'success', title: 'Успех', description: `Тег "${vars.name}" успешно добавлен` })
     },
     onError: (error, vars) => {

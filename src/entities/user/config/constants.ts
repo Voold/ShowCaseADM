@@ -8,7 +8,7 @@ export const ROLES_TRANSLATIONS: Record<keyof UserDto['roles'], string> = {
   Curator: 'Куратор',
   Mentor: 'Ментор',
   Moderator: 'Модератор',
-  ROOP: 'РООП',
+  Roop: 'РООП',
   Teacher: 'Преподаватель'
 } as const
 
@@ -19,7 +19,7 @@ export const ROLE_WEIGHTS: Record<keyof UserDto['roles'], number> = {
   Curator: 1,
   Mentor: 1,
   Moderator: 1,
-  ROOP: 1,
+  Roop: 1,
   Teacher: 1,
 }
 
@@ -30,7 +30,7 @@ export const placeholderUser: User = {
   meta: {
     name: `Загрузка...`,
     bio: '',
-    skills: '',
+    competencies: [],
     experience: ''
   },
   roles: [{ type: 'Default', weight: ROLE_WEIGHTS.Default }],

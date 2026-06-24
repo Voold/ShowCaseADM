@@ -2,7 +2,14 @@
 export type User = UserBase & {
   meta: {
     bio: string
-    skills: string
+    competencies: {
+      id: string
+      name: string
+      skills: {
+        id: string
+        name: string
+      }[]
+    }[]
     experience: string
   }
   capabilities: string[] // по хорошему заменить на юнион
@@ -38,7 +45,14 @@ export type UserDto = {
     firstName: string
     lastName: string
     bio: string
-    skills: string
+    skills?: {
+      roleTypeId: string
+      roleTypeName: string
+      skills?: {
+        skillId: string
+        skillName: string
+      }[]
+    }[]
     experience: string
   }
   roles: {
@@ -60,7 +74,7 @@ export type UserDto = {
     // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     Moderator?: {},
     // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    ROOP?: {},
+    Roop?: {},
     // eslint-disable-next-line @typescript-eslint/no-empty-object-type
     Teacher?: {},
   }
