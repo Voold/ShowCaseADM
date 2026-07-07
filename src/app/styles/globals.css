@@ -1,6 +1,8 @@
 :root {
   font-family: 'Inter', serif;
   font-size: 16px;
+  color: var(--text-color);
+  background-color: var(--bg-color);
 }
 
 *,
@@ -52,7 +54,8 @@ h6 {
   font-weight: 400;
 }
 
-body, p {
+body,
+p {
   font-size: var(--p);
   font-weight: 400;
 }
@@ -84,13 +87,14 @@ button {
 
 input {
   font-family: inherit;
-  font-size: inherit;
-
-  background-color: var(--bg-color);
-  border-radius: 5px;
-  padding: 12px;
   font-size: 14px;
+  
   border: none;
-
   outline: none;
+
+  color: var(--text-color);
+  background-color: var(--bg-color);
+
+  padding: 12px;
+  border-radius: 5px;
 }

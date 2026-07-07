@@ -5,11 +5,11 @@ interface AgreeButtonProps extends ComponentPropsWithoutRef<'button'> {
   isLoading?: boolean
 }
 
-export const AgreeButton = ( {isLoading = false, disabled, className, children, ...props} : AgreeButtonProps) => {
+export const AgreeButton = ( {isLoading = false, disabled, className, children, type = 'submit', ...props} : AgreeButtonProps) => {
   return(
     <button 
       className={`${styles.button} ${disabled ? styles.disabled : ""} ${className ?? ""}`} 
-      type='submit'
+      type={type}
       {...props}
     >
       {isLoading ? "Загрузка..." : children}
