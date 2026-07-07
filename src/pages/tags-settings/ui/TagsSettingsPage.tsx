@@ -1,12 +1,16 @@
 import styles from './TagsSettingsPage.module.css'
 import { TagList } from '@/widgets/tag-list'
-import { CreateTagForm } from '@/features/create-tag'
+import { CreateTagForm } from '@/features/manage-tags'
+import { CreateTagGroupForm } from '@/features/manage-tag-groups'
 
 export function TagsSettingsPage() {
   return (
     <div className={styles.container}>
       <TagList />
-      <CreateTagForm />
+      <div className={styles.forms}>
+        <CreateTagForm />
+        <CreateTagGroupForm />
+      </div>
     </div>
   )
 }
