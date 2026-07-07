@@ -1,7 +1,7 @@
 import styles from './TagList.module.css'
-import { EditTagButton } from '@/features/edit-tag'
-import { RemoveTagButton } from '@/features/remove-tag'
-import { useTags } from '@/entities/tag'
+import { EditTagButton, RemoveTagButton } from '@/features/manage-tags'
+import { EditTagGroupButton, RemoveTagGroupButton } from '@/features/manage-tag-groups'
+import { TagGroupRow, TagRow, useTags } from '@/entities/tag'
 
 export function TagList() {
   const { data: tagGroups = [], isSuccess, isLoading, isError } = useTags()
@@ -14,20 +14,22 @@ export function TagList() {
         {isSuccess && tagGroups.length === 0 ? (
           <h3 className={styles.placeholder}>Ничего не нашлось!</h3>
         ) : (
-          tagGroups.map(group => (
-            <>
-              <p className={styles.groupName}>{group.name}</p>
-              {group.tags.map(tag => (
-                <div className={styles.tag} key={tag.id}>
-                  <p>{tag.name}</p>
-                  <div className={styles.tagActions}>
+          tagGroups
+            .filter(g => g.tags.length)
+            .map(group => (
+              <>
+                <TagGroupRow className={styles.groupRow} group={group}>
+                  <EditTagGroupButton groupId={group.id} />
+                  <RemoveTagGroupButton groupId={group.id} />
+                </TagGroupRow>
+                {group.tags.map(tag => (
+                  <TagRow tag={tag} key={tag.id}>
                     <EditTagButton tagId={tag.id} groupId={tag.groupId} />
                     <RemoveTagButton tagId={tag.id} />
-                  </div>
-                </div>
-              ))}
-            </>
-          ))
+                  </TagRow>
+                ))}
+              </>
+            ))
         )}
       </div>
     </div>
