@@ -1,6 +1,5 @@
 import styles from './ProjectRoleList.module.css'
-import { EditProjectRoleButton } from '@/features/edit-project-role'
-import { RemoveProjectRoleButton } from '@/features/remove-project-role-button'
+import { EditProjectRoleButton, RemoveProjectRoleButton } from '@/features/manage-project-roles'
 import { useProjectRoles } from '@/entities/project-role'
 
 export function ProjectRoleList() {
