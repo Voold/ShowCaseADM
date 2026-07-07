@@ -11,9 +11,7 @@ export const useRemoveTag = () => {
   return useMutation({
     mutationFn: (id: string) => removeTag(id),
     onSuccess: (_, id) => {
-      queryClient.removeQueries({ queryKey: queryKeys.tag(id) })
-      queryClient.invalidateQueries({ queryKey: [...queryKeys.all, 'search'] })
-
+      queryClient.invalidateQueries({ queryKey: queryKeys.all })
       show({ status: 'success', title: 'Успех', description: `Тег с ID ${id} удалён` })
     },
     onError: (error, id) => {

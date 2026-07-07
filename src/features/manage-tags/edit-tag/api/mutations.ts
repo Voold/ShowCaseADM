@@ -10,9 +10,7 @@ export const useEditTag = () => {
   return useMutation({
     mutationFn: (newTag: Tag) => editTag(newTag.id, newTag),
     onSuccess: (_, newTag) => {
-      queryClient.setQueryData(queryKeys.tag(newTag.id), newTag)
-      queryClient.invalidateQueries({ queryKey: [...queryKeys.all, 'search'] })
-
+      queryClient.invalidateQueries({ queryKey: queryKeys.all })
       show({ status: 'success', title: 'Успех', description: `Тег с ID ${newTag.id} обновлён` })
     },
     onError: (error, { id }) => {

@@ -13,7 +13,7 @@ export const useCreateTag = () => {
     onSuccess: (tagId, vars) => {
       const queryKey = queryKeys.tag(tagId)
       queryClient.setQueryData<Tag>(queryKey, { id: tagId, ...vars })
-      queryClient.invalidateQueries({ queryKey: [...queryKeys.all, 'search'] })
+      queryClient.invalidateQueries({ queryKey: [...queryKeys.all] })
 
       show({ status: 'success', title: 'Успех', description: `Тег "${vars.name}" успешно добавлен` })
     },
