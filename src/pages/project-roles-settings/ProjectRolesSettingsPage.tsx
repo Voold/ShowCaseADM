@@ -1,6 +1,6 @@
 import styles from './ProjectRolesSettingsPage.module.css'
 import { ProjectRoleList } from '@/widgets/project-role-list'
-import { CreateProjectRoleForm } from '@/features/create-project-role'
+import { CreateProjectRoleForm } from '@/features/manage-project-roles'
 
 export function ProjectRolesSettingsPage() {
 	return (
