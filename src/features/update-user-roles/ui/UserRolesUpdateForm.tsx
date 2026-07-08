@@ -1,6 +1,8 @@
+import { useState } from 'react'
 import styles from './UserRolesUpdateForm.module.css'
 import { useRemoveUserRole, useSetUserRole } from '../api/mutations'
 import { ROLES_TRANSLATIONS, useUserById, type UserRole } from '@/entities/user'
+import { ConfirmModal } from '@/shared'
 
 interface UserRolesUpdateFormProps {
   userId: string
@@ -15,19 +17,20 @@ export function UserRolesUpdateForm({ userId }: UserRolesUpdateFormProps) {
   const { mutate: setRoleMutate, isPending: isSetPending } = useSetUserRole()
   const { mutate: removeRoleMutate, isPending: isRemovePending } = useRemoveUserRole()
 
+  const [changingRole, setChangingRole] = useState<{ role: UserRole['type']; isActive: boolean } | null>(null)
+
   const handleRoleChange = (roleName: UserRole['type'], isActive: boolean) => {
     if (!isActive) {
-      if (!confirm(`Вы точно хотите добавить роль "${ROLES_TRANSLATIONS[roleName]}?"`)) return
       switch (roleName) {
         case 'Student': {
           const course = prompt('Введите курс обучения студента')
-          if (!course) return
+          if (!course) break
 
           const school = prompt('Введите инженерную школу обучающегося')
-          if (!school) return
+          if (!school) break
 
           const group = prompt('Введите номер группы студента')
-          if (!group) return
+          if (!group) break
 
           setRoleMutate({ userId: userId, type: roleName, payload: { course, school, meta: { group } } })
           break
@@ -37,9 +40,9 @@ export function UserRolesUpdateForm({ userId }: UserRolesUpdateFormProps) {
         }
       }
     } else {
-      if (!confirm(`Вы точно хотите удалить роль "${ROLES_TRANSLATIONS[roleName]}?"`)) return
       removeRoleMutate({ userId: userId, type: roleName })
     }
+    setChangingRole(null)
   }
 
   const roleItems = Object.keys(ROLES_TRANSLATIONS).map(role => {
@@ -49,7 +52,7 @@ export function UserRolesUpdateForm({ userId }: UserRolesUpdateFormProps) {
       <li
         key={role}
         className={`${styles.item} ${isActive && styles.active}`}
-        onClick={() => handleRoleChange(roleType, isActive)}
+        onClick={() => setChangingRole({ role: roleType, isActive: isActive })}
       >
         {ROLES_TRANSLATIONS[roleType]}
       </li>
@@ -59,9 +62,13 @@ export function UserRolesUpdateForm({ userId }: UserRolesUpdateFormProps) {
   return (
     <aside className={styles.container}>
       <p className={styles.title}>Роли пользователя</p>
-      <ul className={styles.list}>
-        {isSetPending || isRemovePending ? <h5>Загрузка...</h5> : roleItems}
-      </ul>
+      <ul className={styles.list}>{isSetPending || isRemovePending ? <h5>Загрузка...</h5> : roleItems}</ul>
+      <ConfirmModal
+        isOpened={changingRole !== null}
+        isPending={isSetPending || isRemovePending}
+        onSubmit={() => handleRoleChange(changingRole!.role, changingRole!.isActive)}
+        onReject={() => setChangingRole(null)}
+      />
     </aside>
   )
 }
