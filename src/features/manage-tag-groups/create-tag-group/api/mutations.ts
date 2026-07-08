@@ -20,7 +20,7 @@ export const useCreateTagGroup = () => {
     onError: (error, vars) => {
       const isBackendError = axios.isAxiosError<BackendError>(error) && error.response
       const message = isBackendError ? error.response?.data.msg : error.message
-      show({ status: 'error', title: 'Ошибка', description: `Произошла ошибка при создании группы "${vars.name}": ${message}"` })
+      show({ status: 'error', title: 'Ошибка', description: `Произошла ошибка при создании группы "${vars.name}": ${message}` })
     }
   })
 }

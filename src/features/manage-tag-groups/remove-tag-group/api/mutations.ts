@@ -17,7 +17,7 @@ export const useRemoveTagGroup = () => {
     onError: (error, id) => {
       const isBackendError = axios.isAxiosError<BackendError>(error) && error.response
       const message = isBackendError ? error.response?.data.msg : error.message
-      show({ status: 'error', title: 'Ошибка', description: `Произошла ошибка при удалении группы с ID ${id}: ${message}"` })
+      show({ status: 'error', title: 'Ошибка', description: `Произошла ошибка при удалении группы с ID ${id}: ${message}` })
     }
   })
 }
