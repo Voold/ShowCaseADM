@@ -14,7 +14,7 @@ export const QuickActionsUsers = () => {
   const { data, isLoading, isError } = useUsersByName(query.toLowerCase(), 0, 5, !!query)
   const users = data?.users.filter(user => !chosenUsers.includes(user)) || []
   
-  const { mutate: setRoleMutate } = useSetUserRole()
+  const { mutate: setRoleMutate, isPending } = useSetUserRole()
   
   const renderUserList = () => {
     if (isLoading) return <h6>Загрузка...</h6>
@@ -57,7 +57,7 @@ export const QuickActionsUsers = () => {
         ))}
       </div>
 
-      <AgreeButton disabled={chosenUsers.length === 0} onClick={handleSubmit}>Подтвердить</AgreeButton>
+      <AgreeButton disabled={chosenUsers.length === 0} onClick={handleSubmit} isLoading={isPending}>Подтвердить</AgreeButton>
     </Card>
   )
 }

@@ -8,17 +8,17 @@ interface RemoveTagButtonProps {
 
 export function RemoveTagButton({ tagId }: RemoveTagButtonProps) {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const { mutate: removeTag } = useRemoveTag()
-
-  const handleRemoveTag = () => {
-    setIsModalOpen(false)
-    removeTag(tagId)
-  }
+  const { mutate: removeTag, isPending } = useRemoveTag()
 
   return (
     <>
-      <CloseButton onClick={() => setIsModalOpen(true)} /> {/* вот тут бы спиннер на загрузку поставить */}
-      <ConfirmModal isOpened={isModalOpen} onSubmit={handleRemoveTag} onReject={() => setIsModalOpen(false)} />
+      <CloseButton onClick={() => setIsModalOpen(true)} />
+      <ConfirmModal
+        isOpened={isModalOpen}
+        isPending={isPending}
+        onSubmit={() => removeTag(tagId, { onSettled: () => setIsModalOpen(false) })}
+        onReject={() => setIsModalOpen(false)}
+      />
     </>
   )
 }
