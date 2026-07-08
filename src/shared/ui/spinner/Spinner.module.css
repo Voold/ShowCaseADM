@@ -1,0 +1,28 @@
+.spinner {
+	--size: 50px;
+
+  display: flex;
+  justify-content: center;
+
+	width: var(--size);
+	aspect-ratio: 1;
+
+	animation: spin_clockwise 1s cubic-bezier(0.7, 0.3, 0.3, 0.7) infinite;
+
+  &::after {
+    content: '';
+  
+    width: 100%;
+		aspect-ratio: 1;
+		border: calc(var(--size) / 5) solid var(--text-color);
+  
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+  }
+}
+
+@keyframes spin_clockwise {
+  to {
+		rotate: 1turn;
+	}
+}
