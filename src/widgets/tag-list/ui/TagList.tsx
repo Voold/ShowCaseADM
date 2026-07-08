@@ -14,22 +14,20 @@ export function TagList() {
         {isSuccess && tagGroups.length === 0 ? (
           <h3 className={styles.placeholder}>Ничего не нашлось!</h3>
         ) : (
-          tagGroups
-            .filter(g => g.tags.length)
-            .map(group => (
-              <>
-                <TagGroupRow className={styles.groupRow} group={group}>
-                  <EditTagGroupButton groupId={group.id} />
-                  <RemoveTagGroupButton groupId={group.id} />
-                </TagGroupRow>
-                {group.tags.map(tag => (
-                  <TagRow tag={tag} key={tag.id}>
-                    <EditTagButton tagId={tag.id} groupId={tag.groupId} />
-                    <RemoveTagButton tagId={tag.id} />
-                  </TagRow>
-                ))}
-              </>
-            ))
+          tagGroups.map(group => (
+            <>
+              <TagGroupRow className={styles.groupRow} group={group}>
+                <EditTagGroupButton groupId={group.id} />
+                <RemoveTagGroupButton groupId={group.id} />
+              </TagGroupRow>
+              {group.tags.map(tag => (
+                <TagRow tag={tag} key={tag.id}>
+                  <EditTagButton tagId={tag.id} groupId={tag.groupId} />
+                  <RemoveTagButton tagId={tag.id} />
+                </TagRow>
+              ))}
+            </>
+          ))
         )}
       </div>
     </div>
