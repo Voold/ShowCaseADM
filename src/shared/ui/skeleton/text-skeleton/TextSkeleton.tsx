@@ -8,6 +8,6 @@ interface TextSkeletonProps {
 
 export function TextSkeleton({ className, rows = 1 }: TextSkeletonProps) {
   return Array.from({ length: rows }, (_, i) => (
-    <div className={`${s2.skeleton} ${s1.text} ${i + 1 === rows ? s1.short : ''} ${className ?? ''}`} key={i} />
+    <div className={`${s2.skeleton} ${s1.text} ${i + 1 === rows && rows !== 1 ? s1.short : ''} ${className ?? ''}`} key={i} />
   ))
 }

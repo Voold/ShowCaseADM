@@ -19,30 +19,43 @@
 }
 
 .userList {
+  visibility: hidden;
+
   position: absolute;
   translate: 0 100%;
   bottom: -5px;
 
   width: 100%;
-  visibility: hidden;
+  min-height: calc(6em + 48px);
   z-index: 2;
+
+  gap: 5px;
+
+  &.loading {
+    gap: 10px;
+  }
 }
 
+.skeleton {
+  height: 2em;
+}
 
 .user {
   display: flex;
   justify-content: start;
-
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 
   padding: 10px;
   border-radius: 5px;
 
   &:hover {
     background-color: var(--outline-color);
+  }
+
+  & p {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -63,14 +76,14 @@
 
 .chosenUser {
   height: max-content;
-  
+
   display: flex;
   align-items: center;
   gap: 5px;
-  
+
   padding: 10px;
   border-radius: 5px;
-  
+
   background-color: var(--green-20pr);
 }
 
@@ -81,9 +94,10 @@
   aspect-ratio: 1;
   height: 15px;
 
-  &::after, &::before {
-    content: "";
-    
+  &::after,
+  &::before {
+    content: '';
+
     position: absolute;
     top: 50%;
     left: 0;

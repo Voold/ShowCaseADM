@@ -5,7 +5,7 @@ import { getTagGroups, getTags } from "./requests"
 export const useTags = () => {
 	return useQuery({
 		queryKey: queryKeys.all,
-		queryFn: () => getTags(),
+		queryFn: getTags,
 		staleTime: 60 * 1000 // 1 min
 	})
 }
@@ -13,7 +13,7 @@ export const useTags = () => {
 export const useTagGroups = () => {
 	return useQuery({
 		queryKey: queryKeys.groups(),
-		queryFn: () => getTagGroups(),
+		queryFn: getTagGroups,
 		staleTime: 60 * 1000
 	})
 }

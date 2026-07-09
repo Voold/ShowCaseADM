@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styles from './CreateTagForm.module.css'
 import { useCreateTag } from '../api/mutations'
 import { TagGroupRow, useTagGroups, type TagGroup } from '@/entities/tag'
-import { AgreeButton, Card, FloatingList } from '@/shared'
+import { AgreeButton, Card, FloatingList, TextSkeleton } from '@/shared'
 
 export function CreateTagForm() {
   const { mutate: createTag, isPending } = useCreateTag()
@@ -31,7 +31,7 @@ export function CreateTagForm() {
   }
 
   const renderGroupList = () => {
-    if (isLoading) return <h6>Загрузка...</h6>
+    if (isLoading) return Array.from({ length: 3 }, (_, i) => <TextSkeleton className={styles.groupSkeleton} key={i} />)
     if (isError) return <h6>Произошла ошибка :P</h6>
     return tagGroups.map(group => <TagGroupRow className={styles.groupRow} group={group} key={group.id} onClick={() => handleChooseGroup(group)} />)
   }

@@ -1,4 +1,5 @@
 import styles from './TagList.module.css'
+import { TagGroupSkeleton } from './skeleton/TagGroupSkeleton'
 import { EditTagButton, RemoveTagButton } from '@/features/manage-tags'
 import { EditTagGroupButton, RemoveTagGroupButton } from '@/features/manage-tag-groups'
 import { TagGroupRow, TagRow, useTags } from '@/entities/tag'
@@ -8,8 +9,8 @@ export function TagList() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.list}>
-        {isLoading && <h3 className={styles.placeholder}>Загрузка...</h3>}
+      <div className={`${styles.list} ${isLoading ? styles.loading : ''}`}>
+        {isLoading && Array.from({ length: 3 }, (_, i) => <TagGroupSkeleton key={i} />)}
         {isError && <h3 className={styles.placeholder}>Произошла ошибка :P</h3>}
         {isSuccess && tagGroups.length === 0 ? (
           <h3 className={styles.placeholder}>Ничего не нашлось!</h3>
