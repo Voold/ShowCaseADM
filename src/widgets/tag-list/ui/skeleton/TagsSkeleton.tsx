@@ -1,7 +1,7 @@
-import styles from './TagGroupSkeleton.module.css'
+import styles from './TagsSkeleton.module.css'
 import { TagGroupRowSkeleton, TagRowSkeleton } from '@/entities/tag'
 
-export function TagGroupSkeleton() {
+export function TagsSkeleton() {
   return (
     <div className={styles.container}>
       <TagGroupRowSkeleton />

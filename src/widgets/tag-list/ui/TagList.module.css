@@ -43,7 +43,8 @@
   will-change: transform;
 
   &.loading {
-    gap: 15px;
+    margin-top: 5px;
+    gap: 20px;
   }
 
   &::-webkit-scrollbar {
