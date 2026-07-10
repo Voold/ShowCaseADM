@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import OpenIcon from '../assets/up.svg?react'
 import styles from './UsersList.module.css'
-import { getHighestRole, ROLES_TRANSLATIONS, UserSlot, useUsersByName } from '@/entities/user'
+import { getHighestRole, ROLES_TRANSLATIONS, UserSlot, UserSlotSkeleton, useUsersByName } from '@/entities/user'
 import { DynamicList, useQueryFilters, useQuerySync } from '@/shared'
 
 const UsersList = () => {
@@ -22,7 +22,7 @@ const UsersList = () => {
       setSearchQuery={setLocalQuery}
       placeholder={'Найти пользователя...'}
     >
-      {isLoading && <h3 className={styles.placeholder}>Загрузка...</h3>}
+      {isLoading && Array.from({ length: 5 }, (_, i) => <UserSlotSkeleton isClickable={true} key={i} />)}
       {isError && <h3 className={styles.placeholder}>Произошла ошибка :P</h3>}
       {isSuccess && users.length === 0 ? (
         <h3 className={styles.placeholder}>Ничего не нашлось!</h3>
@@ -31,7 +31,7 @@ const UsersList = () => {
           <Link key={user.id} to={`/user/${user.id}`} className={styles.link}>
             <UserSlot className={styles.userSlot} user={user} onClick={() => {}}>
               <span
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault()
                   e.stopPropagation()
                   window.location.href = `mailto:${user.email}`
@@ -42,9 +42,7 @@ const UsersList = () => {
                 <OpenIcon className={styles.openIcon} />
               </span>
               <div className={styles.roleWrapper}>
-                <p
-                  className={`${styles.role} ${user.roles.some(role => role.type === 'Admin') ? styles.active : styles.inactive}`}
-                >
+                <p className={`${styles.role} ${user.roles.some(role => role.type === 'Admin') ? styles.active : styles.inactive}`}>
                   {ROLES_TRANSLATIONS[getHighestRole(user.roles).type]}
                 </p>
               </div>

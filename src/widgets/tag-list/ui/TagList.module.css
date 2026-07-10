@@ -42,6 +42,11 @@
   scrollbar-color: var(--outline-color) transparent;
   will-change: transform;
 
+  &.loading {
+    margin-top: 5px;
+    gap: 20px;
+  }
+
   &::-webkit-scrollbar {
     width: 6px;
   }

@@ -11,14 +11,19 @@ export function EditProjectRoleButton({ roleId }: EditProjectRoleButtonProps) {
   const [isModalOpen, setIsModalOpened] = useState(false)
   const [value, setValue] = useState('')
 
-  const { mutate: editProjectRole } = useEditProjectRole()
+  const { mutate: editProjectRole, isPending } = useEditProjectRole()
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
     e.preventDefault()
-		
-		setIsModalOpened(false)
-    editProjectRole({ id: roleId, name: value })
-    setValue('')
+    editProjectRole(
+      { id: roleId, name: value },
+      {
+        onSettled: () => {
+          setIsModalOpened(false)
+          setValue('')
+        }
+      }
+    )
   }
 
   return (
@@ -33,11 +38,12 @@ export function EditProjectRoleButton({ roleId }: EditProjectRoleButtonProps) {
         <Card title='Изменение роли'>
           <form className={styles.form} onSubmit={handleSubmit}>
             <input placeholder='Имя роли' value={value} onChange={e => setValue(e.target.value)} />
-            <AgreeButton disabled={!value.trim()}>Подтвердить</AgreeButton>
+            <AgreeButton isLoading={isPending} disabled={!value.trim()}>
+              Подтвердить
+            </AgreeButton>
           </form>
         </Card>
       </Modal>
     </>
   )
 }
-

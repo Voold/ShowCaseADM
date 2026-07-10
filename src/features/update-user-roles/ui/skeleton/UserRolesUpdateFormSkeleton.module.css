@@ -1,0 +1,16 @@
+.role {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	padding: 12px;
+  border-radius: 5px;
+	background-color: color-mix(in srgb, var(--black-color) 20%, transparent);
+}
+
+.text {
+	height: 1.2em;
+	&:last-child {
+		width: 6.5%;
+	}
+}

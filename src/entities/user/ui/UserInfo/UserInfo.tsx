@@ -9,6 +9,7 @@ interface UserInfoProps extends ComponentPropsWithoutRef<'div'> {
 }
 
 export function UserInfo({ email, bio, competencies, experience, className, ...props }: UserInfoProps) {
+  console.log(competencies)
   return (
     <div className={`${styles.container} ${className ?? ''}`} {...props}>
       <p className={styles.title}>Почта:</p>
@@ -16,7 +17,7 @@ export function UserInfo({ email, bio, competencies, experience, className, ...p
       <p className={styles.title}>Биография:</p>
       {bio || 'Нет'}
       <p className={styles.title}>Скиллы:</p>
-      {competencies ? competencies.join(", ") : 'Нет'}
+      {competencies && competencies.length ? competencies.join(", ") : 'Нет'}
       <p className={styles.title}>Опыт:</p>
       {experience || 'Нет'}
     </div>

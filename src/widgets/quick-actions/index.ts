@@ -1,3 +1,3 @@
-export { QuickActionsUsers } from './ui/QuickActionsUsers'
+export { QuickActionsUsers } from './ui/users/QuickActionsUsers'
 export { QuickActionsProjects } from './ui/QuickActionsProjects'
 

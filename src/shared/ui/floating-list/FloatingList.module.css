@@ -1,7 +1,7 @@
 .list {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
 
   border: var(--outline-color) solid 4px;
   border-radius: 7px;

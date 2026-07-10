@@ -1,5 +1,5 @@
 import styles from './PartnerList.module.css'
-import { PartnerSlot, usePartnersByName } from '@/entities/partner'
+import { PartnerSlot, PartnerSlotSkeleton, usePartnersByName } from '@/entities/partner'
 import { DynamicList, useQueryFilters, useQuerySync } from '@/shared'
 
 export function PartnerList() {
@@ -21,7 +21,7 @@ export function PartnerList() {
       placeholder={'Найти партнёра...'}
       className={styles.container}
     >
-      {isLoading && <h3 className={styles.placeholder}>Загрузка...</h3>}
+      {isLoading && Array.from({ length: 3 }, (_, i) => <PartnerSlotSkeleton key={i} isClickable={true} />)}
       {isError && <h3 className={styles.placeholder}>Произошла ошибка :P</h3>}
       {isSuccess && partners.length === 0 ? (
         <h3 className={styles.placeholder}>Ничего не нашлось!</h3>

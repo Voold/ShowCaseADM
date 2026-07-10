@@ -12,3 +12,12 @@
   display: flex;
   gap: 7px;
 }
+
+.skeleton {
+  width: 35%;
+  height: 1.2em;
+
+  &:last-child {
+    width: 5%;
+  }
+}

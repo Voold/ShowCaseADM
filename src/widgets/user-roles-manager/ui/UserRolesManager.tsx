@@ -1,6 +1,6 @@
 import styles from './UserRolesManager.module.css'
-import { UserRolesUpdateForm } from '@/features/update-user-roles'
-import { UserSlot, useUserById } from '@/entities/user'
+import { UserRolesUpdateForm, UserRolesUpdateFormSkeleton } from '@/features/update-user-roles'
+import { UserSlot, UserSlotSkeleton, useUserById } from '@/entities/user'
 
 interface UserRolesManagerProps {
   userId: string
@@ -9,13 +9,19 @@ interface UserRolesManagerProps {
 export function UserRolesManager({ userId }: UserRolesManagerProps) {
   const { data: user, isLoading, isError } = useUserById(userId)
 
-  if (isLoading) return <h2>Загрузка...</h2>
+  if (isLoading)
+    return (
+      <div className={styles.container}>
+        <UserSlotSkeleton className={styles.slot} />
+        <UserRolesUpdateFormSkeleton />
+      </div>
+    )
   if (isError || !user) return <h2>Произошла ошибка :P</h2>
 
-	return (
-		<div className={styles.container}>
-			<UserSlot className={styles.slot} user={user} />
-			<UserRolesUpdateForm userId={userId} />
-		</div>
-	)
+  return (
+    <div className={styles.container}>
+      <UserSlot className={styles.slot} user={user} />
+      <UserRolesUpdateForm userId={userId} />
+    </div>
+  )
 }

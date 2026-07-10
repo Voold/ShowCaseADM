@@ -3,10 +3,20 @@
   border-radius: 5px;
   padding: 5px 40px;
   width: fit-content;
+
+  & .spinner {
+    --size: 20px;
+  }
 }
 
 .disabled {
   background-color: var(--grey-40pr);
-  pointer-events: none;
-  color: var(--blue-grey-color)
+  cursor: default;
+  color: var(--blue-grey-color);
+}
+
+.loading {
+  color: var(--text-color);
+  cursor: default;
+  background-color: var(--green-20pr);
 }

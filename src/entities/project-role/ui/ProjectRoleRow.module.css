@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background-color: var(--sec-color);
+  border-radius: 5px;
+}
+
+.actions {
+  display: flex;
+  gap: 7px;
+}
+
+.skeleton {
+  width: 35%;
+  height: 1.2em;
+
+  &:last-child {
+    width: 5%;
+  }
+}

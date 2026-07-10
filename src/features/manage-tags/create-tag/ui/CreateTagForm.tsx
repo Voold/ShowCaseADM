@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styles from './CreateTagForm.module.css'
 import { useCreateTag } from '../api/mutations'
 import { TagGroupRow, useTagGroups, type TagGroup } from '@/entities/tag'
-import { AgreeButton, Card, FloatingList } from '@/shared'
+import { AgreeButton, Card, FloatingList, TextSkeleton } from '@/shared'
 
 export function CreateTagForm() {
   const { mutate: createTag, isPending } = useCreateTag()
@@ -15,10 +15,15 @@ export function CreateTagForm() {
 
   const handleCreateTag = (e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
     e.preventDefault()
-    createTag({ name: tagName, groupId: chosenGroup.id })
-
-    setTagName('')
-    setChosenGroup({ id: '', name: '' })
+    createTag(
+      { name: tagName, groupId: chosenGroup.id },
+      {
+        onSuccess: () => {
+          setTagName('')
+          setChosenGroup({ id: '', name: '' })
+        }
+      }
+    )
   }
 
   const handleChooseGroup = (group: Omit<TagGroup, 'tags'>) => {
@@ -31,7 +36,7 @@ export function CreateTagForm() {
   }
 
   const renderGroupList = () => {
-    if (isLoading) return <h6>Загрузка...</h6>
+    if (isLoading) return Array.from({ length: 3 }, (_, i) => <TextSkeleton className={styles.groupSkeleton} key={i} />)
     if (isError) return <h6>Произошла ошибка :P</h6>
     return tagGroups.map(group => <TagGroupRow className={styles.groupRow} group={group} key={group.id} onClick={() => handleChooseGroup(group)} />)
   }
@@ -46,7 +51,7 @@ export function CreateTagForm() {
           </div>
           {isListVisible && <FloatingList className={styles.list}>{renderGroupList()}</FloatingList>}
         </div>
-        <AgreeButton className={styles.button} disabled={!tagName.trim() || !chosenGroup.id.trim()} isLoading={isPending}>
+        <AgreeButton className={styles.button} disabled={isPending || !tagName.trim() || !chosenGroup.id.trim()} isLoading={isPending}>
           Создать
         </AgreeButton>
       </form>
