@@ -11,6 +11,12 @@
 
 .disabled {
   background-color: var(--grey-40pr);
-  pointer-events: none;
+  cursor: default;
   color: var(--blue-grey-color);
+}
+
+.loading {
+  color: var(--text-color);
+  cursor: default;
+  background-color: var(--green-20pr);
 }

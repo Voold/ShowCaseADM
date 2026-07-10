@@ -15,10 +15,15 @@ export function CreateTagForm() {
 
   const handleCreateTag = (e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
     e.preventDefault()
-    createTag({ name: tagName, groupId: chosenGroup.id })
-
-    setTagName('')
-    setChosenGroup({ id: '', name: '' })
+    createTag(
+      { name: tagName, groupId: chosenGroup.id },
+      {
+        onSuccess: () => {
+          setTagName('')
+          setChosenGroup({ id: '', name: '' })
+        }
+      }
+    )
   }
 
   const handleChooseGroup = (group: Omit<TagGroup, 'tags'>) => {
@@ -46,7 +51,7 @@ export function CreateTagForm() {
           </div>
           {isListVisible && <FloatingList className={styles.list}>{renderGroupList()}</FloatingList>}
         </div>
-        <AgreeButton className={styles.button} disabled={!tagName.trim() || !chosenGroup.id.trim()} isLoading={isPending}>
+        <AgreeButton className={styles.button} disabled={isPending || !tagName.trim() || !chosenGroup.id.trim()} isLoading={isPending}>
           Создать
         </AgreeButton>
       </form>

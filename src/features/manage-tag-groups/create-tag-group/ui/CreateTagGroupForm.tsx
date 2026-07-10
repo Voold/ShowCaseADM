@@ -9,9 +9,7 @@ export function CreateTagGroupForm() {
 
   const handleCreateGroup = (e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
     e.preventDefault()
-    
-    createTagGroup({ name: groupName })
-    setGroupName('')
+    createTagGroup({ name: groupName }, { onSuccess: () => setGroupName('') })
   }
 
   return (
