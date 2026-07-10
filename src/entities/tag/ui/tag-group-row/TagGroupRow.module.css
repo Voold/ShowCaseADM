@@ -9,3 +9,11 @@
   display: flex;
   gap: 7px;
 }
+
+.skeleton {
+  width: 50%;
+
+  &:last-child {
+    width: 5%;
+  }
+}

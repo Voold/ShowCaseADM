@@ -5,6 +5,7 @@ export function ProjectRoleRowSkeleton() {
   return (
     <div className={styles.container}>
       <TextSkeleton className={styles.skeleton} />
+      <TextSkeleton className={styles.skeleton} />
     </div>
   )
 }
