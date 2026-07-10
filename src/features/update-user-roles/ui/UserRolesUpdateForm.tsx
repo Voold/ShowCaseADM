@@ -9,9 +9,8 @@ interface UserRolesUpdateFormProps {
 }
 
 export function UserRolesUpdateForm({ userId }: UserRolesUpdateFormProps) {
-  const { data: user, isLoading, isError } = useUserById(userId)
+  const { data: user, isError } = useUserById(userId)
 
-  if (isLoading) return <h2>Загрузка...</h2>
   if (isError || !user) return <h2>Произошла ошибка :P</h2>
 
   const { mutate: setRoleMutate, isPending: isSetPending } = useSetUserRole()
@@ -36,13 +35,12 @@ export function UserRolesUpdateForm({ userId }: UserRolesUpdateFormProps) {
           break
         }
         default: {
-          setRoleMutate({ userId: userId, type: roleName, payload: {} })
+          setRoleMutate({ userId: userId, type: roleName, payload: {} }, {onSettled: () => setChangingRole(null)})
         }
       }
     } else {
-      removeRoleMutate({ userId: userId, type: roleName })
+      removeRoleMutate({ userId: userId, type: roleName }, {onSettled: () => setChangingRole(null)})
     }
-    setChangingRole(null)
   }
 
   const roleItems = Object.keys(ROLES_TRANSLATIONS).map(role => {
@@ -62,7 +60,7 @@ export function UserRolesUpdateForm({ userId }: UserRolesUpdateFormProps) {
   return (
     <aside className={styles.container}>
       <p className={styles.title}>Роли пользователя</p>
-      <ul className={styles.list}>{isSetPending || isRemovePending ? <h5>Загрузка...</h5> : roleItems}</ul>
+      <ul className={styles.list}>{roleItems}</ul>
       <ConfirmModal
         isOpened={changingRole !== null}
         isPending={isSetPending || isRemovePending}
