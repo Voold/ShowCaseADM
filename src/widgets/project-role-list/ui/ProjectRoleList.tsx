@@ -1,23 +1,23 @@
 import styles from './ProjectRoleList.module.css'
 import { EditProjectRoleButton, RemoveProjectRoleButton } from '@/features/manage-project-roles'
-import { ProjectRoleRow, ProjectRoleRowSkeleton, useProjectRoles } from '@/entities/project-role'
+import { ProjectRoleTypeRow, ProjectRoleTypeRowSkeleton, useProjectRoleTypes } from '@/entities/project-role-type'
 
 export function ProjectRoleList() {
-  const { data: projectRoles = [], isSuccess, isLoading, isError } = useProjectRoles()
+  const { data: projectRoleTypes = [], isSuccess, isLoading, isError } = useProjectRoleTypes()
 
   return (
     <div className={styles.container}>
       <div className={styles.list}>
-        {isLoading && Array.from({ length: 5 }, (_, i) => <ProjectRoleRowSkeleton key={i} />)}
+        {isLoading && Array.from({ length: 5 }, (_, i) => <ProjectRoleTypeRowSkeleton key={i} />)}
         {isError && <h3 className={styles.placeholder}>Произошла ошибка :P</h3>}
-        {isSuccess && projectRoles.length === 0 ? (
+        {isSuccess && projectRoleTypes.length === 0 ? (
           <h3 className={styles.placeholder}>Ничего не нашлось!</h3>
         ) : (
-          projectRoles.map(role => (
-            <ProjectRoleRow projectRole={role} key={role.id}>
-              <EditProjectRoleButton roleId={role.id} />
-              <RemoveProjectRoleButton roleId={role.id} />
-            </ProjectRoleRow>
+          projectRoleTypes.map(roleType => (
+            <ProjectRoleTypeRow roleType={roleType} key={roleType.id}>
+              <EditProjectRoleButton roleId={roleType.id} />
+              <RemoveProjectRoleButton roleId={roleType.id} />
+            </ProjectRoleTypeRow>
           ))
         )}
       </div>

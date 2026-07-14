@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { queryKeys, removeProjectRole } from '@/entities/project-role'
+import { projectRoleTypeQueryKeys, removeProjectRoleType } from '@/entities/project-role-type'
 import { useToastsStore } from '@/entities/toast'
 import type { BackendError } from '@/shared'
 
@@ -9,10 +9,10 @@ export const useRemoveTag = () => {
   const { show } = useToastsStore()
 
   return useMutation({
-    mutationFn: (id: string) => removeProjectRole(id),
+    mutationFn: (id: string) => removeProjectRoleType(id),
     onSuccess: (_, id) => {
-      queryClient.removeQueries({ queryKey: queryKeys.projectRole(id) })
-      queryClient.invalidateQueries({ queryKey: queryKeys.search })
+      queryClient.removeQueries({ queryKey: projectRoleTypeQueryKeys.type(id) })
+      queryClient.invalidateQueries({ queryKey: projectRoleTypeQueryKeys.search })
 
       show({ status: 'success', title: 'Успех', description: `Роль с ID ${id} удалена` })
     },

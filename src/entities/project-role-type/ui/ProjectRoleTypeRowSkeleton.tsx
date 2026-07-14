@@ -1,7 +1,7 @@
-import styles from './ProjectRoleRow.module.css'
+import styles from './ProjectRoleTypeRow.module.css'
 import { TextSkeleton } from '@/shared'
 
-export function ProjectRoleRowSkeleton() {
+export function ProjectRoleTypeRowSkeleton() {
   return (
     <div className={styles.container}>
       <TextSkeleton className={styles.skeleton} />
