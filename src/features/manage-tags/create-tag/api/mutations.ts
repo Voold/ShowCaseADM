@@ -10,17 +10,14 @@ export const useCreateTag = () => {
 
   return useMutation({
     mutationFn: (payload: Omit<Tag, 'id'>) => createTag(payload),
-    onSuccess: (tagId, vars) => {
-      const queryKey = queryKeys.tag(tagId)
-      queryClient.setQueryData<Tag>(queryKey, { id: tagId, ...vars })
-      queryClient.invalidateQueries({ queryKey: [...queryKeys.all] })
-
-      show({ status: 'success', title: 'Успех', description: `Тег "${vars.name}" успешно добавлен` })
+    onSuccess: (_, { name }) => {
+      queryClient.invalidateQueries({ queryKey: queryKeys.all })
+      show({ status: 'success', title: 'Успех', description: `Тег "${name}" успешно добавлен` })
     },
-    onError: (error, vars) => {
+    onError: (error, { name }) => {
       const isBackendError = axios.isAxiosError<BackendError>(error) && error.response
       const message = isBackendError ? error.response?.data.msg : error.message
-      show({ status: 'error', title: 'Ошибка', description: `Произошла ошибка при создании тега "${vars.name}": ${message}"` })
+      show({ status: 'error', title: 'Ошибка', description: `Произошла ошибка при создании тега "${name}": ${message}"` })
     }
   })
 }
