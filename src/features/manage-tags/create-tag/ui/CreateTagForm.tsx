@@ -38,6 +38,7 @@ export function CreateTagForm() {
   const renderGroupList = () => {
     if (isLoading) return Array.from({ length: 3 }, (_, i) => <TextSkeleton className={styles.groupSkeleton} key={i} />)
     if (isError) return <h6>Произошла ошибка :P</h6>
+    if (!tagGroups.length) return <h6>Тут пусто</h6>
     return tagGroups.map(group => <TagGroupRow className={styles.groupRow} group={group} key={group.id} onClick={() => handleChooseGroup(group)} />)
   }
 
