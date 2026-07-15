@@ -23,7 +23,7 @@ export function TagList() {
               </TagGroupRow>
               {group.tags.map(tag => (
                 <TagRow tag={tag} key={tag.id}>
-                  <EditTagButton tagId={tag.id} groupId={tag.groupId} />
+                  <EditTagButton tagId={tag.id} />
                   <RemoveTagButton tagId={tag.id} />
                 </TagRow>
               ))}
