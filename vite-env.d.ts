@@ -14,6 +14,7 @@ interface ImportMetaEnv {
   readonly VITE_API_PROJECT_ROLES_URL: string
   readonly VITE_API_BASE_URL: string
   readonly VITE_API_PARTNERS_URL: string
+  readonly VITE_API_CHECKPOINTS_URL: string
 }
 
 interface ImportMeta {
