@@ -1,1 +1,13 @@
-export const mapDateToString = (date: Date) => `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+export const mapDateToBackendString = (date: Date) => {
+  const day = date.getDate().toString().padStart(2, '0')
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  const year = date.getFullYear().toString()
+  return `${year}-${month}-${day}`
+}
+
+export const mapDateToLocalString = (date: Date) => {
+  const day = date.getDate().toString().padStart(2, '0')
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  const year = date.getFullYear().toString()
+  return `${day}.${month}.${year}`
+}
