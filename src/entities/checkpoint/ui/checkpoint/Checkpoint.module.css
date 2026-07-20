@@ -1,0 +1,36 @@
+.container {
+  --checkpointColor: var(--text-color);
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: var(--checkpointColor);
+}
+
+.passed {
+  --checkpointColor: var(--primary-color);
+}
+
+.check {
+  aspect-ratio: 1;
+  height: 24px;
+}
+
+.content {
+  display: flex;
+  gap: 15px;
+}
+
+.dot {
+  aspect-ratio: 1;
+  width: 4px;
+
+  background-color: var(--checkpointColor);
+  border-radius: 50%;
+}
+
+.dot,
+.date {
+  opacity: 0.5;
+}
