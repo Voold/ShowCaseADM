@@ -15,7 +15,7 @@ export function ProjectRoleList() {
         ) : (
           projectRoleTypes.map(roleType => (
             <ProjectRoleTypeRow roleType={roleType} key={roleType.id}>
-              <EditProjectRoleButton roleId={roleType.id} />
+              <EditProjectRoleButton roleType={roleType} />
               <RemoveProjectRoleButton roleId={roleType.id} />
             </ProjectRoleTypeRow>
           ))
