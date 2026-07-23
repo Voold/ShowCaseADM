@@ -76,3 +76,8 @@
 .list:hover {
   scrollbar-color: var(--quiet-grey-color) transparent;
 }
+
+.searchIcon {
+  aspect-ratio: 1;
+  height: 24px;
+}

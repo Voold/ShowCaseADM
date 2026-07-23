@@ -1,7 +1,8 @@
 import { type ComponentPropsWithoutRef, type ReactNode } from 'react'
 import { Pagination } from '../pagination/Pagination.tsx'
-import { SearchInput } from '../search-input/SearchInput.tsx'
+import { SearchIcon } from '../../'
 import styles from './DynamicList.module.css'
+import { Input } from '../input/Input.tsx'
 
 interface DynamicListProps extends ComponentPropsWithoutRef<'div'> {
   // Нужный список
@@ -28,7 +29,14 @@ export function DynamicList({
 }: DynamicListProps) {
   return (
     <div className={`${styles.container} ${className ?? ''}`}>
-      <SearchInput className={styles.input} value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder={placeholder} />
+      <Input
+        className={styles.input}
+        value={searchQuery}
+        onChange={e => setSearchQuery(e.target.value)}
+        onClear={() => setSearchQuery('')}
+        leadingIcon={<SearchIcon className={styles.searchIcon} />}
+        placeholder={placeholder}
+      />
       <div className={styles.listWrapper}>
         <div className={styles.list}>{children}</div>
       </div>

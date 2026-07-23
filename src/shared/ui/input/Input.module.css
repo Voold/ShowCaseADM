@@ -1,0 +1,41 @@
+.container {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+  padding: 10px;
+
+  border-radius: 6px;
+  background-color: var(--bg-color);
+
+  font-size: var(--h6);
+  font-weight: 500;
+
+  & input {
+    flex-grow: 1;
+
+    border: none;
+    outline: none;
+
+    background-color: transparent;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
+.closeButton {
+  opacity: 40%;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 60%;
+  }
+
+  &:active {
+    opacity: 75%;
+  }
+}

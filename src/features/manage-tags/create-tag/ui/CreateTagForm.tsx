@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styles from './CreateTagForm.module.css'
 import { useCreateTag } from '../api/mutations'
 import { TagGroupRow, useTagGroups, type TagGroup } from '@/entities/tag'
-import { AgreeButton, Card, FloatingList, TextSkeleton } from '@/shared'
+import { AgreeButton, Card, FloatingList, Input, TextSkeleton } from '@/shared'
 
 export function CreateTagForm() {
   const { mutate: createTag, isPending } = useCreateTag()
@@ -46,7 +46,8 @@ export function CreateTagForm() {
     <Card title='Добавление тега'>
       <form className={styles.form} onSubmit={handleCreateTag}>
         <div className={styles.fields}>
-          <input type='text' placeholder='Имя тега' value={tagName} onChange={e => setTagName(e.target.value)} />
+          <Input placeholder='Имя тега' value={tagName} onChange={e => setTagName(e.target.value)} onClear={() => setTagName('')} />
+          {/* <input type='text' placeholder='Имя тега' value={tagName} onChange={e => setTagName(e.target.value)} /> */}
           <div className={`${styles.field} ${chosenGroup.id ? ' ' : styles.empty}`} onClick={() => setIsListVisible(p => !p)}>
             {chosenGroup.name || 'Выберите группу'}
           </div>

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import styles from './QuickActionsUsers.module.css'
 import { useSetUserRole } from '@/features/update-user-roles'
 import { useUsersByName, type UserBase } from '@/entities/user'
-import { AgreeButton, Card, FloatingList, SearchInput, TextSkeleton, useQuerySync } from '@/shared'
+import { AgreeButton, Card, FloatingList, Input, SearchIcon, TextSkeleton, useQuerySync } from '@/shared'
 
 export const QuickActionsUsers = () => {
   const [chosenUsers, setChosenUsers] = useState<UserBase[]>([])
@@ -17,7 +17,7 @@ export const QuickActionsUsers = () => {
   const { mutate: setRoleMutate, isPending } = useSetUserRole()
 
   const renderUserList = () => {
-    if (isLoading) return Array.from({ length: 3 }, (_, i) => <TextSkeleton className={styles.skeleton} key={i}/>)
+    if (isLoading) return Array.from({ length: 3 }, (_, i) => <TextSkeleton className={styles.skeleton} key={i} />)
     if (isError) return <h6>Произошла ошибка :P</h6>
     return users.map(user => (
       <button onClick={() => setChosenUsers(p => [...p, user])} className={styles.user} key={user.id}>
@@ -40,7 +40,13 @@ export const QuickActionsUsers = () => {
       <p className={styles.snippet}>Выдать роль &quot;Наставник&quot;</p>
 
       <div className={styles.searchWrapper}>
-        <SearchInput placeholder='Имя или ID пользователя' value={localQuery} onChange={e => setLocalQuery(e.target.value)} />
+        <Input
+          leadingIcon={<SearchIcon className={styles.searchIcon} />}
+          placeholder='Имя или ID пользователя'
+          value={localQuery}
+          onChange={e => setLocalQuery(e.target.value)}
+          onClear={() => setLocalQuery('')}
+        />
         {isListVisible && <FloatingList className={`${styles.userList} ${isLoading ? styles.loading : ''}`}>{renderUserList()}</FloatingList>}
       </div>
 
