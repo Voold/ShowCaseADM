@@ -1,5 +1,5 @@
 import { mapCheckpointGroupDto, mapCheckpointGroupToDto, mapCheckpointToDto } from '../lib/mappers'
-import type { Checkpoint, CheckpointGroup, CheckpointGroupDto } from '../model/types'
+import type { CheckpointDto, CheckpointGroup, CheckpointGroupDto } from '../model/types'
 import { api, ENDPOINTS } from '@/shared'
 
 export const getCheckpointGroups = async (): Promise<CheckpointGroup[]> => {
@@ -7,8 +7,9 @@ export const getCheckpointGroups = async (): Promise<CheckpointGroup[]> => {
   return data.map(mapCheckpointGroupDto)
 }
 
-export const createCheckpointGroup = async (payload: Checkpoint): Promise<string> => {
-  const { data } = await api.post<{ checkpointId: string }>(ENDPOINTS.CHECKPOINTS, mapCheckpointToDto(payload))
+export const createCheckpointGroup = async (payload: Omit<CheckpointGroup, 'id'>): Promise<string> => {
+  const payloadDto: { name: string; checkpoints: CheckpointDto[] } = { name: payload.title, checkpoints: payload.checkpoints.map(mapCheckpointToDto) }
+  const { data } = await api.post<{ checkpointId: string }>(ENDPOINTS.CHECKPOINTS, payloadDto)
   return data.checkpointId
 }
 
