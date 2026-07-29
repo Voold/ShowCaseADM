@@ -27,4 +27,5 @@
   --grey-40pr: rgba(55, 55, 64, 0.4);
 
   --z-index-toast: 5000;
+  --z-index-date-picker: 2500;
 }
