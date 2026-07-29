@@ -10,12 +10,10 @@
   border-radius: 6px;
   background-color: var(--bg-color);
 
-  font-size: var(--h6);
-  font-weight: 500;
-
   & input {
     flex-grow: 1;
 
+    font-size: var(--p);
     border: none;
     outline: none;
 

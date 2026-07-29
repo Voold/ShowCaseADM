@@ -122,3 +122,8 @@
     transform: translateY(-50%) rotate(45deg);
   }
 }
+
+.submitButton {
+  align-self: flex-end;
+  padding-block: 8px;
+}

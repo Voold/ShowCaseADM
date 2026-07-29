@@ -61,7 +61,7 @@ export const QuickActionsUsers = () => {
         ))}
       </div>
 
-      <AgreeButton disabled={chosenUsers.length === 0} onClick={handleSubmit} isLoading={isPending}>
+      <AgreeButton className={styles.submitButton} disabled={chosenUsers.length === 0} onClick={handleSubmit} isLoading={isPending}>
         Подтвердить
       </AgreeButton>
     </Card>

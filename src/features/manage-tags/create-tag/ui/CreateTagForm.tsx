@@ -37,8 +37,8 @@ export function CreateTagForm() {
 
   const renderGroupList = () => {
     if (isLoading) return Array.from({ length: 3 }, (_, i) => <TextSkeleton className={styles.groupSkeleton} key={i} />)
-    if (isError) return <h6>Произошла ошибка :P</h6>
-    if (!tagGroups.length) return <h6>Тут пусто</h6>
+    if (isError) return <h6 className={styles.placeholder}>Произошла ошибка :P</h6>
+    if (!tagGroups.length) return <h6 className={styles.placeholder}>Тут пусто :\</h6>
     return tagGroups.map(group => <TagGroupRow className={styles.groupRow} group={group} key={group.id} onClick={() => handleChooseGroup(group)} />)
   }
 
@@ -47,7 +47,6 @@ export function CreateTagForm() {
       <form className={styles.form} onSubmit={handleCreateTag}>
         <div className={styles.fields}>
           <Input placeholder='Имя тега' value={tagName} onChange={e => setTagName(e.target.value)} onClear={() => setTagName('')} />
-          {/* <input type='text' placeholder='Имя тега' value={tagName} onChange={e => setTagName(e.target.value)} /> */}
           <div className={`${styles.field} ${chosenGroup.id ? ' ' : styles.empty}`} onClick={() => setIsListVisible(p => !p)}>
             {chosenGroup.name || 'Выберите группу'}
           </div>
