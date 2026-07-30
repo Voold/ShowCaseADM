@@ -22,8 +22,7 @@
 }
 
 .field {
-  font-size: 14px;
-  font-weight: 300;
+  font-weight: 400;
 
   border: none;
   outline: none;
@@ -35,7 +34,7 @@
   cursor: pointer;
 
   &.empty {
-    color: color-mix(in srgb, var(--text-color) 40%, transparent);
+    color: color-mix(in srgb, var(--text-color) 50%, transparent);
   }
 }
 

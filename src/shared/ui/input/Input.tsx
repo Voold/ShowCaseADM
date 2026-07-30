@@ -24,7 +24,7 @@ export function Input({
       {leadingIcon}
       <input type='text' placeholder={placeholder} value={value} onChange={onChange} {...props} />
       {children}
-      {((onClear && value) || isCloseAlwaysVisible) && <CloseButton className={styles.closeButton} onClick={onClear} type='button' />}
+      {((onClear && value) || isCloseAlwaysVisible) && <CloseButton className={styles.closeButton} onClick={onClear} type='button' tabIndex={-1} />}
     </div>
   )
 }

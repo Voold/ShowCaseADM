@@ -1,4 +1,5 @@
 import styles from './TagList.module.css'
+import { Fragment } from 'react/jsx-runtime'
 import { TagsSkeleton } from './skeleton/TagsSkeleton'
 import { EditTagButton, RemoveTagButton } from '@/features/manage-tags'
 import { EditTagGroupButton, RemoveTagGroupButton } from '@/features/manage-tag-groups'
@@ -16,7 +17,7 @@ export function TagList() {
           <h3 className={styles.placeholder}>Ничего не нашлось!</h3>
         ) : (
           tagGroups.map(group => (
-            <>
+            <Fragment key={group.id}>
               <TagGroupRow className={styles.groupRow} group={group}>
                 <EditTagGroupButton groupId={group.id} />
                 <RemoveTagGroupButton groupId={group.id} />
@@ -27,7 +28,7 @@ export function TagList() {
                   <RemoveTagButton tagId={tag.id} />
                 </TagRow>
               ))}
-            </>
+            </Fragment>
           ))
         )}
       </div>
