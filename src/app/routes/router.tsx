@@ -11,6 +11,7 @@ import { UserPage } from '@/pages/user'
 import { TagsSettingsPage } from '@/pages/tags-settings'
 import { PartnersSettingsPage } from '@/pages/parnters-settings'
 import { ProjectRolesSettingsPage } from '@/pages/project-roles-settings'
+import { CheckpointsSettingsPage } from '@/pages/checkpoints-settings'
 import { AuthBootstrapper } from '@/features/auth'
 import { ProtectedRoute } from '@/features/protected-route'
 import { ROUTES } from '@/shared'
@@ -51,7 +52,7 @@ export const router = createBrowserRouter([
                   { path: ROUTES.SETTINGS.TAGS, element: <TagsSettingsPage /> },
                   { path: ROUTES.SETTINGS.PROJECT_ROLES, element: <ProjectRolesSettingsPage /> },
                   { path: ROUTES.SETTINGS.PARTNERS, element: <PartnersSettingsPage /> },
-                  // { path: ROUTES.SETTINGS.CHECKPOINTS, element: <TagsSettingsPage /> }
+                  { path: ROUTES.SETTINGS.CHECKPOINTS, element: <CheckpointsSettingsPage /> }
                 ]
               }
             ]
