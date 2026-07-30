@@ -13,7 +13,6 @@
   background-color: var(--sec-color);
   color: var(--text-color);
 
-  cursor: pointer;
   user-select: none;
 }
 
@@ -128,4 +127,8 @@
   &.active {
     background-color: var(--outline-color);
   }
+}
+
+.empty {
+  cursor: default;
 }

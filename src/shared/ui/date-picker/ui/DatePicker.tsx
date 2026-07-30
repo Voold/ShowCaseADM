@@ -1,50 +1,60 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import s from './DatePicker.module.css'
 import { ChevronLeftIcon, mapDateToLocalString, useClickOutside } from '../../..'
 import { getDaysAmount } from '../lib/getDaysAmount'
 import { getMonthTranslation } from '../lib/getMonthTranslation'
 import { WEEKDAYS } from '../config/weekdays'
+import { getPaddingDays } from '../lib/getPaddingDays'
 
 interface DatePickerProps {
   onChange?: (date: Date | null) => void
+  value?: Date | null
   position?: 'left' | 'center' | 'right'
 }
 
-export function DatePicker({ onChange, position = 'center' }: DatePickerProps) {
+export function DatePicker({ onChange, value = null, position = 'center' }: DatePickerProps) {
   const [isPickerVisible, setIsPickerVisible] = useState(false)
 
-  const [year, setYear] = useState<number>(new Date().getFullYear())
-  const [month, setMonth] = useState<number>(new Date().getMonth())
-  const [date, setDate] = useState<Date | null>(null)
+  const [viewDate, setViewDate] = useState<Date>(value ?? new Date())
 
   const containerRef = useRef<HTMLDivElement>(null)
   useClickOutside(containerRef, () => setIsPickerVisible(false))
 
-  const shiftMonth = (delta: number) => {
-    const d = new Date(year, month + delta, 1)
-    setMonth(d.getMonth())
-    setYear(d.getFullYear())
-  }
+  useEffect(() => {
+    if (value === null) {
+      setViewDate(new Date())
+    }
+  }, [value])
+
+  const shiftMonth = (delta: number) => setViewDate(d => new Date(d.getFullYear(), d.getMonth() + delta, 1))
 
   const changeDate = (day: number) => {
-    if (isActive(day)) setDate(null)
-    else setDate(new Date(year, month, day))
+    const year = viewDate.getFullYear()
+    const month = viewDate.getMonth()
+    const newDate = !isActive(new Date(year, month, day)) ? new Date(year, month, day) : null
 
     setIsPickerVisible(false)
-    onChange?.(date)
+    onChange?.(newDate)
   }
 
-  const isActive = (day: number) => {
-    if (!date) return false
-    return day === date.getDate() && month === date.getMonth() && year === date.getFullYear()
+  const isActive = (date: Date) => {
+    if (!value) return false
+    return date.getDate() === value.getDate() && date.getMonth() === value.getMonth() && date.getFullYear() === value.getFullYear()
   }
 
-  const days = Array.from({ length: getDaysAmount(year, month) }, (_, i) => (i + 1).toString().padStart(2, '0'))
+  const year = viewDate.getFullYear()
+  const month = viewDate.getMonth()
+
+  const firstDayOfWeek = getPaddingDays(year, month)
+  const paddingDays = Array.from({ length: firstDayOfWeek })
+
+  const totalDays = getDaysAmount(year, month)
+  const days = Array.from({ length: totalDays }, (_, i) => i + 1)
   return (
     <div className={s.container} ref={containerRef}>
-      <p className={`${s.date} ${date ? '' : s.placeholder}`} onClick={() => setIsPickerVisible(v => !v)}>
-        {date ? mapDateToLocalString(date) : 'Выберите дату'}
-      </p>
+      <button type='button' className={`${s.date} ${value ? '' : s.placeholder}`} onClick={() => setIsPickerVisible(v => !v)}>
+        {value ? mapDateToLocalString(value) : 'Выберите дату'}
+      </button>
       {isPickerVisible && (
         <div className={`${s.picker} ${s[position]}`}>
           <div className={s.header}>
@@ -56,16 +66,26 @@ export function DatePicker({ onChange, position = 'center' }: DatePickerProps) {
           </div>
           <div className={s.calendar}>
             <ul className={s.weekDays}>
-              {WEEKDAYS.map((day, i) => (
-                <li className={s.weekDay} key={i}>
+              {WEEKDAYS.map(day => (
+                <li className={s.weekDay} key={day}>
                   {day}
                 </li>
               ))}
             </ul>
             <ul className={s.grid}>
-              {days.map((day, i) => (
-                <li className={`${s.gridDay} ${isActive(Number(day)) ? s.active : ''}`} key={i} onClick={() => changeDate(Number(day))}>
-                  {day}
+              {paddingDays.map((_, i) => (
+                <li key={`pad-${i}`} className={`${s.gridDay} ${s.empty}`}>
+                  -
+                </li>
+              ))}
+              {days.map(day => (
+                <li key={day}>
+                  <button
+                    className={`${s.gridDay} ${isActive(new Date(year, month, day)) ? s.active : ''}`}
+                    onClick={() => changeDate(day)}
+                  >
+                    {day.toString().padStart(2, '0')}
+                  </button>
                 </li>
               ))}
             </ul>
