@@ -1,6 +1,6 @@
 import styles from './UserProjectsList.module.css'
 import { ProjectSlot, useUserProjects } from '@/entities/project'
-import { DynamicList, useQueryFilters, useQuerySync } from '@/shared'
+import { Pagination, ScrollableList, SearchInput, useQueryFilters, useQuerySync } from '@/shared'
 
 interface UserProjectsListProps {
   userId: string
@@ -22,22 +22,24 @@ export function UserProjectsList({ userId }: UserProjectsListProps) {
   return (
     <div className={styles.container}>
       <p className={styles.title}>Проекты пользователя</p>
-      <DynamicList
-        currentPage={page}
-        totalPages={totalPages}
-        setCurrentPage={setPage}
-        searchQuery={localQuery}
-        setSearchQuery={setLocalQuery}
-        placeholder={'Найти проект...'}
-      >
-        {isLoading && <h3 className={styles.placeholder}>Загрузка...</h3>}
-        {isError && <h3 className={styles.placeholder}>Произошла ошибка :P</h3>}
-        {isSuccess && projects.length === 0 ? (
-          <h3 className={styles.placeholder}>Ничего не нашлось!</h3>
-        ) : (
-          projects.map(project => <ProjectSlot key={project.id} project={project} onClick={() => {}} />)
-        )}
-      </DynamicList>
+      <div className={styles.projectSearch}>
+        <SearchInput
+          value={localQuery}
+          onChange={e => setLocalQuery(e.target.value)}
+          onClear={() => setLocalQuery('')}
+          placeholder={'Найти проект...'}
+        />
+        <ScrollableList>
+          {isLoading && <h3 className={styles.placeholder}>Загрузка...</h3>}
+          {isError && <h3 className={styles.placeholder}>Произошла ошибка :P</h3>}
+          {isSuccess && projects.length === 0 ? (
+            <h3 className={styles.placeholder}>Ничего не нашлось!</h3>
+          ) : (
+            projects.map(project => <ProjectSlot key={project.id} project={project} onClick={() => {}} />)
+          )}
+        </ScrollableList>
+        {totalPages !== 1 && <Pagination currentPage={page} totalPages={totalPages} onPageSelect={setPage} />}
+      </div>
     </div>
   )
 }

@@ -21,7 +21,6 @@ export async function getMe(): Promise<User> {
   return mapUserDto(data)
 }
 
-//ANCHOR - other feature
 export async function getUserById(userId: string): Promise<User> {
   const { data } = await api.get<UserDto>(ENDPOINTS.USER_BY_ID(userId))
   return mapUserDto(data)
