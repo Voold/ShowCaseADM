@@ -1,5 +1,5 @@
 import { TextSkeleton } from '@/shared'
 
-export function CheckpointSkeleton() {
+export function CheckpointRowSkeleton() {
   return <TextSkeleton />
 }

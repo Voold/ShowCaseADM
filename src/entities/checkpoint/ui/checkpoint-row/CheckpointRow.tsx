@@ -1,14 +1,14 @@
 import type { ComponentPropsWithoutRef } from 'react'
-import styles from './Checkpoint.module.css'
+import styles from './CheckpointRow.module.css'
 import CircleCheckIcon from '../../assets/check-circle.svg?react'
 import type { Checkpoint } from '../../model/types'
 import { mapDateToLocalString } from '@/shared'
 
-interface CheckpointProps extends ComponentPropsWithoutRef<'div'> {
+interface CheckpointRowProps extends ComponentPropsWithoutRef<'div'> {
   checkpoint: Checkpoint
 }
 
-export function Checkpoint({ checkpoint, className, children, ...props }: CheckpointProps) {
+export function CheckpointRow({ checkpoint, className, children, ...props }: CheckpointRowProps) {
   const isPassed = checkpoint.deadline <= new Date()
 
   return (

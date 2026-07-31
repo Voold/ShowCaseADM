@@ -1,4 +1,4 @@
-export { Checkpoint } from './checkpoint/Checkpoint'
-export { CheckpointSkeleton } from './checkpoint/CheckpointSkeleton'
-export { CheckpointGroup } from './checkpoint-group/CheckpointGroup'
-export { CheckpointGroupSkeleton } from './checkpoint-group/CheckpointGroupSkeleton'
+export { CheckpointRow } from './checkpoint-row/CheckpointRow'
+export { CheckpointRowSkeleton } from './checkpoint-row/CheckpointRowSkeleton'
+export { CheckpointGroupCard } from './checkpoint-group-card/CheckpointGroupCard'
+export { CheckpointGroupCardSkeleton } from './checkpoint-group-card/CheckpointGroupCardSkeleton'
