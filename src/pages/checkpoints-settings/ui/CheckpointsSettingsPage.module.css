@@ -1,16 +1,9 @@
 .container {
-  display: flex;
-  align-items: start;
+  display: grid;
+  grid-template-columns: 4fr 3fr;
   gap: 20px;
+  align-items: start;
 
   flex: 1;
   min-height: 0;
-
-  & > :first-child {
-    flex: 1 1 0;
-  }
-
-  & > :last-child {
-    flex: 1 1 0;
-  }
 }
