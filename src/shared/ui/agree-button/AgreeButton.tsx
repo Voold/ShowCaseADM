@@ -11,6 +11,7 @@ export const AgreeButton = ( {isLoading = false, disabled, className, children, 
     <button 
       className={`${styles.button} ${disabled ? styles.disabled : ""} ${isLoading ? styles.loading : ""} ${className ?? ""}`} 
       type={type}
+      disabled={disabled || isLoading}
       {...props}
     >
       {isLoading ? <Spinner className={styles.spinner}/> : children}

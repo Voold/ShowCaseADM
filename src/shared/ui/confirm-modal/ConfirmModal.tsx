@@ -18,10 +18,10 @@ export function ConfirmModal({ isOpened, isPending = false, text = 'Продол
         <div className={styles.wrapper}>
           <p>{text}</p>
           <div className={styles.actions}>
-            <button onClick={onSubmit} className={styles.confirm}>
+            <button onClick={onSubmit} disabled={isPending} className={styles.confirm}>
               {isPending ? <Spinner className={styles.spinner}/> : "Да"}
             </button>
-            <button onClick={onReject} className={styles.reject}>
+            <button onClick={onReject} disabled={isPending} className={styles.reject}>
               Нет
             </button>
           </div>
