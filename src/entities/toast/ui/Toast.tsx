@@ -9,11 +9,7 @@ interface ToastProps {
 
 export function Toast({ toast, onClose }: ToastProps) {
   const { id, status, title, description, link } = toast
-  const [isPaused, setIsPaused] = useState(true)
-
-  useEffect(() => {
-    setTimeout(() => setIsPaused(false), 10)
-  }, [])
+  const [isPaused, setIsPaused] = useState(false)
 
   useEffect(() => {
     if (isPaused) return
