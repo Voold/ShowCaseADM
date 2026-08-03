@@ -55,7 +55,7 @@ export function CreateCheckpointGroupForm() {
     <form onSubmit={handleSubmit}>
       <Card title='Создание нового набора' className={styles.form}>
         <div className={styles.fields}>
-          <Input placeholder='Название набора' value={title} onChange={e => setTitle(e.target.value)} onClear={() => setTitle('')}></Input>
+          <Input placeholder='Название набора' value={title} onChange={e => setTitle(e.target.value)}></Input>
           {fields.map((f, i) => (
             <Input
               key={f.id}

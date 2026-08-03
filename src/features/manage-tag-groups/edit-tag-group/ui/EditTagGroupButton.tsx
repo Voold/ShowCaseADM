@@ -14,27 +14,26 @@ export function EditTagGroupButton({ group }: EditTagGroupButtonProps) {
 
   const { mutate: editGroup, isPending } = useEditTagGroup()
 
+  const handleOpen = () => {
+    setValue(group.name)
+    setIsModalOpened(true)
+  }
+
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
     e.preventDefault()
-    editGroup(
-      { id: group.id, name: value },
-      {
-        onSettled: () => {
-          setIsModalOpened(false)
-          setValue(group.name)
-        }
-      }
-    )
+    editGroup({ id: group.id, name: value }, { onSettled: () => setIsModalOpened(false) })
   }
 
   return (
     <>
-      <EditIcon className={styles.button} onClick={() => setIsModalOpened(true)} />
+      <EditIcon className={styles.button} onClick={handleOpen} />
       <Modal isOpened={isModalOpen} onClose={() => setIsModalOpened(false)}>
         <Card title='Изменение группы тегов'>
           <form className={styles.form} onSubmit={handleSubmit}>
             <Input placeholder='Имя группы' value={value} onChange={e => setValue(e.target.value)} onClear={() => setValue('')} />
-            <AgreeButton isLoading={isPending} disabled={!value.trim()}>Подтвердить</AgreeButton>
+            <AgreeButton isLoading={isPending} disabled={!value.trim() || value === group.name}>
+              Подтвердить
+            </AgreeButton>
           </form>
         </Card>
       </Modal>
