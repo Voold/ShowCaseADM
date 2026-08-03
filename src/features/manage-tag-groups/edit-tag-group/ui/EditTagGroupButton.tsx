@@ -31,7 +31,7 @@ export function EditTagGroupButton({ group }: EditTagGroupButtonProps) {
         <Card title='Изменение группы тегов'>
           <form className={styles.form} onSubmit={handleSubmit}>
             <Input placeholder='Имя группы' value={value} onChange={e => setValue(e.target.value)} onClear={() => setValue('')} />
-            <AgreeButton isLoading={isPending} disabled={!value.trim()}>
+            <AgreeButton isLoading={isPending} disabled={!value.trim() || value === group.name}>
               Подтвердить
             </AgreeButton>
           </form>

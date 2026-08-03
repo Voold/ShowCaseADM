@@ -31,7 +31,7 @@ export function EditProjectRoleButton({ roleType }: EditProjectRoleButtonProps) 
         <Card title='Изменение роли'>
           <form className={styles.form} onSubmit={handleSubmit}>
             <Input placeholder='Имя роли' value={value} onChange={e => setValue(e.target.value)} onClear={() => setValue('')} />
-            <AgreeButton isLoading={isPending} disabled={!value.trim()}>
+            <AgreeButton isLoading={isPending} disabled={!value.trim() || value === roleType.name}>
               Подтвердить
             </AgreeButton>
           </form>

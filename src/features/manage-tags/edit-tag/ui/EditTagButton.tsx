@@ -45,6 +45,8 @@ export function EditTagButton({ tag, group }: EditTagButtonProps) {
     ))
   }
 
+  const isIdentical = tagName === tag.name && chosenGroup.id === group.id
+
   return (
     <>
       <EditIcon className={styles.button} onClick={handleOpen} />
@@ -66,7 +68,7 @@ export function EditTagButton({ tag, group }: EditTagButtonProps) {
             </div>
             <AgreeButton
               className={styles.confirmButton}
-              disabled={isPending || !tagName.trim() || !chosenGroup.id.trim()}
+              disabled={!tagName.trim() || !chosenGroup.id.trim() || isIdentical}
               isLoading={isPending}
             >
               Подтвердить

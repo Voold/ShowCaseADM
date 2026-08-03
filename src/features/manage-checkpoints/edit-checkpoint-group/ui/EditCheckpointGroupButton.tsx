@@ -52,7 +52,18 @@ export function EditCheckpointGroupButton({ group }: EditCheckpointGroupButtonPr
     )
   }
 
-  const isReady = title !== '' && fields.length > 1 && fields.slice(0, -1).every(f => f.name && f.date)
+  const nonEmptyFields = fields.slice(0, -1)
+
+  const isIdentical =
+    title === group.title &&
+    nonEmptyFields.length === group.checkpoints.length &&
+    nonEmptyFields.every((f, i) => {
+      const g = group.checkpoints[i]
+      return f.name === g.title && f.date?.getTime() === g.deadline.getTime()
+    })
+
+  const isReady = title !== '' && fields.length > 1 && nonEmptyFields.every(f => f.name && f.date) && !isIdentical
+
   return (
     <>
       <EditIcon className={styles.button} onClick={handleOpen} />
