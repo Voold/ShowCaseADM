@@ -75,7 +75,6 @@ export function EditCheckpointGroupButton({ group }: EditCheckpointGroupButtonPr
                 placeholder='Название набора'
                 value={title}
                 onChange={e => setTitle(e.target.value)}
-                onClear={() => setTitle('')}
               ></Input>
               {fields.map((f, i) => (
                 <Input
