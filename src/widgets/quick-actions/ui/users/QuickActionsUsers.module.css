@@ -2,6 +2,11 @@
   color: var(--blue-grey-color);
 }
 
+.searchIcon {
+  aspect-ratio: 1;
+  height: 24px;
+}
+
 .content {
   height: 100%;
 
@@ -116,4 +121,9 @@
   &::before {
     transform: translateY(-50%) rotate(45deg);
   }
+}
+
+.submitButton {
+  align-self: flex-end;
+  padding-block: 8px;
 }

@@ -1,61 +1,69 @@
+.container {
+  height: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .email {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
 
-	font-style: italic;
-	color: var(--blue-grey-color);
-	
-	cursor: pointer;
+  font-style: italic;
+  color: var(--blue-grey-color);
 
-	&:hover {
-		text-decoration: underline;
-	}
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .openIcon {
-	width: 12px;
-	height: 12px;
+  width: 12px;
+  height: 12px;
 }
 
 .link {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 .roleWrapper {
-	flex: 1;
+  flex: 1;
 
-	display: flex;
-	align-items: center;
-	justify-content: end;
+  display: flex;
+  align-items: center;
+  justify-content: end;
 
-	margin-right: 4px;
+  margin-right: 4px;
 }
 
 .role {
-	width: 150px;
-	
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  width: 150px;
 
-	border-radius: var(--border-radius);
-	padding: 5px 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: var(--border-radius);
+  padding: 5px 12px;
 }
 
 .active {
-	background-image: linear-gradient(
-		color-mix(in srgb, var(--primary-color) 20%, transparent),
-		color-mix(in srgb, var(--primary-color) 20%, transparent)
-	);
+  background-image: linear-gradient(
+    color-mix(in srgb, var(--primary-color) 20%, transparent),
+    color-mix(in srgb, var(--primary-color) 20%, transparent)
+  );
 }
 
 .inactive {
-	color: var(--blue-grey-color);
+  color: var(--blue-grey-color);
 }
 
 .placeholder {
-	margin: auto;
-	color: color-mix(in srgb, var(--text-color) 30%, transparent);
+  margin: auto;
+  color: color-mix(in srgb, var(--text-color) 30%, transparent);
 }

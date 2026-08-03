@@ -1,0 +1,21 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.fields {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.field {
+	gap: 15px;
+	padding-block: 5px;
+}
+
+.submitButton {
+	align-self: flex-end;
+  padding-block: 8px;
+}

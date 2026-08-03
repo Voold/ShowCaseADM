@@ -10,7 +10,7 @@
   --h3: 26px;
   --h4: 24px;
   --h5: 20px;
-  --h6: 16px;
+  --h6: 18px;
   --p : 16px;
 
   --border-radius: 5px;
@@ -27,4 +27,5 @@
   --grey-40pr: rgba(55, 55, 64, 0.4);
 
   --z-index-toast: 5000;
+  --z-index-date-picker: 2500;
 }

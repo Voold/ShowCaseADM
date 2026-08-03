@@ -1,18 +1,4 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-  flex: 1;
-	min-height: 0;
-}
-
-.input {
-  border: 6px solid var(--sec-color);
-  border-radius: 12px;
-}
-
-.listWrapper {
   position: relative;
   
   flex: 1;
@@ -54,25 +40,31 @@
   padding: 2px 6px;
 
   scrollbar-color: var(--outline-color) transparent;
-}
+  will-change: transform;
 
-.list::-webkit-scrollbar {
-  width: 6px;
-}
+  &.loading {
+    margin-top: 5px;
+    gap: 10px;
+  }
 
-.list::-webkit-scrollbar-track {
-  background: transparent;
-}
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
 
-.list::-webkit-scrollbar-thumb {
-  background: var(--outline-color);
-  border-radius: 3px;
-}
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
 
-.list:hover::-webkit-scrollbar-thumb {
-  background: var(--quiet-grey-color);
-}
+  &::-webkit-scrollbar-thumb {
+    background: var(--outline-color);
+    border-radius: 3px;
+  }
 
-.list:hover {
-  scrollbar-color: var(--quiet-grey-color) transparent;
+  &:hover::-webkit-scrollbar-thumb {
+    background: var(--quiet-grey-color);
+  }
+
+  &:hover {
+    scrollbar-color: var(--quiet-grey-color) transparent;
+  }
 }

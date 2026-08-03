@@ -2,7 +2,7 @@ import { useState } from 'react'
 import partnerAvatar from '../assets/partner-avatar.svg'
 import { useAddPartner } from '../api/mutations'
 import styles from './AddPartnerForm.module.css'
-import { AgreeButton, Card } from '@/shared'
+import { AgreeButton, Card, Input } from '@/shared'
 
 export function AddPartnerForm() {
   const { mutate: addPartner, isPending } = useAddPartner()
@@ -26,17 +26,24 @@ export function AddPartnerForm() {
     }
   }
 
+  const handleURLClear = () => {
+    setPhotoUrl('')
+    setError('')
+  }
+
   return (
     <Card title='Добавление партнёра'>
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.inputs}>
-          <input placeholder='Имя партнёра' value={name} onChange={e => setName(e.target.value)} />
+          <Input placeholder='Имя партнёра' value={name} onChange={e => setName(e.target.value)} onClear={() => setName('')} />
           <div className={`${styles.wrapper} ${error ? styles.error : ''}`}>
-            <input
+            <Input
+              className={styles.urlInput}
               placeholder='URL на фото партнёра'
               value={photoUrl}
               onChange={e => setPhotoUrl(e.target.value)}
               onBlur={e => validateUrl(e.target.value)}
+              onClear={handleURLClear}
             />
             <p>{error}</p>
           </div>

@@ -1,0 +1,9 @@
+.container {
+  display: grid;
+  grid-template-columns: 4fr 3fr;
+  gap: 20px;
+  align-items: start;
+
+  flex: 1;
+  min-height: 0;
+}

@@ -1,0 +1,22 @@
+.container {
+  height: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.list {
+  /* display: grid;
+  grid-template-columns: repeat(2, 1fr); */
+
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 15px;
+  align-content: flex-start;
+}
+
+.placeholder {
+  margin: auto;
+  opacity: 0.3;
+}

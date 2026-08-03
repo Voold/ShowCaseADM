@@ -1,28 +1,10 @@
-.search {
-  --search-height: 24px;
-
-  display: flex;
-  gap: 8px;
-  padding: 8px;
-  width: 100%;
-  border-radius: 4px;
-  background-color: var(--bg-color);
-}
-
-.icon {
-  height: var(--search-height);
-  aspect-ratio: 1;
-}
-
 .input {
-  flex-grow: 1;
-  line-height: var(--search-height);
-  padding: 0;
-  border: none;
-  background-color: transparent;
-
-  &:focus {
-    outline: none;
-  }
+  border: 3px solid var(--outline-color);
+  /* border-radius: 10px !important; */
+  border-radius: 10px;
 }
 
+.searchIcon {
+  aspect-ratio: 1;
+  height: 24px;
+}

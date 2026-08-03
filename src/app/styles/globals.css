@@ -51,7 +51,7 @@ h5 {
 
 h6 {
   font-size: var(--h6);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 body,
@@ -83,18 +83,4 @@ button {
   background-color: transparent;
   border: none;
   outline: none;
-}
-
-input {
-  font-family: inherit;
-  font-size: 14px;
-  
-  border: none;
-  outline: none;
-
-  color: var(--text-color);
-  background-color: var(--bg-color);
-
-  padding: 12px;
-  border-radius: 5px;
 }

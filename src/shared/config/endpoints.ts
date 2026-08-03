@@ -7,8 +7,7 @@ export const ENDPOINTS = {
   USER_BY_ID: (userId: string) => `${import.meta.env.VITE_REF_GET_USERS}/${userId}`,
   USERS_BY_NAME: import.meta.env.VITE_REF_GET_USERS,
   PROJECTS_BY_NAME: import.meta.env.VITE_REF_GET_PROJECTS,
-  USER_PROJECTS: (userId: string) =>
-    `${import.meta.env.VITE_REF_GET_USERS}/${userId}/${import.meta.env.VITE_REF_GET_PROJECTS}`,
+  USER_PROJECTS: (userId: string) => `${import.meta.env.VITE_REF_GET_USERS}/${userId}/${import.meta.env.VITE_REF_GET_PROJECTS}`,
   USER_ROLES: (userId: string, roleName: string) => `${import.meta.env.VITE_REF_GET_USERS}/${userId}${import.meta.env.VITE_REF_ROLES}/${roleName}`,
   TAGS: import.meta.env.VITE_API_TAGS_URL,
   TAG_BY_ID: (tagId: string) => `${import.meta.env.VITE_API_TAGS_URL}/${tagId}`,
@@ -18,4 +17,6 @@ export const ENDPOINTS = {
   PROJECT_ROLE_BY_ID: (roleId: string) => `${import.meta.env.VITE_API_PROJECT_ROLES_URL}/${roleId}`,
   PARTNERS: import.meta.env.VITE_API_PARTNERS_URL,
   PARTNER_BY_ID: (partnerId: string) => `${import.meta.env.VITE_API_PARTNERS_URL}/${partnerId}`,
+  CHECKPOINTS: import.meta.env.VITE_API_CHECKPOINTS_URL,
+  CHECKPOINT_BY_ID: (checkpointId: string) => `${import.meta.env.VITE_API_CHECKPOINTS_URL}/${checkpointId}`,
 }

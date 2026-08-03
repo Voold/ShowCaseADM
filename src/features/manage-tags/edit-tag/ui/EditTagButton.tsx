@@ -2,7 +2,7 @@ import { useState } from 'react'
 import styles from './EditTagButton.module.css'
 import { useEditTag } from '../api/mutations'
 import { TagGroupRow, useTagGroups, type Tag, type TagGroup } from '@/entities/tag'
-import { AgreeButton, Card, EditIcon, FloatingList, Modal, TextSkeleton } from '@/shared'
+import { AgreeButton, Card, EditIcon, FloatingList, Input, Modal, TextSkeleton } from '@/shared'
 
 interface EditTagButtonProps {
   tag: Tag
@@ -53,7 +53,7 @@ export function EditTagButton({ tag, group }: EditTagButtonProps) {
         <Card title='Изменение тега'>
           <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.fields}>
-              <input type='text' placeholder='Имя тега' value={tagName} onChange={e => setTagName(e.target.value)} />
+              <Input type='text' placeholder='Имя тега' value={tagName} onChange={e => setTagName(e.target.value)} onClear={() => setTagName('')} />
               <div className={`${styles.field} ${chosenGroup.id ? ' ' : styles.empty}`} onClick={() => setIsListVisible(p => !p)}>
                 {chosenGroup.name || 'Выберите группу'}
               </div>
