@@ -20,18 +20,15 @@ export function EditTagButton({ tag, group }: EditTagButtonProps) {
 
   const { mutate: editTag, isPending } = useEditTag()
 
+  const handleOpen = () => {
+    setTagName(tag.name)
+    setChosenGroup(group)
+    setIsModalOpened(true)
+  }
+
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
     e.preventDefault()
-    editTag(
-      { id: tag.id, name: tagName, groupId: chosenGroup.id },
-      {
-        onSettled: () => {
-          setIsModalOpened(false)
-          setTagName(tag.name)
-          setChosenGroup(group)
-        }
-      }
-    )
+    editTag({ id: tag.id, name: tagName, groupId: chosenGroup.id }, { onSettled: () => setIsModalOpened(false) })
   }
 
   const handleChooseGroup = (group: Omit<TagGroup, 'tags'>) => {
@@ -43,23 +40,35 @@ export function EditTagButton({ tag, group }: EditTagButtonProps) {
     if (isLoading) return Array.from({ length: 3 }, (_, i) => <TextSkeleton className={styles.groupSkeleton} key={i} />)
     if (isError) return <h6>Произошла ошибка :P</h6>
     if (!tagGroups.length) return <h6>Тут пусто</h6>
-    return tagGroups.map(group => <TagGroupRow className={styles.groupRow} group={group} key={group.id} onClick={() => handleChooseGroup(group)} />)
+    return tagGroups.map(group => (
+      <TagGroupRow className={styles.groupRow} group={group} key={group.id} onClick={() => handleChooseGroup(group)} />
+    ))
   }
 
   return (
     <>
-      <EditIcon className={styles.button} onClick={() => setIsModalOpened(true)} />
+      <EditIcon className={styles.button} onClick={handleOpen} />
       <Modal isOpened={isModalOpen} onClose={() => setIsModalOpened(false)}>
         <Card title='Изменение тега'>
           <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.fields}>
-              <Input type='text' placeholder='Имя тега' value={tagName} onChange={e => setTagName(e.target.value)} onClear={() => setTagName('')} />
+              <Input
+                type='text'
+                placeholder='Имя тега'
+                value={tagName}
+                onChange={e => setTagName(e.target.value)}
+                onClear={() => setTagName('')}
+              />
               <div className={`${styles.field} ${chosenGroup.id ? ' ' : styles.empty}`} onClick={() => setIsListVisible(p => !p)}>
                 {chosenGroup.name || 'Выберите группу'}
               </div>
               {isListVisible && <FloatingList className={styles.list}>{renderGroupList()}</FloatingList>}
             </div>
-            <AgreeButton className={styles.confirmButton} disabled={isPending || !tagName.trim() || !chosenGroup.id.trim()} isLoading={isPending}>
+            <AgreeButton
+              className={styles.confirmButton}
+              disabled={isPending || !tagName.trim() || !chosenGroup.id.trim()}
+              isLoading={isPending}
+            >
               Подтвердить
             </AgreeButton>
           </form>

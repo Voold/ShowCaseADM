@@ -1,14 +1,10 @@
 import { useState, type SyntheticEvent } from 'react'
 import styles from './EditCheckpointGroupButton.module.css'
+import type { Field } from './types'
+import { mapCheckpointToField } from '../lib/mappers'
 import { useEditCheckpointGroup } from '../api/mutations'
 import { type CheckpointGroup } from '@/entities/checkpoint'
 import { AgreeButton, Card, DatePicker, EditIcon, Input, Modal } from '@/shared'
-
-type Field = {
-  id: string
-  name: string
-  date: Date | null
-}
 
 const createEmptyField = (): Field => ({ id: crypto.randomUUID(), name: '', date: null })
 
@@ -21,7 +17,13 @@ export function EditCheckpointGroupButton({ group }: EditCheckpointGroupButtonPr
   const { mutate: editGroup, isPending } = useEditCheckpointGroup()
 
   const [title, setTitle] = useState(group.title)
-  const [fields, setFields] = useState<Field[]>(group.checkpoints.map(c => ({ id: crypto.randomUUID(), name: c.title, date: c.deadline })))
+  const [fields, setFields] = useState<Field[]>([...group.checkpoints.map(mapCheckpointToField), createEmptyField()])
+
+  const handleOpen = () => {
+    setTitle(group.title)
+    setFields([...group.checkpoints.map(mapCheckpointToField), createEmptyField()])
+    setIsModalOpened(true)
+  }
 
   const handleChange = (index: number, fieldName: 'name' | 'date', value: string | (Date | null)) => {
     setFields(f => {
@@ -46,21 +48,14 @@ export function EditCheckpointGroupButton({ group }: EditCheckpointGroupButtonPr
     e.preventDefault()
     editGroup(
       { id: group.id, title, checkpoints: fields.filter(f => f.name.trim() && f.date).map(f => ({ title: f.name, deadline: f.date! })) },
-      {
-        onSettled: () => {
-          setIsModalOpened(false)
-          setTitle(group.title)
-          setFields(group.checkpoints.map(c => ({ id: crypto.randomUUID(), name: c.title, date: c.deadline })))
-        }
-      }
+      { onSettled: () => setIsModalOpened(false) }
     )
   }
 
   const isReady = title !== '' && fields.length > 1 && fields.slice(0, -1).every(f => f.name && f.date)
-
   return (
     <>
-      <EditIcon className={styles.button} onClick={() => setIsModalOpened(true)} />
+      <EditIcon className={styles.button} onClick={handleOpen} />
       <Modal isOpened={isModalOpen} onClose={() => setIsModalOpened(false)}>
         <form onSubmit={handleSubmit}>
           <Card title='Редактирование набора' className={styles.form}>
