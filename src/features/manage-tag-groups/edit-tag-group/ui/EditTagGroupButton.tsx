@@ -1,26 +1,27 @@
 import { useState } from 'react'
 import styles from './EditTagGroupButton.module.css'
 import { useEditTagGroup } from '../api/mutations'
+import type { TagGroup } from '@/entities/tag'
 import { AgreeButton, Card, EditIcon, Input, Modal } from '@/shared'
 
 interface EditTagGroupButtonProps {
-  groupId: string
+  group: Omit<TagGroup, 'tags'>
 }
 
-export function EditTagGroupButton({ groupId }: EditTagGroupButtonProps) {
+export function EditTagGroupButton({ group }: EditTagGroupButtonProps) {
   const [isModalOpen, setIsModalOpened] = useState(false)
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(group.name)
 
   const { mutate: editGroup, isPending } = useEditTagGroup()
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
     e.preventDefault()
     editGroup(
-      { id: groupId, name: value },
+      { id: group.id, name: value },
       {
         onSettled: () => {
           setIsModalOpened(false)
-          setValue('')
+          setValue(group.name)
         }
       }
     )

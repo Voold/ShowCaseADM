@@ -19,12 +19,12 @@ export function TagList() {
           tagGroups.map(group => (
             <Fragment key={group.id}>
               <TagGroupRow className={styles.groupRow} group={group}>
-                <EditTagGroupButton groupId={group.id} />
+                <EditTagGroupButton group={group} />
                 <RemoveTagGroupButton groupId={group.id} />
               </TagGroupRow>
               {group.tags.map(tag => (
                 <TagRow tag={tag} key={tag.id}>
-                  <EditTagButton tagId={tag.id} />
+                  <EditTagButton tag={tag} group={group} />
                   <RemoveTagButton tagId={tag.id} />
                 </TagRow>
               ))}

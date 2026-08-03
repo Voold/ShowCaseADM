@@ -1,44 +1,41 @@
 import { useState } from 'react'
 import styles from './EditTagButton.module.css'
 import { useEditTag } from '../api/mutations'
-import { TagGroupRow, useTagGroups, type TagGroup } from '@/entities/tag'
+import { TagGroupRow, useTagGroups, type Tag, type TagGroup } from '@/entities/tag'
 import { AgreeButton, Card, EditIcon, FloatingList, Input, Modal, TextSkeleton } from '@/shared'
 
 interface EditTagButtonProps {
-  tagId: string
+  tag: Tag
+  group: Omit<TagGroup, 'tags'>
 }
 
-export function EditTagButton({ tagId }: EditTagButtonProps) {
+export function EditTagButton({ tag, group }: EditTagButtonProps) {
   const [isModalOpen, setIsModalOpened] = useState(false)
 
   const { data: tagGroups = [], isLoading, isError } = useTagGroups()
   const [isListVisible, setIsListVisible] = useState(false)
 
-  const [tagName, setTagName] = useState('')
-  const [chosenGroup, setChosenGroup] = useState<{ id: string; name: string }>({ id: '', name: '' })
+  const [tagName, setTagName] = useState(tag.name)
+  const [chosenGroup, setChosenGroup] = useState<Omit<TagGroup, 'tags'>>(group)
 
   const { mutate: editTag, isPending } = useEditTag()
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
     e.preventDefault()
     editTag(
-      { id: tagId, name: tagName, groupId: chosenGroup.id },
+      { id: tag.id, name: tagName, groupId: chosenGroup.id },
       {
         onSettled: () => {
           setIsModalOpened(false)
-          setTagName('')
-          setChosenGroup({ id: '', name: '' })
+          setTagName(tag.name)
+          setChosenGroup(group)
         }
       }
     )
   }
 
   const handleChooseGroup = (group: Omit<TagGroup, 'tags'>) => {
-    if (chosenGroup.id === group.id) {
-      setChosenGroup({ id: '', name: '' })
-    } else {
-      setChosenGroup({ id: group.id, name: group.name })
-    }
+    setChosenGroup(group)
     setIsListVisible(false)
   }
 
@@ -63,7 +60,7 @@ export function EditTagButton({ tagId }: EditTagButtonProps) {
               {isListVisible && <FloatingList className={styles.list}>{renderGroupList()}</FloatingList>}
             </div>
             <AgreeButton className={styles.confirmButton} disabled={isPending || !tagName.trim() || !chosenGroup.id.trim()} isLoading={isPending}>
-              Создать
+              Подтвердить
             </AgreeButton>
           </form>
         </Card>

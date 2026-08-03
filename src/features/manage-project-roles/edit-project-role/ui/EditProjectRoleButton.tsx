@@ -1,26 +1,28 @@
 import { useState } from 'react'
 import styles from './EditProjectRoleButton.module.css'
 import { useEditProjectRole } from '../api/mutations'
+import type { ProjectRoleType } from '@/entities/project-role-type'
 import { AgreeButton, Card, EditIcon, Input, Modal } from '@/shared'
 
+
 interface EditProjectRoleButtonProps {
-  roleId: string
+  roleType: ProjectRoleType
 }
 
-export function EditProjectRoleButton({ roleId }: EditProjectRoleButtonProps) {
+export function EditProjectRoleButton({ roleType }: EditProjectRoleButtonProps) {
   const [isModalOpen, setIsModalOpened] = useState(false)
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState(roleType.name)
 
   const { mutate: editProjectRole, isPending } = useEditProjectRole()
 
   const handleSubmit = (e: React.SyntheticEvent<HTMLFormElement, SubmitEvent>) => {
     e.preventDefault()
     editProjectRole(
-      { id: roleId, name: value },
+      { id: roleType.id, name: value },
       {
         onSettled: () => {
           setIsModalOpened(false)
-          setValue('')
+          setValue(roleType.name)
         }
       }
     )
