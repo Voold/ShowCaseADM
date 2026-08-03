@@ -52,9 +52,8 @@ export function CreateCheckpointGroupForm() {
   const isReady = title !== '' && fields.length > 1 && fields.slice(0, -1).every(f => f.name && f.date)
 
   return (
-    <Card>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <h5>Создание нового набора</h5>
+    <form onSubmit={handleSubmit}>
+      <Card title='Создание нового набора' className={styles.form}>
         <div className={styles.fields}>
           <Input placeholder='Название набора' value={title} onChange={e => setTitle(e.target.value)} onClear={() => setTitle('')}></Input>
           {fields.map((f, i) => (
@@ -74,7 +73,7 @@ export function CreateCheckpointGroupForm() {
         <AgreeButton className={styles.submitButton} isLoading={isPending} disabled={!isReady}>
           Создать
         </AgreeButton>
-      </form>
-    </Card>
+      </Card>
+    </form>
   )
 }
