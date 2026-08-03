@@ -1,4 +1,5 @@
 import s from './CheckpointList.module.css'
+import { EditCheckpointGroupButton, RemoveCheckpointGroupButton } from '@/features/manage-checkpoints'
 import { CheckpointGroupCard, CheckpointGroupCardSkeleton, useCheckpointGroups } from '@/entities/checkpoint'
 import { Pagination, ScrollableList, useQueryFilters } from '@/shared'
 
@@ -14,7 +15,18 @@ export function CheckpointList() {
     if (isLoading) return Array.from({ length: 5 }, (_, i) => <CheckpointGroupCardSkeleton key={i} />)
     if (isError) return <h3 className={s.placeholder}>Произошла ошибка :P</h3>
     if (checkpointGroups.length === 0) return <h3 className={s.placeholder}>Ничего не нашлось!</h3>
-    return checkpointGroups.map(g => <CheckpointGroupCard key={g.id} group={g} />)
+    return checkpointGroups.map(g => (
+      <CheckpointGroupCard
+        key={g.id}
+        group={g}
+        actions={
+          <>
+            <EditCheckpointGroupButton group={g} />
+            <RemoveCheckpointGroupButton groupId={g.id} />
+          </>
+        }
+      />
+    ))
   }
 
   return (
