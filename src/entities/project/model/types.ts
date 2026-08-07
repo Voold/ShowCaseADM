@@ -5,8 +5,10 @@ import type { ProjectRoleType } from '@/entities/project-role-type'
 import type { CheckpointGroup } from '@/entities/checkpoint'
 
 export type ProjectStatus = 'active' | 'approved' | 'rejected' | 'pending' | 'completed' | 'archived'
+export type ProjectType = 'Case' | 'Real' | 'Study'
 
 export type Project = {
+  type: ProjectType
   id: string
   ownerId: string
   partnerId: string
@@ -38,6 +40,7 @@ export type Project = {
 }
 
 export type ProjectDto = {
+  type: ProjectType
   id: string
   ownerId: number
   partnerId: string

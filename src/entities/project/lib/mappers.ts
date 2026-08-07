@@ -1,6 +1,7 @@
 import type { Project, ProjectDto, ProjectStatus } from '../model/types'
 
 export const mapProjectDto = (dto: ProjectDto): Project => ({
+  type: dto.type,
   id: dto.id,
   ownerId: dto.ownerId.toString(),
   partnerId: dto.partnerId,
