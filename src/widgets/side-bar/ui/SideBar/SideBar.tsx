@@ -6,7 +6,7 @@ import LayoutIcon from '../../assets/layout.svg?react'
 import UsersIcon from '../../assets/users.svg?react'
 import styles from './SideBar.module.css'
 import { NavButton } from '../NavButton/NavButton'
-import { UserSlot, useMe, useAuthStore, placeholderUser } from '@/entities/user'
+import { UserSlot, useMe, useAuthStore, UserSlotSkeleton } from '@/entities/user'
 import { Logo, ROUTES } from '@/shared'
 
 const buttons = [
@@ -20,7 +20,7 @@ const buttons = [
 
 export function SideBar() {
   const status = useAuthStore(s => s.status)
-  const { data: user = placeholderUser } = useMe(status === 'authenticated')
+  const { data: user } = useMe(status === 'authenticated')
 
   return (
     <div className={styles.sideBar}>
@@ -34,7 +34,7 @@ export function SideBar() {
         ))}
       </nav>
       <span className={styles.divider} />
-      <UserSlot user={user} />
+      {user ? <UserSlot user={user}/> : <UserSlotSkeleton />}
     </div>
   )
 }
