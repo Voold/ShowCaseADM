@@ -8,7 +8,6 @@
 }
 
 .clickable {
-  user-select: none;
   cursor: pointer;
 
   border-radius: 5px;
