@@ -1,26 +1,49 @@
-import styles from './ProjectSlot.module.css'
-import ProjectIcon from '../../assets/project.svg?react'
+import s from './ProjectSlot.module.css'
 import type { Project } from '../../model/types.ts'
+import type { ComponentPropsWithoutRef, ReactElement } from 'react'
 import { getStatusTranslation } from '../../lib/getStatusTranslation.ts'
-import type { ComponentPropsWithoutRef } from 'react'
+import { getTypeTranslation } from '../../lib/getTypeTranslation.ts'
 
 interface ProjectSlotProps extends ComponentPropsWithoutRef<'div'> {
   project: Project
+  partnerElement?: ReactElement
+  isClickable?: boolean
 }
 
-export const ProjectSlot = ({ project, className, onClick, ...props }: ProjectSlotProps) => {
+export const ProjectSlot = ({ project, partnerElement, isClickable = false, className, children, ...props }: ProjectSlotProps) => {
+  const tagsAmount = project.tags?.length || 0
   return (
-    <div className={`${styles.container} ${onClick && styles.clickable} ${className}`} onClick={onClick} {...props}>
-      <div className={styles.iconContainer}>
-        <ProjectIcon className={styles.projectIcon} />
-        <div className={styles.description}>
-          <p className={styles.name}>{project.name}</p>
-          <p className={styles.id}>{project.id}</p>
+    <div className={`${s.container} ${isClickable ? s.clickable : ''} ${className ?? ''}`} {...props}>
+      <div className={s.header}>
+        <div className={s.upper}>
+          <h6 className={s.title}>{project.meta.title}</h6>
+          <div className={s.tag}>
+            <p>{project.primaryTag.name}</p>
+            {tagsAmount && (
+              <>
+                <span className={s.dot} />
+                <p>Ещё +{tagsAmount}</p>
+              </>
+            )}
+          </div>
+        </div>
+        <div className={s.lower}>
+          <p className={`${s.status} ${s[project.status]}`}>{getStatusTranslation(project.status)}</p>
+          <span className={s.dot} />
+          <p>{getTypeTranslation(project.type)}</p>
+          <span className={s.dot} />
+          <p className={s.ellipsis} title={project.id}>
+            {project.id}
+          </p>
         </div>
       </div>
-
-      <p className={styles.school}>{project.school}</p>
-      <p className={`${styles.status} ${styles[project.status]}`}>{getStatusTranslation(project.status)}</p>
+      {partnerElement ||
+        (children && (
+          <div className={s.footer}>
+            {partnerElement}
+            {children}
+          </div>
+        ))}
     </div>
   )
 }

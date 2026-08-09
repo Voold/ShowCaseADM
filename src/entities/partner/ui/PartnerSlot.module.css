@@ -4,18 +4,17 @@
   justify-content: space-between;
   gap: 10px;
 
-  border-radius: 5px;
-  overflow: hidden;
-  
-  background-color: var(--sec-color);
+  border-radius: 13px;
+  overflow: hidden;  
 }
 
 .clickable {
   user-select: none;
   cursor: pointer;
 
-  padding: 8px;
-
+  padding: 10px;
+  
+  background-color: var(--sec-color);
   transition: background-color 0.2s ease-in-out;
 
   &:hover {
@@ -27,30 +26,41 @@
   }
 }
 
-.mainInfo {
+.body {
   flex: 1;
   min-width: 0;
 
   display: flex;
   align-items: center;
-  gap: inherit;
+  gap: 6px;
 }
 
 .avatar {
   max-width: 100px;
-  height: 50px; 
+  aspect-ratio: 1;
+  height: 40px; 
   object-fit: cover;
-  border-radius: 5px;
+  border-radius: 50%;
   flex-shrink: 0;
 }
 
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
 .name {
-  font-size: var(--h6);
   font-weight: 700;
   
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.description {
+  font-size: 14px;
+  color: color-mix(in srgb, var(--text-color) 60%, transparent);
 }
 
 .skeleton {

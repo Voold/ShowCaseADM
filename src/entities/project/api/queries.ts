@@ -1,19 +1,19 @@
 import { useQuery } from '@tanstack/react-query'
 import { queryKeys } from './queryKeys'
-import { getProjectsByName, getUserProjects } from './requests'
+import { getProjects, getUserProjects } from './requests'
 
-export const useProjectsByName = (query: string, offset: number, limit: number) => {
+export const useProjects = (filters: { query: string; offset: number; limit: number }) => {
   return useQuery({
-    queryKey: queryKeys.search(query, offset, limit),
-    queryFn: () => getProjectsByName(query, offset, limit),
-    staleTime: 60 * 1000 // 1 min
+    queryKey: queryKeys.list(filters),
+    queryFn: () => getProjects(filters),
+    staleTime: 60 * 1000
   })
 }
 
-export const useUserProjects = (userId: string, params: { query: string; offset: number; limit: number }) => {
+export const useUserProjects = (userId: string, filters: { query: string; offset: number; limit: number }) => {
   return useQuery({
-    queryKey: queryKeys.userSearch(userId, params.query, params.limit, params.offset),
-    queryFn: () => getUserProjects(userId, params),
-    staleTime: 60 * 1000 // 1 min
+    queryKey: queryKeys.userList(userId, filters),
+    queryFn: () => getUserProjects(userId, filters),
+    staleTime: 60 * 1000
   })
 }

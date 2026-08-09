@@ -6,7 +6,7 @@ const ProjectsList = () => {
   const { page, setPage, limit, offset, query, setQuery } = useQueryFilters()
   const [localQuery, setLocalQuery] = useQuerySync(query, setQuery)
 
-  const { data, isSuccess, isLoading, isError } = useProjectsByName(query.toLowerCase(), offset, limit)
+  const { data, isSuccess, isLoading, isError } = useProjectsByName({query: query.toLowerCase(), offset, limit})
   const { projects, total } = data || { projects: [], total: 0 }
 
   const totalPages = Math.ceil(total / limit) || 1
@@ -25,7 +25,7 @@ const ProjectsList = () => {
         {isSuccess && projects.length === 0 ? (
           <h3 className={styles.placeholder}>Ничего не нашлось!</h3>
         ) : (
-          projects.map(project => <ProjectSlot key={project.id} project={project} />)
+          projects.map(project => <ProjectSlot key={project.id} project={project} isClickable />)
         )}
       </ScrollableList>
       {totalPages !== 1 && <Pagination currentPage={page} totalPages={totalPages} onPageSelect={setPage} />}

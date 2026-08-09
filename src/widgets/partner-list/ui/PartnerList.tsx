@@ -25,7 +25,7 @@ export function PartnerList() {
         {isSuccess && partners.length === 0 ? (
           <h3 className={styles.placeholder}>Ничего не нашлось!</h3>
         ) : (
-          partners.map(partner => <PartnerSlot key={partner.id} partner={partner} />)
+          partners.map(partner => <PartnerSlot key={partner.id} partner={partner} className={styles.partner} />)
         )}
       </ScrollableList>
       {totalPages !== 1 && <Pagination currentPage={page} totalPages={totalPages} onPageSelect={setPage} />}

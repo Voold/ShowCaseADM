@@ -1,5 +1,4 @@
-import defaultAvatar from '../assets/user-avatar.svg'
-import { type User, type UserDto } from '../model/types'
+import { type UserDto } from '../model/types'
 
 export const ROLES_TRANSLATIONS: Record<keyof UserDto['roles'], string> = {
   Default: 'Пользователь',
@@ -21,18 +20,4 @@ export const ROLE_WEIGHTS: Record<keyof UserDto['roles'], number> = {
   Moderator: 1,
   Roop: 1,
   Teacher: 1,
-}
-
-export const placeholderUser: User = {
-	id: 'loading...',
-  email: `loading@example.com`,
-  profilePicture: defaultAvatar,
-  meta: {
-    name: `Загрузка...`,
-    bio: '',
-    competencies: [],
-    experience: ''
-  },
-  roles: [{ type: 'Default', weight: ROLE_WEIGHTS.Default }],
-  capabilities: []
 }
